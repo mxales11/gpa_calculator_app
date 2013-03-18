@@ -4,6 +4,8 @@ describe Student do
 
 	before { @student = Student.new(email: "student@example.com", password: "foobar", password_confirmation: "foobar") }
 
+
+
 	subject { @student }
 
 	it { should respond_to(:email) }

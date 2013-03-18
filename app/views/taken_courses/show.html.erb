@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Student id:</b>
+  <%= @taken_course.student_id %>
+</p>
+
+<p>
+  <b>Course name:</b>
+  <% @course = Course.find(@taken_course.course_id) %>
+  <%= @course.name %>
+</p>
+ 
+<p>
+  <b>Grade:</b>
+  <%= @taken_course.grade %>
+</p>
+
+
+
+
+<%= link_to 'Edit', edit_taken_course_path(@taken_course) %> |
+<%= link_to 'Back', taken_courses_path %>

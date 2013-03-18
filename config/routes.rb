@@ -11,6 +11,7 @@ GpaCalculatorApp::Application.routes.draw do
 
   resources :courses
   resources :students
+  resources :taken_courses
 
   
 
