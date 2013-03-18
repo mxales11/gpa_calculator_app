@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  email: MyString
+  password_digest: MyString
+  number_of_credits_earned: 1
+  current_gpa: 9.99
+
+two:
+  email: MyString
+  password_digest: MyString
+  number_of_credits_earned: 1
+  current_gpa: 9.99

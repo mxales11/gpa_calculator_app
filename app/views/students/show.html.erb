@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Email:</b>
+  <%= @student.email %>
+</p>
+
+<p>
+  <b>Number of credits earned:</b>
+  <%= @student.credits_earned %>
+</p>
+
+<p>
+  <b>Current gpa:</b>
+  <%= @student.cumulative_gpa %>
+</p>
+
+<p>
+  <b>Major gpa:</b>
+  <%= @student.major_gpa %>
+</p>
+
+<p>
+<b>Make projections:</b>
+  <%= link_to 'Make projections', 'make_projections_student_path' %>
+</p>
+
+<p>
+<b>Enter courses accomplished to have your cumulative gpa, major gpa, and credits earned calculated</b>
+
+<%= link_to 'Enter courses accomplished', '#' %>
+</p>
+
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>
