@@ -2,9 +2,12 @@ require 'spec_helper'
 
 describe Student do 
 
-	before { @student = Student.new(email: "student@example.com", password: "foobar", password_confirmation: "foobar") }
+	before { 
 
+	@student = Student.create(email: "student@example.com", password: "foobar", password_confirmation: "foobar") 
+	@courses = Course.create({ name: 'Probability', credits: 3}, { name: 'Calculus III', credits: 4} )
 
+	}
 
 	subject { @student }
 
@@ -16,10 +19,22 @@ describe Student do
 	it { should respond_to(:password) }
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:authenticate) }
-
-
+	it { should respond_to(:taken_courses) }
+	it { should respond_to(:courses) }
 
 	it { should be_valid }
+	
+	
+    it "should exist" do
+		Student.find(@student.id).email.should == "student@example.com"
+    end
+
+    it "should have 2 taken courses" do
+	    TakenCourse.create!(student_id: @student.id, course_id: 1, grade: "AB")
+	   	TakenCourse.create!(student_id: @student.id, course_id: 2, grade: "CD")
+	    @student.taken_courses(:force_reload=>:true).size.should == 2
+    end
+    
 
 	#email tests
 
@@ -89,9 +104,6 @@ describe Student do
 
 
 	#authenticate
-
-
-
 	describe "return value of authenticate method" do
 		before { @student.save }
 		let(:found_student) { Student.find_by_email(@student.email) }
@@ -107,5 +119,9 @@ describe Student do
 			specify { student_for_invalid_password.should be_false }
 		end
 	end
+
+
+
+
 end
 		

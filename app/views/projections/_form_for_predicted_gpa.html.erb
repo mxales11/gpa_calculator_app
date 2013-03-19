@@ -1,0 +1,31 @@
+<form>
+	<br></br>
+	<br></br>
+	<h2>FORM FOR PREDICTED GPA</h2>
+
+	<table>
+	  <tr>
+	    <th>Course</th>
+	    <th>Credits</th>
+	    <th>Predicted_Grade</th>
+	    <th>Is_Major_Course</th>
+	    <th>Is_Repeated_Course</th>
+	  </tr>
+
+	<% 7.times do |course_number| %>
+	  <tr>
+	  	<td><%= course_number+1 %></td>
+	    <td><input type="text" name="credits"></td>
+	    <td><input type="text" name="predicted_grade"></td>
+	    <td><input type="checkbox" name="is_major_course" value="is_major_course"></td>
+	    <td><input type="checkbox" name="is_repeated_course" value="is_major_course"></td>
+	  </tr>
+	<% end %>
+	</table>
+
+	<input type="submit" value="Submit">
+
+</form> 
+
+<br>Your predicted major GPA is: </br>
+<br>Your predicted cumulative GPA is:</br>
