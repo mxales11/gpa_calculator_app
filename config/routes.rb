@@ -13,8 +13,12 @@ GpaCalculatorApp::Application.routes.draw do
   resources :students
   resources :taken_courses
 
-  
+  resources :students do
+    resources :taken_courses
+  end
 
+ 
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

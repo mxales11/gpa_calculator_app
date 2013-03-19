@@ -1,9 +1,13 @@
  class TakenCoursesController < ApplicationController
 
-
- def index
-    @taken_courses = TakenCourse.all
-
+   def index
+    if  params[:student_id].nil?
+      @taken_courses = TakenCourse.all
+    else
+      @taken_courses = TakenCourse.find_all_by_student_id(params[:student_id])
+    
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @taken_courses }
@@ -14,6 +18,7 @@
   # GET /students/1.json
   def show
     @taken_course = TakenCourse.find(params[:id])
+    @course = Course.find(@taken_course.course_id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,16 +39,17 @@
 
   # GET /students/1/edit
   def edit
-    @student = Student.find(params[:id])
+    @taken_course = TakenCourse.find(params[:id])
   end
 
   # POST /students
   # POST /students.json
   def create
         @taken_course = TakenCourse.new(params[:taken_course])
+        @student = Student.find(@taken_course.student_id)
     if @taken_course.save
       flash[:success] = "Taken course was created"
-      redirect_to @taken_course
+      redirect_to student_taken_courses_path(@student)
 
       #redirect to student profile where:
       #he can enter his courses to have his cumulative gpa counted
@@ -76,7 +82,7 @@
     @taken_course.destroy
 
     respond_to do |format|
-      format.html { redirect_to students_url }
+      format.html { redirect_to taken_courses_url }
       format.json { head :no_content }
     end
   end

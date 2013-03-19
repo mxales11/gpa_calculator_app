@@ -22,13 +22,18 @@
 
 <p>
 <b>Make projections:</b>
-  <%= link_to 'Make projections', 'make_projections_student_path' %>
+  <%= link_to 'Make projections', students_make_projections_path(@student) %>
 </p>
 
 <p>
 <b>Enter courses accomplished to have your cumulative gpa, major gpa, and credits earned calculated</b>
 
-<%= link_to 'Enter courses accomplished', '#' %>
+<%= link_to 'Enter courses accomplished', new_student_taken_course_path(@student, @taken_course) %>
+</p>
+
+<p>
+<b>Make projections:</b>
+  <%= link_to 'See taken courses', student_taken_courses_path(@student) %>
 </p>
 
 
