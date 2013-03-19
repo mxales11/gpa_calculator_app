@@ -32,12 +32,4 @@ ActiveRecord::Schema.define(:version => 20130318000710) do
 
   add_index "students", ["email"], :name => "index_students_on_email", :unique => true
 
-  create_table "taken_courses", :force => true do |t|
-    t.integer  "student_id"
-    t.integer  "course_id"
-    t.string   "grade"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
 end
