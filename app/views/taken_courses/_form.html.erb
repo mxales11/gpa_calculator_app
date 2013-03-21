@@ -11,11 +11,6 @@
     </div>
   <% end %>
 
-
-  <div class="field">
-    <%= f.label :student_id %><br />
-    <%= f.text_field :student_id %>
-  </div>
   <div class="field">
     <%= f.label :course_id %><br />
     <%= f.collection_select :course_id , Course.all, :id, :name %>

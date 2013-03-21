@@ -30,8 +30,15 @@ describe Student do
     end
 
     it "should have 2 taken courses" do
-	    TakenCourse.create!(student_id: @student.id, course_id: 1, grade: "AB")
-	   	TakenCourse.create!(student_id: @student.id, course_id: 2, grade: "CD")
+
+    	before {
+
+    		@taken_course = @student.taken_courses.build
+			visit new_student_taken_course_path(@student, @taken_course)
+	
+    	}
+	    TakenCourse.create!(course_id: 1, grade: "AB")
+	   	TakenCourse.create!(course_id: 2, grade: "CD")
 	    @student.taken_courses(:force_reload=>:true).size.should == 2
     end
     

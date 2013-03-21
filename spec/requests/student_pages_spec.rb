@@ -8,9 +8,9 @@ describe "Student pages" do
 
 	before { 
 
-	@student = Student.create(email: "student@example.com", password: "foobar", password_confirmation: "foobar") 
-	@courses = Course.create([{ name: 'Probability', credits: 3}, { name: 'Web Systems', credits: 3}, { name: 'Linear Algebra', credits: 3}, { name: 'Bible and Belief', credits: 3}, { name: 'Modern Dance', credits: 1}, { name: 'Ceramics', credits: 3}, { name: 'Calculus III', credits: 4}, { name: 'Intro to Literature', credits: 3}, { name: 'Modern Movies', credits: 3}, { name: 'Into to Geography', credits: 3}])
-	@taken_course = TakenCourse.new
+	@student = Student.create!(email: "student@example.com", password: "foobar", password_confirmation: "foobar") 
+	@courses = Course.create!([{ name: 'Probability', credits: 3}, { name: 'Web Systems', credits: 3}, { name: 'Linear Algebra', credits: 3}, { name: 'Bible and Belief', credits: 3}, { name: 'Modern Dance', credits: 1}, { name: 'Ceramics', credits: 3}, { name: 'Calculus III', credits: 4}, { name: 'Intro to Literature', credits: 3}, { name: 'Modern Movies', credits: 3}, { name: 'Into to Geography', credits: 3}])
+	@taken_course = @student.taken_courses.build
 
 	visit new_student_taken_course_path(@student, @taken_course)
 

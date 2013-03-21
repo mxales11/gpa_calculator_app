@@ -29,7 +29,18 @@
   # GET /students/new
   # GET /students/new.json
   def new
-    @taken_course = TakenCourse.new
+
+    if !params[:student_id].nil?
+
+      flash[:success] = "Student id is #{:student_id}"
+      @student = Student.find(params[:student_id])
+      @taken_course = @student.taken_courses.build
+  
+  else
+    #change it so that it's not a success
+    flash[:success] = "Student id doesn't exist"
+   
+  end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,15 +56,15 @@
   # POST /students
   # POST /students.json
   def create
-        @taken_course = TakenCourse.new(params[:taken_course])
-        @student = Student.find(@taken_course.student_id)
+
+    @student = Student.find(params[:student_id])
+    @taken_course = TakenCourse.new(params[:taken_course])
+    @taken_course.student_id = @student.taken_courses.build(student_id: @student.id)
+
     if @taken_course.save
       flash[:success] = "Taken course was created"
       redirect_to student_taken_courses_path(@student)
-
-      #redirect to student profile where:
-      #he can enter his courses to have his cumulative gpa counted
-      #he can make projections
+    
     else
       render 'new'
     end
