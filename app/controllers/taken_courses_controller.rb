@@ -58,8 +58,7 @@
   def create
 
     @student = Student.find(params[:student_id])
-    @taken_course = TakenCourse.new(params[:taken_course])
-    @taken_course.student_id = @student.taken_courses.build(student_id: @student.id)
+    @taken_course = @student.taken_courses.build(params[:taken_course])
 
     if @taken_course.save
       flash[:success] = "Taken course was created"
