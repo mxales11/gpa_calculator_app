@@ -1,12 +1,12 @@
  class TakenCoursesController < ApplicationController
 
    def index
-    if  params[:student_id].nil?
-      @taken_courses = TakenCourse.all
-    else
-      @taken_courses = TakenCourse.find_all_by_student_id(params[:student_id])
-    
-    end
+    #if  params[:student_id].nil?
+      #@taken_courses = TakenCourse.all
+    #else
+      #@taken_courses = TakenCourse.find_all_by_student_id(params[:student_id])
+       #@taken_courses = TakenCourse.all
+    @taken_courses = TakenCourse.all
     
     respond_to do |format|
       format.html # index.html.erb
@@ -58,16 +58,39 @@
   def create
 
     @student = Student.find(params[:student_id])
+    logger.debug "********************************************************************************************************************************************************"
+    logger.debug "Student  #{@student.attributes.inspect}"
     @taken_course = @student.taken_courses.build(params[:taken_course])
 
+    Rails.logger.info("PARAMS: #{params.inspect}")
+    logger.debug "********************************************************************************************************************************************************"
+    logger.debug " Major gpa is #{@student.major_gpa}"
+    @student.major_gpa= 3
+     logger.debug "Student  #{@student.attributes.inspect}"
+    @student.save
+    logger.debug "Major gpa is #{@student.major_gpa}"
+
+    Rails.logger.info("PARAMS: #{params.inspect}")
+
+    #@student.update_attributes(params[:student][:major_gpa]);
+    logger.debug "********************************************************************************************************************************************************"
+    logger.debug"Student  #{@student.attributes.inspect}"
+
+
+    #in helper
+    #view_context.calculateGPA(@student)
+ 
     if @taken_course.save
-      flash[:success] = "Taken course was created"
-      redirect_to student_taken_courses_path(@student)
-    
-    else
-      render 'new'
+        logger.debug "********************************************************************************************************************************************************"
+        logger.debug #{@student.attributes.inspect}"
+        redirect_to student_taken_courses_path(@student)
+    else 
+           logger.debug "********************************************************************************************************************************************************"
+          logger.debug "********student was created"
+          logger.debug "Student was created. Attributes hash: #{@student.attributes.inspect}"
+          render 'new'
     end
-  end
+end
 
   # PUT /students/1
   # PUT /students/1.json
@@ -98,4 +121,7 @@
   end
 
   
+
+
+
 end

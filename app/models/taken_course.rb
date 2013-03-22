@@ -1,6 +1,6 @@
 class TakenCourse < ActiveRecord::Base
-  belongs_to :student
-  belongs_to :course
+  belongs_to :student, touch: true
+  belongs_to :course, touch: true
   attr_accessible :course_id, :grade
 
   validates :course_id, presence: true

@@ -8,6 +8,7 @@ GpaCalculatorApp::Application.routes.draw do
   
  
   get "students/make_projections"
+  get "students/calculateGPA"
 
   resources :courses
   resources :students

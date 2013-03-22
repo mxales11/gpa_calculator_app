@@ -1,4 +1,5 @@
-<%= form_for(@taken_course) do |f| %>
+<%= form_for([@student, @taken_course]) do |f| %>
+
   <% if @taken_course.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@taken_course.errors.count, "error") %> prohibited this course taken from being saved:</h2>
@@ -11,7 +12,8 @@
     </div>
   <% end %>
 
-  <div class="field">
+
+  <div>
     <%= f.label :course_id %><br />
     <%= f.collection_select :course_id , Course.all, :id, :name %>
   </div>
@@ -19,7 +21,9 @@
     <%= f.label :grade %><br />
     <%= f.text_field :grade %>
   </div>
+  
   <div class="actions">
     <%= f.submit "Add taken course", class: "btn btn-large btn-primary" %>
   </div>
 <% end %>
+

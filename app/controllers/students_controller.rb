@@ -14,6 +14,9 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
     @student = Student.find(params[:id])
+    logger.debug "Student  #{@student.attributes.inspect}"
+    Rails.logger.info("PARAMS: #{params.inspect}")
+    #@student.update_attributes(params[:student])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,6 +44,7 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(params[:student])
+    
     if @student.save
       flash[:success] = "Student was created"
       redirect_to @student
@@ -57,6 +61,7 @@ class StudentsController < ApplicationController
   # PUT /students/1.json
   def update
     @student = Student.find(params[:id])
+    
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
@@ -85,4 +90,11 @@ class StudentsController < ApplicationController
 
 
   end
+
+
+
+
+
+
+
 end

@@ -21,6 +21,7 @@ describe Student do
 	it { should respond_to(:authenticate) }
 	it { should respond_to(:taken_courses) }
 	it { should respond_to(:courses) }
+	
 
 	it { should be_valid }
 	
