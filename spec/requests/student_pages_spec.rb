@@ -4,71 +4,98 @@ describe "Student pages" do
 
 	subject { page }
 
-	let(:submit) { "Add taken course" }
 
-	before { 
+	describe "profile page" do
 
-	@student = Student.create!(email: "student@example.com", password: "foobar", password_confirmation: "foobar") 
-	@courses = Course.create!([{ name: 'Probability', credits: 3}, { name: 'Web Systems', credits: 3}, { name: 'Linear Algebra', credits: 3}, { name: 'Bible and Belief', credits: 3}, { name: 'Modern Dance', credits: 1}, { name: 'Ceramics', credits: 3}, { name: 'Calculus III', credits: 4}, { name: 'Intro to Literature', credits: 3}, { name: 'Modern Movies', credits: 3}, { name: 'Into to Geography', credits: 3}])
-	@taken_course = @student.taken_courses.build
+		let(:student) { FactoryGirl.create(:student) }
+		before { visit student_path(student) }
 
-	visit new_student_taken_course_path(@student, @taken_course)
-
-	}
-
-
-	# association tests
-
+		it { should have_selector('h1', text: student.email) }
+		it { should have_selector('title', title: student.email) }
+	end
 		
-	describe "with valid information" do
 
-		before do
-			fill_in "student_id", with: "1"
-			fill_in "course_id", with: "2"
-			fill_in "grade", with: "AB"
+	describe "signup" do
+
+		before { visit signup_path }
+		let(:submit) { "Create my account" }
+
+		describe "with invalid information" do
+			it "should not create a student" do
+				expect { click_button submit }.not_to change(Student, :count)
+			end
 		end
 
-		it "should create taken course" do
-				expect { click_button submit }.to change(TakenCourse, :count).by(1)
-		end
-	end
+		describe "with valid information" do
+			before do
+				fill_in "Email", with: "Example User"
+				fill_in "Password", with: "foobar"
+				fill_in "Confirmation", with: "foobar"
+			end
 
-	describe "with missing grade" do 
-
-		before do
-			fill_in "student_id", with: "1"
-			fill_in "course_id", with: "2"
-		end
-
-		it "should not create taken course" do
-				expect { click_button submit }.not_to change(TakenCourse, :count)
-		end
-	end
-
-
-	describe "with missing student_id" do 
-
-		before do
-			fill_in "grade", with: "AB"
-			fill_in "course_id", with: "2"
-		end
-
-		it "should not create taken course" do
-				expect { click_button submit }.not_to change(TakenCourse, :count)
+			it "should create a student" do
+				expect { click_button submit}. to change(Student, :count).by(1)
+			end
 		end
 	end
 
 
-	describe "with missing course_id" do 
+=begin
+	describe "signup page" do
+
+		it { should have_selector('h1', text: 'Sign up') }
+		it { should have_selector('title', text: 'Sign up') }
+	end
+
+		before { visit signup_path }
+		
+
+	describe "add taken courses page" do
+
+		let(:student) { FactoryGirl.create(:student) }
+		let(:course) { FactoryGirl.create(:course) }
+		let(:submit) { "Add taken course" }
 
 		before do
-			fill_in "student_id", with: "1"
-			fill_in "grade", with: "AB"
+			visit new_student_taken_course_path(student, taken_course)
 		end
 
-		it "should not create taken course" do
-				expect { click_button submit }.not_to change(TakenCourse, :count)
+			describe "with valid information" do
+
+				before do
+					fill_in "course_id", with: 3
+					fill_in "grade", with: "AB"
+				end
+				
+
+				it "should create taken course" do
+						expect { click_button submit }.to change(TakenCourse, :count).by(1)
+				end
+			end
+
+			describe "with missing grade" do 
+
+				before do
+					fill_in "course_id", with: 2
+				end
+
+				it "should not create taken course" do
+						expect { click_button submit }.not_to change(TakenCourse, :count)
+				end
+			end
+
+
+			describe "with missing course_id" do 
+
+				before do
+					fill_in "grade", with: "AB"
+				end
+
+				it "should not create taken course" do
+						expect { click_button submit }.not_to change(TakenCourse, :count)
+				end
+			end
 		end
-	end
+=end
 
 end

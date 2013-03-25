@@ -4,12 +4,8 @@ class ApplicationController < ActionController::Base
 
    def calculateGPA(student)
 
-    #remove it from root
-    student.cumulative_gpa = "3.3"
-    student.major_gpa = "2.0"
-    return student
-
-  end
+    	student.update_attributes(major_gpa: 1.5, cumulative_gpa: 7.3)  
+	end
 
 
 end

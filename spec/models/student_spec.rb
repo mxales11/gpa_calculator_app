@@ -2,13 +2,10 @@ require 'spec_helper'
 
 describe Student do 
 
-	before { 
-
-	@student = Student.create(email: "student@example.com", password: "foobar", password_confirmation: "foobar") 
-	@courses = Course.create({ name: 'Probability', credits: 3}, { name: 'Calculus III', credits: 4} )
-
-	}
-
+	before do 
+		@student = Student.new(email: "student@yahoo.com", password:"foobar", password_confirmation: "foobar")
+	end
+	
 	subject { @student }
 
 	it { should respond_to(:email) }
@@ -22,25 +19,21 @@ describe Student do
 	it { should respond_to(:taken_courses) }
 	it { should respond_to(:courses) }
 	
-
-	it { should be_valid }
+	it{ should be_valid }
 	
+		
 	
     it "should exist" do
-		Student.find(@student.id).email.should == "student@example.com"
+    	@student.save
+		Student.find(@student.id).email.should == "student@yahoo.com"
     end
 
     it "should have 2 taken courses" do
 
-    	before {
-
-    		@taken_course = @student.taken_courses.build
-			visit new_student_taken_course_path(@student, @taken_course)
-	
-    	}
-	    TakenCourse.create!(course_id: 1, grade: "AB")
-	   	TakenCourse.create!(course_id: 2, grade: "CD")
-	    @student.taken_courses(:force_reload=>:true).size.should == 2
+    		@student.save
+    		@student.taken_courses.create!(course_id: 1, grade: "AB")
+			@student.taken_courses.create!(course_id: 2, grade: "CD")
+			@student.taken_courses(:force_reload=>:true).size.should == 2
     end
     
 
@@ -127,9 +120,6 @@ describe Student do
 			specify { student_for_invalid_password.should be_false }
 		end
 	end
-
-
-
 
 end
 		

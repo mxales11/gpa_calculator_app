@@ -6,10 +6,9 @@ GpaCalculatorApp::Application.routes.draw do
   match '/help', to: 'static_pages#help'
   match '/about', to: 'static_pages#about'
   
- 
   get "students/make_projections"
-  get "students/calculateGPA"
-
+  match '/signup', to: 'students#new'
+ 
   resources :courses
   resources :students
   resources :taken_courses

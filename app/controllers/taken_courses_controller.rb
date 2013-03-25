@@ -57,37 +57,35 @@
   # POST /students.json
   def create
 
+    logger.debug "********************************************************************************************************************************************************"
+    Rails.logger.info("PARAMS: #{params.inspect}")
+
+
     @student = Student.find(params[:student_id])
+    @taken_course = @student.taken_courses.build(params[:taken_course])
+    
+
     logger.debug "********************************************************************************************************************************************************"
     logger.debug "Student  #{@student.attributes.inspect}"
-    @taken_course = @student.taken_courses.build(params[:taken_course])
+  
+    #calculateGPA(@student)
+    student.update_attribute(:major_gpa, 2.0)
 
-    Rails.logger.info("PARAMS: #{params.inspect}")
     logger.debug "********************************************************************************************************************************************************"
-    logger.debug " Major gpa is #{@student.major_gpa}"
-    @student.major_gpa= 3
-     logger.debug "Student  #{@student.attributes.inspect}"
-    @student.save
-    logger.debug "Major gpa is #{@student.major_gpa}"
+    logger.debug "Student  #{@student.attributes.inspect}"
+   
 
-    Rails.logger.info("PARAMS: #{params.inspect}")
-
-    #@student.update_attributes(params[:student][:major_gpa]);
-    logger.debug "********************************************************************************************************************************************************"
+   
     logger.debug"Student  #{@student.attributes.inspect}"
 
-
-    #in helper
-    #view_context.calculateGPA(@student)
  
-    if @taken_course.save
+    if @taken_course.save!
         logger.debug "********************************************************************************************************************************************************"
-        logger.debug #{@student.attributes.inspect}"
+        logger.debug "#{@student.attributes.inspect}"
         redirect_to student_taken_courses_path(@student)
     else 
-           logger.debug "********************************************************************************************************************************************************"
-          logger.debug "********student was created"
-          logger.debug "Student was created. Attributes hash: #{@student.attributes.inspect}"
+          logger.debug "********************************************************************************************************************************************************"
+          logger.debug "Student was not created. Student: #{@student.attributes.inspect}"
           render 'new'
     end
 end

@@ -2,12 +2,9 @@ require 'spec_helper'
 
 describe TakenCourse do 
 
-	before { 
-
-	@student = Student.create(email: "student@yahoo.com", password: "foobar", password_confirmation: "foobar")
-	@courses = Course.create([{ name: 'Probability', credits: 3}, { name: 'Web Systems', credits: 3}, { name: 'Linear Algebra', credits: 3}, { name: 'Bible and Belief', credits: 3}, { name: 'Modern Dance', credits: 1}, { name: 'Ceramics', credits: 3}, { name: 'Calculus III', credits: 4}, { name: 'Intro to Literature', credits: 3}, { name: 'Modern Movies', credits: 3}, { name: 'Into to Geography', credits: 3}])
-	
-	}
+	before do 
+		@student = Student.new(email: "student@yahoo.com", password:"foobar", password_confirmation: "foobar")
+	end
 
 	subject { @student }
 
