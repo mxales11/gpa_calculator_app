@@ -11,7 +11,7 @@ describe "Student pages" do
 		before { visit student_path(student) }
 
 		it { should have_selector('h1', text: student.email) }
-		it { should have_selector('title', title: student.email) }
+		it { should have_selector('title', title: "Student") }
 	end
 		
 
@@ -28,7 +28,7 @@ describe "Student pages" do
 
 		describe "with valid information" do
 			before do
-				fill_in "Email", with: "Example User"
+				fill_in "Email", with: "john15@yahoo.com"
 				fill_in "Password", with: "foobar"
 				fill_in "Confirmation", with: "foobar"
 			end
