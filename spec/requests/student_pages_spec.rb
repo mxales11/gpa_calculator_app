@@ -40,7 +40,11 @@ describe "Student pages" do
 	end
 
 
-=begin
+
+	
+
+
+=begin TESTS FOR ADDING TAKEN COURSES:
 	describe "signup page" do
 
 		it { should have_selector('h1', text: 'Sign up') }

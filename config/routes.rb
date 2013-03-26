@@ -7,11 +7,15 @@ GpaCalculatorApp::Application.routes.draw do
   match '/about', to: 'static_pages#about'
   
   get "students/make_projections"
+
   match '/signup', to: 'students#new'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
  
   resources :courses
   resources :students
   resources :taken_courses
+  resources :sessions, only: [:new, :create, :destroy]
 
   resources :students do
     resources :taken_courses
