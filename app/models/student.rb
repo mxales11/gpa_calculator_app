@@ -1,6 +1,7 @@
 class Student < ActiveRecord::Base
   attr_accessible :cumulative_gpa, :email, :credits_earned, :password, :password_confirmation, :major_gpa
   has_secure_password
+  
 
 
 

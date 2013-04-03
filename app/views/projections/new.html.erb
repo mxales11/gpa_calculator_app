@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="span6 offset3">
-		<%= form_for(:projection, url: make_projections_path) do |f| %>
+		<%= form_for(:projection, url: student_projections_path) do |f| %>
 
 			<%= f.label :desired_cumulative_gpa %>
 			<%= f.text_field :desired_cumulative_gpa %>
@@ -21,6 +21,7 @@
 	</div>
 
 <br>
+
 
  <% if !(params[:projection][:desired_cumulative_gpa] rescue nil).nil? && !(params[:projection][:credits_taken_this_semester] rescue nil).nil?  %>
 

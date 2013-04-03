@@ -17,18 +17,16 @@ GpaCalculatorApp::Application.routes.draw do
   resources :taken_courses
   resources :sessions, only: [:new, :create, :destroy]
 
-
-
-  resources :projections, only: [:new, :create, :show, :destroy]
-
-
-  #make it nested routes
-  match '/make_projections', to: 'projections#new'
-  match '/delete_projections', to: 'projections#destroy', via: :delete
-
   resources :students do
     resources :taken_courses
   end
+
+
+  resources :students do
+    resources :projections, only: [:new, :create, :destroy, :show]
+  end
+
+
 
  
   
