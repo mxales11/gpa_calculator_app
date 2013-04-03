@@ -1,0 +1,47 @@
+<% provide(:title, "Target GPA") %>
+<h1>Form for target Cumulative GPA</h1>
+
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for(:projection, url: make_projections_path) do |f| %>
+
+			<%= f.label :desired_cumulative_gpa %>
+			<%= f.text_field :desired_cumulative_gpa %>
+
+			<%= f.label :credits_taken_this_semester %>
+			<%= f.password_field :credits_taken_this_semester %>
+
+			<%= f.hidden_field :gpa_you_want_this_semester %>
+
+
+
+			<%= f.submit "Calculate GPA", class: "btn btn-large btn-primary" %>
+		<% end %>
+
+	</div>
+
+<br>
+
+ <% if !(params[:projection][:desired_cumulative_gpa] rescue nil).nil? && !(params[:projection][:credits_taken_this_semester] rescue nil).nil?  %>
+
+ 	<% if !(params[:projection][:desired_cumulative_gpa]).blank? && !(params[:projection][:credits_taken_this_semester]).blank?  %>
+	   <%= 'Are not nil' %>
+	   <%= params[:projection][:desired_cumulative_gpa] %>
+	   <%= params[:projection][:credits_taken_this_semester] %>
+	   <%= calculateGPANeededForTargetGPA(3.7, 17, 95, 3.5) %>
+    <% else %>
+    	 <%= 'Are empty' %>
+    <% end %>
+<% else %>
+    <%= 'Are nil' %>
+<% end %>
+
+</br>
+
+</div>
+
+
+<%= debug("Params are") %>
+<%= debug(params) %>
+
+

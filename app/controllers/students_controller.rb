@@ -16,6 +16,8 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     logger.debug "Student  #{@student.attributes.inspect}"
     Rails.logger.info("PARAMS: #{params.inspect}")
+
+    puts "printing student works"
     #@student.update_attributes(params[:student])
 
     respond_to do |format|

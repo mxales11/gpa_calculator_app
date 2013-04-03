@@ -57,10 +57,6 @@
   # POST /students.json
   def create
 
-    logger.debug "********************************************************************************************************************************************************"
-    Rails.logger.info("PARAMS: #{params.inspect}")
-
-
     @student = Student.find(params[:student_id])
     @taken_course = @student.taken_courses.build(params[:taken_course])
     
@@ -69,16 +65,12 @@
     logger.debug "Student  #{@student.attributes.inspect}"
   
     #calculateGPA(@student)
-    student.update_attribute(:major_gpa, 2.0)
+    @student.update_attribute(:major_gpa, 2.0)
 
     logger.debug "********************************************************************************************************************************************************"
     logger.debug "Student  #{@student.attributes.inspect}"
    
 
-   
-    logger.debug"Student  #{@student.attributes.inspect}"
-
- 
     if @taken_course.save!
         logger.debug "********************************************************************************************************************************************************"
         logger.debug "#{@student.attributes.inspect}"
