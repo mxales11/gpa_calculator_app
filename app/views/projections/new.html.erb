@@ -29,7 +29,35 @@
 	   <%= 'Are not nil' %>
 	   <%= params[:projection][:desired_cumulative_gpa] %>
 	   <%= params[:projection][:credits_taken_this_semester] %>
-	   <%= calculateGPANeededForTargetGPA(3.7, 17, 95, 3.5) %>
+
+
+
+	   <%= 'Cumulative Gpa you need this semester for target cumulative gpa' %>
+	   <%-# arguments to method are: credits_earned, cumulative_gpa, targetGpa, creditsTakenThisSemester  -%>
+
+	   <%= calculateGpaNeededForTargetCumulativeGpa(100, 3.5, 3.7, 18) %>
+
+
+	   <%= 'Major Gpa you need this semester for target major (cumulative) gpa ' %>
+	   <%-# arguments to method are: major_credits_earned, major_gpa, targetGpa, majorCreditsTakenThisSemester  -%>
+
+	   <%=  calculateGpaNeededForTargetMajorGpa(100, 3.6, 3.8, 6) %>
+
+
+
+	   <%= 'Your predicted cumulative gpa is ' %>
+	   <%-# arguments to method are: credits_earned, cumulative_gpa, creditsArray, predictedGradeArray, isRepeatedCourseArray  -%>
+
+
+	   	<%-# change those from global to local  -%>
+		@creditsArray = [ 3, 2, 1 ]
+		@predictedGradeArray = [ 'B', 'C', 'D' ]
+		@isRepeatedCourseArray = [ 'true', 'true', 'false' ]
+
+	   <%=  calculatePredictedCumulativeGpa(100, 3.6, @creditsArray, @predictedGradeArray, @isRepeatedCourseArray ) %>
+
+	    <%-# add the last fourth method -%>
+
     <% else %>
     	 <%= 'Are empty' %>
     <% end %>
