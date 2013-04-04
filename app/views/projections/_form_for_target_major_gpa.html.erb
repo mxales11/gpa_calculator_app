@@ -1,0 +1,12 @@
+<%= form_for(:projection, url: student_projections_path) do |f| %>
+
+			<%= f.label :desired_major_gpa %>
+			<%= f.text_field :desired_major_gpa %>
+
+			<%= f.label :major_credits_taken_this_semester %>
+			<%= f.password_field :major_credits_taken_this_semester %>
+
+			<%= f.hidden_field :major_gpa_you_want_this_semester %>
+
+			<%= f.submit "Calculate major gpa you want this semester", class: "btn btn-large btn-primary" %>
+<% end %>

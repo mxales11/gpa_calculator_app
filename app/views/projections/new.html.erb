@@ -3,72 +3,75 @@
 
 <div class="row">
 	<div class="span6 offset3">
-		<%= form_for(:projection, url: student_projections_path) do |f| %>
 
-			<%= f.label :desired_cumulative_gpa %>
-			<%= f.text_field :desired_cumulative_gpa %>
-
-			<%= f.label :credits_taken_this_semester %>
-			<%= f.password_field :credits_taken_this_semester %>
-
-			<%= f.hidden_field :gpa_you_want_this_semester %>
+		<%= render 'form_for_target_cumulative_gpa' %>
 
 
+	<%-# this is just debug information) -%>
+	<br>
+	 	<% if !(params[:projection][:desired_cumulative_gpa] rescue nil).nil? && !(params[:projection][:credits_taken_this_semester] rescue nil).nil?  %>
 
-			<%= f.submit "Calculate GPA", class: "btn btn-large btn-primary" %>
-		<% end %>
+	 		<% if !(params[:projection][:desired_cumulative_gpa]).blank? && !(params[:projection][:credits_taken_this_semester]).blank?  %>
 
-	</div>
+				<br>
+				   	<%= params[:projection][:desired_cumulative_gpa] %>
+				   	<%= params[:projection][:credits_taken_this_semester] %>
+				</br>
 
-<br>
+			   <br>
+			   <%= 'Cumulative Gpa you need this semester for target cumulative gpa' %>
+			   <%-# arguments to method are: credits_earned, cumulative_gpa, targetGpa, creditsTakenThisSemester  -%>
+			   <%= calculateGpaNeededForTargetCumulativeGpa(100, 3.5, 3.7, 18) %>
+				</br>
 
+				<br>
+			   <%= 'Major Gpa you need this semester for target major (cumulative) gpa ' %>
+			   <%-# arguments to method are: major_credits_earned, major_gpa, targetGpa, majorCreditsTakenThisSemester  -%>
+			   <%=  calculateGpaNeededForTargetMajorGpa(18, 3.6, 3.8, 6) %>
+				</br>
 
- <% if !(params[:projection][:desired_cumulative_gpa] rescue nil).nil? && !(params[:projection][:credits_taken_this_semester] rescue nil).nil?  %>
+				<br>
+			   <%= 'Your predicted cumulative gpa is ' %>
+			   <%-# arguments to method are: credits_earned, cumulative_gpa, creditsArray, predictedGradeArray, isRepeatedCourseArray  -%>
+			   	<%-# change those from global to local  @creditsArray = [ 3, 2, 1 ] @predictedGradeArray = [ 'B', 'C', 'D' ]@isRepeatedCourseArray = [ 'true', 'true', 'false' ]
+				-%>
+			   <%= calculatePredictedCumulativeGpa(100, 3.6, [ 3, 2, 1 ], [ 'A', 'B', 'C'], [ 'true', 'true', 'false']) %>
+				</br>
 
- 	<% if !(params[:projection][:desired_cumulative_gpa]).blank? && !(params[:projection][:credits_taken_this_semester]).blank?  %>
-	   <%= 'Are not nil' %>
-	   <%= params[:projection][:desired_cumulative_gpa] %>
-	   <%= params[:projection][:credits_taken_this_semester] %>
-
-
-
-	   <%= 'Cumulative Gpa you need this semester for target cumulative gpa' %>
-	   <%-# arguments to method are: credits_earned, cumulative_gpa, targetGpa, creditsTakenThisSemester  -%>
-
-	   <%= calculateGpaNeededForTargetCumulativeGpa(100, 3.5, 3.7, 18) %>
-
-
-	   <%= 'Major Gpa you need this semester for target major (cumulative) gpa ' %>
-	   <%-# arguments to method are: major_credits_earned, major_gpa, targetGpa, majorCreditsTakenThisSemester  -%>
-
-	   <%=  calculateGpaNeededForTargetMajorGpa(100, 3.6, 3.8, 6) %>
-
-
-
-	   <%= 'Your predicted cumulative gpa is ' %>
-	   <%-# arguments to method are: credits_earned, cumulative_gpa, creditsArray, predictedGradeArray, isRepeatedCourseArray  -%>
-
-
-	   	<%-# change those from global to local  -%>
-		@creditsArray = [ 3, 2, 1 ]
-		@predictedGradeArray = [ 'B', 'C', 'D' ]
-		@isRepeatedCourseArray = [ 'true', 'true', 'false' ]
-
-	   <%=  calculatePredictedCumulativeGpa(100, 3.6, @creditsArray, @predictedGradeArray, @isRepeatedCourseArray ) %>
-
-	    <%-# add the last fourth method -%>
-
-    <% else %>
-    	 <%= 'Are empty' %>
-    <% end %>
-<% else %>
-    <%= 'Are nil' %>
-<% end %>
+		   	<br>
+		   <%= 'Your predicted major gpa is ' %>
+		   <%-# arguments to method are: (major_credits_earned, major_gpa, creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourse)  -%>
+		   <%= calculatePredictedMajorGpa(18, 3.6, [ 3, 2, 1 ], [ 'A', 'B', 'C'], [ 'true', 'true', 'false'], [ 'false', 'false', 'true']) %>
+			</br>
+	    <% else %>
+	    	 <%= 'Are empty' %>
+	    <% end %>
+	<% else %>
+	    <%= 'Are nil' %>
+	<% end %>
 
 </br>
 
 </div>
+</div>
 
+
+<h1>Form for target Major GPA</h1>
+<div class="row">
+	<div class="span6 offset3">
+			<%= render 'form_for_target_major_gpa' %>
+
+	</div>
+</div>
+
+
+<h1>Form for predicted GPA</h1>
+<div class="row">
+	<div class="span6 offset3">
+		<%= render 'form_for_predicted_gpa' %>
+
+	</div>
+</div>
 
 <%= debug("Params are") %>
 <%= debug(params) %>

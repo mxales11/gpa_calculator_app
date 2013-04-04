@@ -17,9 +17,8 @@ class StudentsController < ApplicationController
     logger.debug "Student  #{@student.attributes.inspect}"
     Rails.logger.info("PARAMS: #{params.inspect}")
 
-    puts "printing student works"
     #@student.update_attributes(params[:student])
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @student }

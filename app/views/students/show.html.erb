@@ -1,18 +1,11 @@
 <title>Student</title>
 
-
-
-<p id="notice"><%= notice %></p>
-<%= debug("Cumulative gpa is:") %>
-<%= debug(Student.find(params[:id]).cumulative_gpa) %>
-<%= debug("Major gpa is:") %>
-<%= debug(Student.find(params[:id]).major_gpa) %>
+<%= debug("Cumulative gpa is: #{Student.find(params[:id]).cumulative_gpa}") %>
+<%= debug("Major gpa is: #{Student.find(params[:id]).major_gpa}") %>
 
 <p>
   <b>Email:</b>
-  <h1>
   <%= @student.email %>
-  </h1>
 </p>
 
 <p>

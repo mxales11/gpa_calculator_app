@@ -1,9 +1,9 @@
 module ProjectionsHelper
 
+	#those methods are just mockups for now
+
 
 	gradingSchema = { A: 4.0, AB: 3.5, B: 3.0, BC: 2.5, C: 2.0, CD: 1.5, D: 1.0, F:0.0 }
-
-	#those methods are just mockups for now
 
 	def changeGradingSchema(gradingSchema)
 
@@ -11,8 +11,6 @@ module ProjectionsHelper
 		#how am I gonna change the above grading schema?
 
 	end
-
-
 	#merge those two methods later
 
 	def calculateGpaNeededForTargetCumulativeGpa(credits_earned, cumulative_gpa, targetGpa, creditsTakenThisSemester) 
@@ -43,39 +41,40 @@ module ProjectionsHelper
 		#credits_earned and cumulative_gpa are from student attributes, student is found in projections controller @student = Student.find(params[:student_id])
 		#the rest of attributes is calculated in projections form
 
-		hpts = 0;
+		hpts = 0
 
 		[creditsArray, predictedGradeArray, isRepeatedCourseArray].transpose.each do |credits, predictedGrade, isRepeatedCourse|
-  # . . 
-			puts credits
-			puts predictedGrade
-			puts isRepeatedCourse
-			hpts = hpts + credits * predictedGrade
+   
+   			logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2"
+			logger.debug "Credits are  #{credits}"
+			logger.debug "predictedGrade are  #{predictedGrade}"
+			logger.debug "Is Repeated course  #{isRepeatedCourse}"
+			hpts = hpts + credits
 
 		end
 
-		predictedCumulativeGpa = creditsEarned * cumulative_gpa + htps
+		#change 0 to htps
+		predictedCumulativeGpa = credits_earned * cumulative_gpa + 0
 		return predictedCumulativeGpa
 
 	end
 
 
-	def calculatePredictedMajorGPA(credits_earned, major_gpa, creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourse)
+	def calculatePredictedMajorGpa(credits_earned, major_gpa, creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourseArray)
 
 		#credits_earned and major_gpa are from student attributes, student is found in projections controller @student = Student.find(params[:student_id])
 		#the rest of attributes is calculated in projections form
-		hpts = 0;
+		hpts = 0
 
 		[creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourseArray].transpose.each do |credits, predictedGrade, isMajorCourse, isRepeatedCourse|
-  # . . 
-			puts credits
-			puts predictedGrade
-			puts isMajorCourse
-			puts isRepeatedCourse
-			hpts = hpts + credits * predictedGrade
+  		
+  		hpts = hpts + credits 
 
 		end
-		predictedMajorGpa = creditsEarned * major_gpa + htps
+
+		#change 0 to htps
+		#change to major credits earned
+		predictedMajorGpa =  credits_earned * major_gpa + 0
 		return predictedMajorGpa
 	end
 

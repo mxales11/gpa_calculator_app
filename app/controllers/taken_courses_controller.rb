@@ -3,11 +3,9 @@
    def index
     #if  params[:student_id].nil?
       #@taken_courses = TakenCourse.all
-    #else
-      #@taken_courses = TakenCourse.find_all_by_student_id(params[:student_id])
-       #@taken_courses = TakenCourse.all
-    @taken_courses = TakenCourse.all
-    
+    @student = Student.find(params[:student_id])
+    @taken_courses = @student.taken_courses
+   
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @taken_courses }
@@ -17,6 +15,7 @@
   # GET /students/1
   # GET /students/1.json
   def show
+
     @taken_course = TakenCourse.find(params[:id])
     @course = Course.find(@taken_course.course_id)
 
@@ -65,6 +64,7 @@
     logger.debug "Student  #{@student.attributes.inspect}"
   
     #calculateGPA(@student)
+    #see if this method works
     @student.update_attribute(:major_gpa, 2.0)
 
     logger.debug "********************************************************************************************************************************************************"
