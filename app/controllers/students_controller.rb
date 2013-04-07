@@ -47,12 +47,10 @@ class StudentsController < ApplicationController
     @student = Student.new(params[:student])
     
     if @student.save
-      flash[:success] = "Student was created"
+      sign_in @student
+      flash[:success] = "Welcome to Make Projections App!"
       redirect_to @student
 
-      #redirect to student profile where:
-      #he can enter his courses to have his cumulative gpa counted
-      #he can make projections
     else
       render 'new'
     end

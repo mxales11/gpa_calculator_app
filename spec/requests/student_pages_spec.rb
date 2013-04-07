@@ -10,8 +10,7 @@ describe "Student pages" do
 		let(:student) { FactoryGirl.create(:student) }
 		before { visit student_path(student) }
 
-		it { should have_selector('h1', text: student.email) }
-		it { should have_selector('title', title: "Student") }
+		it { should have_selector('title', title: student.email) }
 	end
 		
 
@@ -35,6 +34,17 @@ describe "Student pages" do
 
 			it "should create a student" do
 				expect { click_button submit}. to change(Student, :count).by(1)
+			end
+
+
+			describe "after saving the student" do
+				before { click_button submit }
+				let(:student) { Student.find_by_email('student@yahoo.com') }
+
+				it { should have_selector('title', text: student.email) }
+				it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+
+				it { should have_link('Sign out') }
 			end
 		end
 	end

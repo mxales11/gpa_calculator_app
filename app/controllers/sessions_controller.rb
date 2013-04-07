@@ -1,10 +1,9 @@
 class SessionsController < ApplicationController
 
-	def new
 
+	def new
 	end
 
-	
 	def create
 		student = Student.find_by_email(params[:session][:email])
 		if student && student.authenticate(params[:session][:password])
@@ -17,7 +16,10 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-
+		Rails.logger.info("DESTROY WAS INVOKED")
+		sign_out
+		redirect_to root_path
 	end
-
+		
 end
+

@@ -6,6 +6,7 @@ class Student < ActiveRecord::Base
 
 
   before_save { |student| student.email = email.downcase }
+  before_save :create_remember_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -17,7 +18,13 @@ class Student < ActiveRecord::Base
   validates :password_confirmation, presence: true
 
   has_many :taken_courses 
-  has_many :courses, :through => :taken_courses
 
+
+
+  private
+
+  def create_remember_token
+    self.remember_token = SecureRandom.urlsafe_base64
+  end
 
 end

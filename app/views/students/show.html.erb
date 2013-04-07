@@ -1,12 +1,7 @@
-<title>Student</title>
-
 <%= debug("Cumulative gpa is: #{Student.find(params[:id]).cumulative_gpa}") %>
 <%= debug("Major gpa is: #{Student.find(params[:id]).major_gpa}") %>
 
-<p>
-  <b>Email:</b>
-  <%= @student.email %>
-</p>
+<title>Email: <%= @student.email %> </title>
 
 <p>
   <b>Number of credits earned:</b>
@@ -31,7 +26,7 @@
 <p>
 <b>Enter taken courses to have your cumulative gpa, major gpa, and credits earned calculated and to be able to make projections</b>
 
-<%= link_to 'Enter taken courses', new_student_taken_course_path(@student, @taken_course) %>
+<%= link_to 'Add completed courses', new_student_taken_course_path(@student, @taken_course) %>
 </p>
 
 <p>

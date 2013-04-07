@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130319053556) do
+ActiveRecord::Schema.define(:version => 20130405022202) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -28,9 +28,11 @@ ActiveRecord::Schema.define(:version => 20130319053556) do
     t.integer  "credits_earned"
     t.decimal  "major_gpa"
     t.decimal  "cumulative_gpa"
+    t.string   "remember_token"
   end
 
   add_index "students", ["email"], :name => "index_students_on_email", :unique => true
+  add_index "students", ["remember_token"], :name => "index_students_on_remember_token"
 
   create_table "taken_courses", :force => true do |t|
     t.integer  "student_id"

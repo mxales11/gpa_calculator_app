@@ -18,6 +18,8 @@
  * ========================================================== */
 
 
+$('.dropdown-toggle').dropdown()
+
 !function ($) {
 
   "use strict"; // jshint ;_;
