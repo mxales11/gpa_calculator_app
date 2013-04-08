@@ -18,7 +18,7 @@
  * ========================================================== */
 
 
-$('.dropdown-toggle').dropdown()
+//$('.dropdown-toggle').dropdown()
 
 !function ($) {
 
