@@ -174,19 +174,19 @@ def matchGradeToNumbers(taken_course)
 
   if(taken_course.grade =="A")
     return 4
-  elseif (taken_course.grade =="AB")
+  elsif (taken_course.grade =="AB")
     return 3.5
-  elseif (taken_course.grade =="B")
+  elsif (taken_course.grade =="B")
     return 3
-  elseif (taken_course.grade =="BC")
+  elsif (taken_course.grade =="BC")
     return 2.5
-  elseif (taken_course.grade=="C")
+  elsif (taken_course.grade=="C")
     return 2
-  elseif (taken_course.grade =="CD")
+  elsif (taken_course.grade =="CD")
     return 1.5
-  elseif (taken_course.grade =="D")
+  elsif (taken_course.grade =="D")
     return 1
-  elseif (taken_course.grade =="F")
+  elsif (taken_course.grade =="F")
     return 0
   end
 end

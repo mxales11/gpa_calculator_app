@@ -1,7 +1,5 @@
 module ApplicationHelper
 
-	#returns a full title on a per page basis.
-
 	def full_title(page_title)
 		base_title = "GPA Projections App"
 		if page_title.empty?
