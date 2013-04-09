@@ -1,12 +1,16 @@
-<%= debug("Cumulative gpa is: #{Student.find(params[:id]).cumulative_gpa}") %>
-<%= debug("Major gpa is: #{Student.find(params[:id]).major_gpa}") %>
-
-<title>Email: <%= @student.email %> </title>
+<h1><title>Email: <%= @student.email %> </title></h1>
 
 <p>
   <b>Number of credits earned:</b>
   <%= @student.credits_earned %>
 </p>
+
+
+<p>
+  <b>Number of major credits earned:</b>
+  <%= @student.major_credits_earned %>
+</p>
+
 
 <p>
   <b>Cumulative gpa:</b>

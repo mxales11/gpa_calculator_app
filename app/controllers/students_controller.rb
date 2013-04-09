@@ -49,6 +49,7 @@ class StudentsController < ApplicationController
     if @student.save
       sign_in @student
       flash[:success] = "Welcome to Make Projections App!"
+      initializeStudentAttibutes(@student)
       redirect_to @student
 
     else
@@ -85,15 +86,14 @@ class StudentsController < ApplicationController
     end
   end
 
-  def make_projections
+  private
 
+  def initializeStudentAttibutes(student)
 
+     student.update_attribute(:major_gpa, 0.0)
+     student.update_attribute(:cumulative_gpa, 0.0)
+     student.update_attribute(:credits_earned, 0)
+     student.update_attribute(:major_credits_earned, 0)
   end
-
-
-
-
-
-
 
 end

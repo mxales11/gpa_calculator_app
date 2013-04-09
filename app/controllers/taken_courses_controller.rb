@@ -62,15 +62,9 @@
 
     logger.debug "********************************************************************************************************************************************************"
     logger.debug "Student  #{@student.attributes.inspect}"
-  
-    #calculateGPA(@student)
-    #see if this method works
 
-
-
-    #THIS SIGNS OUT AUTOMATICALLY
-    @student.update_attribute(:major_gpa, 2.0)
-
+    updateCredits(@taken_course, @student)
+    calculateGPA(@taken_course, @student)
 
     logger.debug "********************************************************************************************************************************************************"
     logger.debug "Student  #{@student.attributes.inspect}"
@@ -117,6 +111,49 @@ end
 
   
 
+private 
 
+def updateCredits(taken_course, student)
+
+  @course = Course.find(taken_course.course_id)
+
+  if(taken_course.is_major?)
+
+    student.update_attribute(:major_credits_earned, student.major_credits_earned + @course.credits)
+
+    logger.debug "Course is: "
+    logger.debug "#{@course.name}"
+    logger.debug "#{@course.credits}"
+  
+  end
+
+   student.update_attribute(:credits_earned, student.credits_earned + @course.credits)
+    
+end
+
+
+
+def calculateGPA(taken_course, student)
+
+  logger.debug "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+  logger.debug "Calculate GPA was invoked"
+
+  @course = Course.find(taken_course.course_id)
+  @course_credits = @course.credits
+
+  if(taken_course.is_major?)
+     @major_course_credits = @course_credits
+  else
+     @major_course_credits = 0
+  end
+
+
+  student.update_attribute(:cumulative_gpa, (student.cumulative_gpa * (student.credits_earned -  @course_credits) + (@course_credits * 4.0) / student.credits_earned))
+  student.update_attribute(:major_gpa, (student.major_gpa * (student.major_credits_earned -  @major_course_credits) + (@major_course_credits * 4.0) / student.major_credits_earned))
+
+  
+end
 
 end
+
+
