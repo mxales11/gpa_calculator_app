@@ -69,7 +69,8 @@
 
 
     #THIS SIGNS OUT AUTOMATICALLY
-    #@student.update_attribute(:major_gpa, 2.0)
+    @student.update_attribute(:major_gpa, 2.0)
+
 
     logger.debug "********************************************************************************************************************************************************"
     logger.debug "Student  #{@student.attributes.inspect}"

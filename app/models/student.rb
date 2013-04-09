@@ -1,5 +1,5 @@
 class Student < ActiveRecord::Base
-  attr_accessible :name, :cumulative_gpa, :email, :credits_earned, :password, :password_confirmation, :major_gpa
+  attr_accessible :major_credits_earned, :name, :cumulative_gpa, :email, :credits_earned, :password, :password_confirmation, :major_gpa
   has_secure_password
   
 
@@ -24,7 +24,8 @@ class Student < ActiveRecord::Base
   private
 
   def create_remember_token
-    self.remember_token = SecureRandom.urlsafe_base64
+    if self.remember_token.nil?
+      self.remember_token = SecureRandom.urlsafe_base64
+    end
   end
-
 end
