@@ -184,17 +184,7 @@ margin-bottom: 3px;
 }
 
 
-/* forms */
 
-input, textarea, select, .uneditable-input .span6 {
-border: 1px solid #bbb;
-width: 100%;
-padding: 10px;
-height: auto;
-margin-botttom: 15px;
-@include box_sizing;
-
-}
 
 #errors_explanation {
 

@@ -1,3 +1,6 @@
+
+  <div class= "textarea">
+
  <%= form_for(@student) do |f| %>
   <% if @student.errors.any? %>
     <div id="error_explanation">
@@ -10,6 +13,7 @@
       </ul>
     </div>
   <% end %>
+
 
   <div class="field">
     <%= f.label :email %><br />
@@ -25,5 +29,7 @@
   </div>
   <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
 <% end %>
+
+</div>
 
 

@@ -1,3 +1,5 @@
+
+  <div class= "textarea">
 <%= form_for([@student, @taken_course]) do |f| %>
 
   <% if @taken_course.errors.any? %>
@@ -35,4 +37,6 @@
     <%= f.submit "Add taken course", class: "btn btn-large btn-primary" %>
   </div>
 <% end %>
+
+</div>
 
