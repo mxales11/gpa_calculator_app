@@ -148,10 +148,47 @@ def calculateGPA(taken_course, student)
   end
 
 
-  student.update_attribute(:cumulative_gpa, (student.cumulative_gpa * (student.credits_earned -  @course_credits) + (@course_credits * 4.0) / student.credits_earned))
-  student.update_attribute(:major_gpa, (student.major_gpa * (student.major_credits_earned -  @major_course_credits) + (@major_course_credits * 4.0) / student.major_credits_earned))
 
+  #for cumulative
+  @htps_before = student.cumulative_gpa * (student.credits_earned -  @course_credits)
+  @htps_after = @course_credits * matchGradeToNumbers(taken_course)
+  @all_possible_htps = student.credits_earned * 4
+
+  #for major
+  @major_htps_before = student.major_gpa * (student.major_credits_earned -  @major_course_credits)
+  @major_htps_after = @major_course_credits *  matchGradeToNumbers(taken_course)
+  @major_all_possible_htps = student.major_credits_earned * 4
+
+  #for major
+
+  student.update_attribute(:cumulative_gpa, ((@htps_before + @htps_after)/ @all_possible_htps) * 4)
+
+  if (taken_course.is_major?)
+    student.update_attribute(:major_gpa, ((@major_htps_before + @major_htps_after)/ @major_all_possible_htps) * 4)
+  end
   
+end
+
+
+def matchGradeToNumbers(taken_course)
+
+  if(taken_course.grade =="A")
+    return 4
+  elseif (taken_course.grade =="AB")
+    return 3.5
+  elseif (taken_course.grade =="B")
+    return 3
+  elseif (taken_course.grade =="BC")
+    return 2.5
+  elseif (taken_course.grade=="C")
+    return 2
+  elseif (taken_course.grade =="CD")
+    return 1.5
+  elseif (taken_course.grade =="D")
+    return 1
+  elseif (taken_course.grade =="F")
+    return 0
+  end
 end
 
 end
