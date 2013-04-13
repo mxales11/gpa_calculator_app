@@ -1,31 +1,37 @@
-<form>
-	<br></br>
-	<br></br>
-	<h2>FORM FOR PREDICTED GPA</h2>
+<%= form_for(:projection, url: student_projections_path) do |f| %>
 
+	
+	
 	<table>
-	  <tr>
-	    <th>Course</th>
-	    <th>Credits</th>
-	    <th>Predicted_Grade</th>
-	    <th>Is_Major_Course</th>
-	    <th>Is_Repeated_Course</th>
-	  </tr>
+		<tr>
+		    <td>Course</td>
+		    <td>Credits</td>
+		    <td>Predicted Grade</td>
+		    <td>Is Major  Course</td>
+		    <td>Is Repeated Course</td>
+	  	</tr>
 
-	<% 7.times do |course_number| %>
-	  <tr>
-	  	<td><%= course_number+1 %></td>
-	    <td><input type="text" name="credits"></td>
-	    <td><input type="text" name="predicted_grade"></td>
-	    <td><input type="checkbox" name="is_major_course" value="is_major_course"></td>
-	    <td><input type="checkbox" name="is_repeated_course" value="is_major_course"></td>
-	  </tr>
-	<% end %>
-	</table>
+		<tr>
+			<% 7.times do |course_number| %>
 
-	<input type="submit" value="Submit">
+				 <td><%= course_number + 1%> </td>
+				 <td>
+					<%= f.select :"credits#{course_number}", options_for_select([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) %>
+				 </td>
+				 <td>
+				  	<%= f.select :"predicted_grade#{course_number}", options_for_select(['A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
+				 </td>
+				 <td>	
+					 <%= f.check_box :"is_major_course#{course_number}" , {checked: true } %>
+				</td>
+				 <td>
+					 <%= f.check_box :"is_repeated_course#{course_number}" , {checked: true } %>
+				 </td>
+		
+		</tr>
+			<% end %>
+	<table>
 
-</form> 
-
-<br>Your predicted major GPA is: </br>
-<br>Your predicted cumulative GPA is:</br>
+	<%= f.submit "Calculate your predicted GPAs", class: "btn btn-large btn-primary" %>
+		
+<% end %>

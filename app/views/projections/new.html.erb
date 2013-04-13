@@ -11,52 +11,37 @@
 		</div>
 
 
-	<%-# this is just debug information) -%>
+	<%-# debug information for target cumulative gpa -%>
 	<br>
 	 	<% if !(params[:projection][:desired_cumulative_gpa] rescue nil).nil? && !(params[:projection][:credits_taken_this_semester] rescue nil).nil?  %>
 
 	 		<% if !(params[:projection][:desired_cumulative_gpa]).blank? && !(params[:projection][:credits_taken_this_semester]).blank?  %>
 
 				<br>
-				   	<%= params[:projection][:desired_cumulative_gpa] %>
-				   	<%= params[:projection][:credits_taken_this_semester] %>
+					<h4>
+						<%= "desired cumulative gpa" %>
+					   	<%= params[:projection][:desired_cumulative_gpa] %>
+					   	<%= "credits taken this semester" %>
+					   	<%= params[:projection][:credits_taken_this_semester] %>
+					</h4>
 				</br>
 
 			   <br>
-			   <%= 'Cumulative Gpa you need this semester for target cumulative gpa' %>
-			   <%-# arguments to method are: credits_earned, cumulative_gpa, targetGpa, creditsTakenThisSemester  -%>
-			   <%= calculateGpaNeededForTargetCumulativeGpa(100, 3.5, 3.7, 18) %>
+			   		<h4>
+					   <%= 'Cumulative Gpa you need this semester for target cumulative gpa' %>
+					   <%-# arguments to method are: credits_earned, cumulative_gpa, targetGpa, creditsTakenThisSemester  -%>
+					   <%= calculateGpaNeededForTargetCumulativeGpa(100, 3.5, 3.7, 18) %>
+					</h4>
 				</br>
 
-				<br>
-			   <%= 'Major Gpa you need this semester for target major (cumulative) gpa ' %>
-			   <%-# arguments to method are: major_credits_earned, major_gpa, targetGpa, majorCreditsTakenThisSemester  -%>
-			   <%=  calculateGpaNeededForTargetMajorGpa(18, 3.6, 3.8, 6) %>
-				</br>
-
-				<br>
-			   <%= 'Your predicted cumulative gpa is ' %>
-			   <%-# arguments to method are: credits_earned, cumulative_gpa, creditsArray, predictedGradeArray, isRepeatedCourseArray  -%>
-			   	<%-# change those from global to local  @creditsArray = [ 3, 2, 1 ] @predictedGradeArray = [ 'B', 'C', 'D' ]@isRepeatedCourseArray = [ 'true', 'true', 'false' ]
-				-%>
-			   <%= calculatePredictedCumulativeGpa(100, 3.6, [ 3, 2, 1 ], [ 'A', 'B', 'C'], [ 'true', 'true', 'false']) %>
-				</br>
-
-		   	<br>
-		   <%= 'Your predicted major gpa is ' %>
-		   <%-# arguments to method are: (major_credits_earned, major_gpa, creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourse)  -%>
-		   <%= calculatePredictedMajorGpa(18, 3.6, [ 3, 2, 1 ], [ 'A', 'B', 'C'], [ 'true', 'true', 'false'], [ 'false', 'false', 'true']) %>
-			</br>
-	    <% else %>
-	    	 <%= 'Are empty' %>
+	    	<% else %>
+	    	<%= 'Are empty' %>
 	    <% end %>
-	<% else %>
-	    <%= 'Are nil' %>
-	<% end %>
-
-</br>
-
-</div>
+		<% else %>
+	    	<%= 'Are nil' %>
+		<% end %>
+	</br>
+	</div>
 </div>
 
 
@@ -68,6 +53,40 @@
 	</div>
 </div>
 
+	<%-# debug information for target major gpa -%>
+	<br>
+	 	
+				<% if !(params[:projection][:desired_major_gpa] rescue nil).nil? && !(params[:projection][:major_credits_taken_this_semester] rescue nil).nil?  %>
+
+	 		<% if !(params[:projection][:desired_major_gpa]).blank? && !(params[:projection][:major_credits_taken_this_semester]).blank?  %>
+
+				<br>
+					<h4>
+						<%= "desired_cumulative_gpa" %>
+					   	<%= params[:projection][:desired_major_gpa] %>
+					   	<%= "credits taken this semester" %>
+					   	<%= params[:projection][:major_credits_taken_this_semester] %>
+				   	<h4>
+				</br>
+			
+				<br>
+					<h4>
+					   <%= 'Major Gpa you need this semester for target major (cumulative) gpa ' %>
+					   <%-# arguments to method are: major_credits_earned, major_gpa, targetGpa, majorCreditsTakenThisSemester  -%>
+
+
+					   <%=  calculateGpaNeededForTargetMajorGpa(18, 3.6, 3.8, 6) %>
+					</h4>
+				</br>
+		    	
+	    		<% else %>
+	    			<%= 'Are empty' %>
+	   			<% end %>
+			<% else %>
+	    		<%= 'Are nil' %>
+			<% end %>
+	</br>
+
 
 <h1>Form for predicted GPA</h1>
 <div class="row">
@@ -77,7 +96,51 @@
 	</div>
 </div>
 
+
+
+	<%-# debug information for predicted cumulative and major gpa -%>
+
+			<% if !(params[:projection][:credits0] rescue nil).nil? && !(params[:projection][:major_credits_taken_this_semester] rescue nil).nil?  %>
+
+					<br>
+					   	<%= "credits" %>
+						<%= params[:projection][:credits0] %>
+						<%= "predicted_grade" %>
+						<%= params[:projection][:predicted_grade0] %>
+						<%= "is_major_course" %>
+						<%= params[:projection][:is_major_course0] %>
+						<%= "is_repeated_course" %>
+						<%= params[:projection][:is_repeated_course0] %>
+					</br>
+		
+			
+
+				 <%-# create arrays  -%>
+
+				<% creditsArray = getArrayOfParams('credits', 7) %>
+				<% gradesArray = getArrayOfParams('predicted_grade', 7) %>
+				<% isMajorCourseArray = getArrayOfParams('is_major_course', 7) %>
+				<% isRepeatedCourseArray = getArrayOfParams('is_repeated_course', 7) %>
+
+			
+				<br> 
+					<h4><%= 'Your predicted cumulative GPA is ' %>
+						<%-# arguments to method are: credits_earned, cumulative_gpa, creditsArray, predictedGradeArray, isRepeatedCourseArray  -%>
+						<%= calculatePredictedCumulativeGpa(@student.credits_earned, @student.cumulative_gpa,  creditsArray , gradesArray, isRepeatedCourseArray) %>
+					<h4>
+				</br>
+
+
+			   	<br>
+			   		<h3><%= 'Your predicted major GPA is ' %> 
+				   		<%-# arguments to method are: (major_credits_earned, major_gpa, creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourse) -%>
+				   		<%= calculatePredictedMajorGpa(@student.major_credits_earned, @student.major_gpa,  creditsArray , gradesArray, isMajorCourseArray, isRepeatedCourseArray) %>
+				   	<h3>
+				</br>
+
+				<% end %>
+			</br>
+
 <%= debug("Params are") %>
 <%= debug(params) %>
-
 

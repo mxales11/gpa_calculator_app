@@ -49,7 +49,7 @@ module ProjectionsHelper
 			logger.debug "Credits are  #{credits}"
 			logger.debug "predictedGrade are  #{predictedGrade}"
 			logger.debug "Is Repeated course  #{isRepeatedCourse}"
-			hpts = hpts + credits
+			hpts = hpts + credits.to_i
 
 		end
 
@@ -68,7 +68,7 @@ module ProjectionsHelper
 
 		[creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourseArray].transpose.each do |credits, predictedGrade, isMajorCourse, isRepeatedCourse|
   		
-  		hpts = hpts + credits 
+  		hpts = hpts + credits.to_i
 
 		end
 
@@ -76,6 +76,37 @@ module ProjectionsHelper
 		#change to major credits earned
 		predictedMajorGpa =  credits_earned * major_gpa + 0
 		return predictedMajorGpa
+	end
+
+
+	def getArrayOfParams(parameter, arrayLength)
+
+		logger.debug("HELPER INVOKED")
+		arrayOfParams = Array.new
+		length = arrayLength.to_i
+		logger.debug(length)
+
+
+		length.to_i.times do |i|
+
+	   		logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2"
+			logger.debug "LOOP"
+		
+			logger.debug "EXPECTED PARAMS"
+			logger.debug("#{parameter}#{i.to_s}")
+			logger.debug(params[:projection][:"#{parameter}#{i.to_s}"])
+   			arrayOfParams.push(params[:projection][:"#{parameter}#{i.to_s}"])
+
+	   		logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2"
+			logger.debug "WAS PUSHED"
+
+   		end
+
+	   		logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2"
+			logger.debug "ARRAY OF PARAMS is  #{arrayOfParams}"
+
+		return arrayOfParams
+
 	end
 
 
