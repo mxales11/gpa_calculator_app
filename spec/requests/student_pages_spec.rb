@@ -12,8 +12,28 @@ describe "Student pages" do
 
 		it { should have_selector('title', title: student.email) }
 	end
+
+
+	describe "projection pages" do
+
+		let(:student) { FactoryGirl.create(:student) }
+		let(:submit) { "Calculate your predicted GPAs" }
+
+		let(:projection) { Projection.new }
 		
 
+		before {  new_student_projection_path(student, projection) }
+		before { click_button submit }
+	
+		
+		subject { projection }
+		it { should respond_to(:predicted_grade0) }
+		it { should respond_to(:is_major_course0) }
+		it { should respond_to(:is_repeated_course0) }
+	
+	end
+
+		
 	describe "signup" do
 
 		before { visit signup_path }
