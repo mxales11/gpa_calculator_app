@@ -12,7 +12,7 @@ module ProjectionsHelper
 
 	def calculateGpaNeededForTargetCumulativeGpa(credits_earned, cumulative_gpa, targetGpa, creditsTakenThisSemester) 
 
-		all_possible_hpts = (credits_earned * creditsTakenThisSemester) * 4.0
+		all_possible_hpts = (credits_earned + creditsTakenThisSemester) * 4.0
 		htps_earned = credits_earned * cumulative_gpa
 
 		gpaNeededForTargetCumulativeGpa = (targetGpa * all_possible_hpts)/(4*creditsTakenThisSemester) - (htps_earned/creditsTakenThisSemester)
