@@ -35,10 +35,10 @@
 				</br>
 
 	    	<% else %>
-	    	<%= 'Are empty' %>
+	    	<%= 'Some fields are empty' %>
 	    <% end %>
 		<% else %>
-	    	<%= 'Are nil' %>
+	    	<%= 'Params are nil' %>
 		<% end %>
 	</br>
 	</div>
@@ -80,10 +80,10 @@
 				</br>
 		    	
 	    		<% else %>
-	    			<%= 'Are empty' %>
+	    			<%= 'Some fields are empty' %>
 	   			<% end %>
 			<% else %>
-	    		<%= 'Are nil' %>
+	    		<%= 'Params are nil' %>
 			<% end %>
 	</br>
 
@@ -100,7 +100,7 @@
 
 	<%-# debug information for predicted cumulative and major gpa -%>
 
-			<% if !(params[:projection][:credits0] rescue nil).nil? && !(params[:projection][:major_credits_taken_this_semester] rescue nil).nil?  %>
+			<% if !(params[:projection][:credits0] rescue nil).nil? && !(params[:projection][:predicted_grade0] rescue nil).nil?  %>
 
 					<br>
 					   	<%= "credits" %>
@@ -132,10 +132,16 @@
 
 
 			   	<br>
-			   		<h3><%= 'Your predicted major GPA is ' %> 
+			   		<h4><%= 'Your predicted (cumulative) major GPA is ' %> 
 				   		<%-# arguments to method are: (major_credits_earned, major_gpa, creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourse) -%>
 				   		<%= calculatePredictedMajorGpa(@student.major_credits_earned, @student.major_gpa,  creditsArray , gradesArray, isMajorCourseArray, isRepeatedCourseArray) %>
-				   	<h3>
+				   	<h4>
+				</br>
+
+				<% else %>
+
+				<br>
+					<h4><%= 'Params are nil' %> <h4>
 				</br>
 
 				<% end %>

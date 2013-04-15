@@ -1,0 +1,47 @@
+C:\Users\Marta\SMU\CS\CS380\rails_projects\gpa_calculator_app>bundle exec rspec
+spec > rspec.results
+        SECURITY WARNING: No secret option provided to Rack::Session::Cookie.
+        This poses a security threat. It is strongly recommended that you
+        provide a secret to prevent exploits that may be possible from crafted
+        cookies. This will not be supported in future versions of Rack, and
+        future versions will even invalidate your existing user cookies.
+
+        Called from: C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1
+/gems/actionpack-3.2.3/lib/action_dispatch/middleware/session/abstract_store.rb:
+28:in `initialize'.
+
+Rack::File headers parameter replaces cache_control after Rack 1.5.
+C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/spec/requests/stud
+ent_pages_spec.rb:22:in `block (2 levels) in <top (required)>': uninitialized co
+nstant Projection (NameError)
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/example_group.rb:201:in `module_eval'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/example_group.rb:201:in `subclass'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/example_group.rb:187:in `describe'
+        from C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/spec/
+requests/student_pages_spec.rb:17:in `block in <top (required)>'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/example_group.rb:201:in `module_eval'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/example_group.rb:201:in `subclass'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/example_group.rb:187:in `describe'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/dsl.rb:18:in `describe'
+        from C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/spec/
+requests/student_pages_spec.rb:3:in `<top (required)>'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/configuration.rb:746:in `block in load_spec_files'
+
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/configuration.rb:746:in `map'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/configuration.rb:746:in `load_spec_files'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/command_line.rb:22:in `run'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/runner.rb:69:in `run'
+        from C:/Users/Marta/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/rs
+pec-core-2.9.0/lib/rspec/core/runner.rb:10:in `block in autorun'

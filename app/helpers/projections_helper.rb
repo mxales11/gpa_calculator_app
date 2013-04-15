@@ -1,9 +1,6 @@
 module ProjectionsHelper
 
-	#those methods are just mockups for now
 
-
-	gradingSchema = { A: 4.0, AB: 3.5, B: 3.0, BC: 2.5, C: 2.0, CD: 1.5, D: 1.0, F:0.0 }
 
 	def changeGradingSchema(gradingSchema)
 
@@ -38,44 +35,65 @@ module ProjectionsHelper
 
 	def calculatePredictedCumulativeGpa(credits_earned, cumulative_gpa, creditsArray, predictedGradeArray, isRepeatedCourseArray)
 
-		#credits_earned and cumulative_gpa are from student attributes, student is found in projections controller @student = Student.find(params[:student_id])
-		#the rest of attributes is calculated in projections form
+		gradingSchema = { "A" => 4.0, "AB" => 3.5, "B" => 3.0, "BC" => 2.5, "C" =>2.0, "CD" =>1.5, "D"=> 1.0, "F" => 0.0 }
+		predicted_cumulative_hpts_earned = 0
+		predicted_cumulative_credits_earned = 0
 
-		hpts = 0
 
 		[creditsArray, predictedGradeArray, isRepeatedCourseArray].transpose.each do |credits, predictedGrade, isRepeatedCourse|
-   
-   			logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2"
-			logger.debug "Credits are  #{credits}"
-			logger.debug "predictedGrade are  #{predictedGrade}"
-			logger.debug "Is Repeated course  #{isRepeatedCourse}"
-			hpts = hpts + credits.to_i
+  		 
+  		 		if (isRepeatedCourse)
 
-		end
+  		 		else
+  					predicted_cumulative_hpts_earned = credits.to_i * gradingSchema[predictedGrade.to_s] + predicted_cumulative_hpts_earned
+  					predicted_cumulative_credits_earned = credits.to_i + predicted_cumulative_credits_earned
+  				end
+  		end
+	
 
-		#change 0 to htps
-		predictedCumulativeGpa = credits_earned * cumulative_gpa + 0
-		return predictedCumulativeGpa
+		cumulative_hpts = predicted_cumulative_hpts_earned + credits_earned * cumulative_gpa
+		all_possible_hpts = (credits_earned + predicted_cumulative_credits_earned) * 4.0
+
+		predicted_cumulative_gpa =  4.0 * (cumulative_hpts / all_possible_hpts)
+
+		logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$Hpts are  #{predicted_cumulative_hpts_earned}"
+		logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$predictedGpa is #{predicted_cumulative_gpa}"
+		return predicted_cumulative_gpa
 
 	end
 
 
-	def calculatePredictedMajorGpa(credits_earned, major_gpa, creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourseArray)
+	def calculatePredictedMajorGpa(major_credits_earned, major_gpa, creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourseArray)
 
-		#credits_earned and major_gpa are from student attributes, student is found in projections controller @student = Student.find(params[:student_id])
-		#the rest of attributes is calculated in projections form
-		hpts = 0
+
+		gradingSchema = { "A" => 4.0, "AB" => 3.5, "B" => 3.0, "BC" => 2.5, "C" =>2.0, "CD" =>1.5, "D"=> 1.0, "F" => 0.0 }
+		predicted_major_hpts_earned = 0
+		predicted_major_credits_earned = 0
+
 
 		[creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourseArray].transpose.each do |credits, predictedGrade, isMajorCourse, isRepeatedCourse|
   		
-  		hpts = hpts + credits.to_i
+			if (isMajorCourse.to_i == 1) 
 
+				if(isRepeatedCourse)
+
+				else
+					logger.debug(key)
+  					predicted_major_hpts_earned = credits.to_i * gradingSchema[predictedGrade.to_s] + predicted_major_hpts_earned
+  					predicted_major_credits_earned = credits.to_i + predicted_major_credits_earned
+  				end
+  			end
 		end
 
-		#change 0 to htps
-		#change to major credits earned
-		predictedMajorGpa =  credits_earned * major_gpa + 0
-		return predictedMajorGpa
+		cumulative_major_hpts = predicted_major_hpts_earned + major_credits_earned * major_gpa
+		all_possible_major_hpts = (major_credits_earned + predicted_major_credits_earned) * 4.0
+
+		predicted_major_gpa =  4.0 * (cumulative_major_hpts / all_possible_major_hpts)
+
+		logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$Hpts are  #{predicted_major_hpts_earned}"
+		logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$predictedGpa is #{predicted_major_gpa}"
+		return predicted_major_gpa
+	
 	end
 
 
