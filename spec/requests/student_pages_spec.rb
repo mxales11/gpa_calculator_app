@@ -22,14 +22,30 @@ describe "Student pages" do
 		let(:projection) { Projection.new }
 		
 
-		before {  new_student_projection_path(student, projection) }
-		before { click_button submit }
-	
+		describe "accessing parameters" do
+			before {  new_student_projection_path(student, projection) }
+			before { click_button submit }
 		
-		subject { projection }
-		it { should respond_to(:predicted_grade0) }
-		it { should respond_to(:is_major_course0) }
-		it { should respond_to(:is_repeated_course0) }
+			
+			subject { projection }
+			it { should respond_to(:predicted_grade0) }
+			it { should respond_to(:is_major_course0) }
+			it { should respond_to(:is_repeated_course0) }
+
+		end
+
+		describe "calculation predicted gpa" do
+
+			before {  new_student_projection_path(student, projection) }
+			before { click_button submit }
+
+			subject { projection }
+				it " should be equal to 4.0"
+					expect { params[:projection][:student] == 4.0}
+		
+
+
+		end
 	
 	end
 
