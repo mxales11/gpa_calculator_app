@@ -39,12 +39,12 @@ describe "Student pages" do
 			before {  new_student_projection_path(student, projection) }
 			before { click_button submit }
 
-			subject { projection }
-				it " should be equal to 4.0"
-					expect { params[:projection][:student] == 4.0}
+			it { should have_selector('h4', text: "Your predicted cumulative GPA is") }
+			it { should have_selector('h4', text: "Your predicted (cumulative) major GPA is ") }
+			
+			it { should have_selector('h4', text: "4.0") }
+			it { should have_selector('h4', text: "4.0") }
 		
-
-
 		end
 	
 	end

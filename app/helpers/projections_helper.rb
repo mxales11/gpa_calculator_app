@@ -12,12 +12,16 @@ module ProjectionsHelper
 
 	def calculateGpaNeededForTargetCumulativeGpa(credits_earned, cumulative_gpa, targetGpa, creditsTakenThisSemester) 
 
-		#credits_earned and cumulative_gpa come from student attibutes
-		#rest arguments come from form
-		gpaNeededForTargetCumulativeGpa = (targetGpa - credits_earned *  cumulative_gpa) / creditsTakenThisSemester
+		all_possible_hpts = (credits_earned * creditsTakenThisSemester) * 4.0
+		htps_earned = credits_earned * cumulative_gpa
+
+		gpaNeededForTargetCumulativeGpa = (targetGpa * all_possible_hpts)/(4*creditsTakenThisSemester) - (htps_earned/creditsTakenThisSemester)
+			
 		return gpaNeededForTargetCumulativeGpa;
 
 	end
+		
+
 
 	def calculateGpaNeededForTargetMajorGpa(credits_earned, major_gpa, targetGpa, majorCreditsTakenThisSemester) 
 
