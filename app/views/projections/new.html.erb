@@ -30,7 +30,7 @@
 			   		<h4>
 					   <%= 'Cumulative Gpa you need this semester for target cumulative gpa' %>
 					   <%-# arguments to method are: credits_earned, cumulative_gpa, targetGpa, creditsTakenThisSemester  -%>
-					   <%= calculateGpaNeededForTargetCumulativeGpa(100, 3.5, 3.7, 18) %>
+					   <%= calculateGpaNeededForTargetCumulativeGpa(params[:projection][:desired_cumulative_gpa] , params[:projection][:credits_taken_this_semester]) %>
 					</h4>
 				</br>
 
@@ -75,7 +75,7 @@
 					   <%-# arguments to method are: major_credits_earned, major_gpa, targetGpa, majorCreditsTakenThisSemester  -%>
 
 
-					   <%=  calculateGpaNeededForTargetMajorGpa(18, 3.6, 3.8, 6) %>
+					   <%=  calculateGpaNeededForTargetMajorGpa(params[:projection][:desired_major_gpa] , params[:projection][:major_credits_taken_this_semester]) %>
 					</h4>
 				</br>
 		    	
@@ -124,16 +124,16 @@
 
 			
 				<br> 
-					<h4><%= 'Your predicted cumulative GPA is ' %>
-						<%-# arguments to method are: credits_earned, cumulative_gpa, creditsArray, predictedGradeArray, isRepeatedCourseArray  -%>
+					<h4><%= 'Your predicted cumulative Gpa is ' %>
+						
 						<%= calculatePredictedCumulativeGpa(@student.credits_earned, @student.cumulative_gpa,  creditsArray , gradesArray, isRepeatedCourseArray) %>
 					<h4>
 				</br>
 
 
 			   	<br>
-			   		<h4><%= 'Your predicted (cumulative) major GPA is ' %> 
-				   		<%-# arguments to method are: (major_credits_earned, major_gpa, creditsArray, predictedGradeArray, isMajorCourseArray, isRepeatedCourse) -%>
+			   		<h4><%= 'Your predicted (cumulative) major Gpa is ' %> 
+				   	
 				   		<%= calculatePredictedMajorGpa(@student.major_credits_earned, @student.major_gpa,  creditsArray , gradesArray, isMajorCourseArray, isRepeatedCourseArray) %>
 				   	<h4>
 				</br>

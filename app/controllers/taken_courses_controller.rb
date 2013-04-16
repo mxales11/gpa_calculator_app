@@ -73,7 +73,7 @@
     if @taken_course.save!
         logger.debug "********************************************************************************************************************************************************"
         logger.debug "#{@student.attributes.inspect}"
-        redirect_to student_taken_courses_path(@student)
+        redirect_to @student
     else 
           logger.debug "********************************************************************************************************************************************************"
           logger.debug "Student was not created. Student: #{@student.attributes.inspect}"

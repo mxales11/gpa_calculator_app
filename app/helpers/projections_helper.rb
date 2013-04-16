@@ -10,25 +10,26 @@ module ProjectionsHelper
 	end
 	#merge those two methods later
 
-	def calculateGpaNeededForTargetCumulativeGpa(credits_earned, cumulative_gpa, target_gpa, creditsTakenThisSemester) 
+	def calculateGpaNeededForTargetCumulativeGpa(target_gpa, creditsTakenThisSemester) 
 
-		all_possible_hpts = (credits_earned + creditsTakenThisSemester) * 4.0
-		htps_earned = credits_earned * cumulative_gpa
+		all_possible_hpts = (@student.credits_earned + creditsTakenThisSemester.to_f) * 4.0
+		
+		htps_earned = @student.credits_earned * @student.cumulative_gpa
 
-		gpaNeededForTargetCumulativeGpa = (target_gpa * all_possible_hpts)/(4*creditsTakenThisSemester) - (htps_earned/creditsTakenThisSemester)
+		gpaNeededForTargetCumulativeGpa = (target_gpa.to_f * all_possible_hpts.to_f)/(4.0*creditsTakenThisSemester.to_f) - (htps_earned.to_f/creditsTakenThisSemester.to_f)
 			
 		return gpaNeededForTargetCumulativeGpa;
+		
 
 	end
 		
 
+	def calculateGpaNeededForTargetMajorGpa(target_major_gpa, major_credits_taken_this_semester) 
 
-	def calculateGpaNeededForTargetMajorGpa(major_credits_earned, major_gpa, target_major_gpa, major_credits_taken_this_semester) 
+		all_possible_major_hpts = (@student.major_credits_earned + major_credits_taken_this_semester.to_f) * 4.0
+		major_hpts_earned = @student.major_credits_earned * @student.major_gpa
 
-		all_possible_major_hpts = (major_credits_earned + major_credits_taken_this_semester) * 4.0
-		major_htps_earned = major_credits_earned * major_gpa
-
-		majorGpaNeededForTargetCumulativeGpa = (target_major_gpa * all_possible_major_hpts)/(4*major_credits_taken_this_semester) - (major_hpts_earned/major_credits_taken_this_semester)
+		majorGpaNeededForTargetCumulativeGpa = (target_major_gpa.to_f * all_possible_major_hpts.to_f)/(4.0*major_credits_taken_this_semester.to_f) - (major_hpts_earned.to_f/major_credits_taken_this_semester.to_f)
 			
 		return majorGpaNeededForTargetCumulativeGpa;
 
@@ -48,10 +49,10 @@ module ProjectionsHelper
   		 
   		 		if (isRepeatedCourse)
 
-  		 		else
+  		 		end
   					predicted_cumulative_hpts_earned = credits.to_i * gradingSchema[predictedGrade.to_s] + predicted_cumulative_hpts_earned
   					predicted_cumulative_credits_earned = credits.to_i + predicted_cumulative_credits_earned
-  				end
+  				
   		end
 	
 
@@ -60,7 +61,6 @@ module ProjectionsHelper
 
 		predicted_cumulative_gpa =  4.0 * (cumulative_hpts / all_possible_hpts)
 
-		logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$Hpts are  #{predicted_cumulative_hpts_earned}"
 		logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$predictedGpa is #{predicted_cumulative_gpa}"
 		return predicted_cumulative_gpa
 
@@ -81,11 +81,10 @@ module ProjectionsHelper
 
 				if(isRepeatedCourse)
 
-				else
-					logger.debug(key)
-  					predicted_major_hpts_earned = credits.to_i * gradingSchema[predictedGrade.to_s] + predicted_major_hpts_earned
-  					predicted_major_credits_earned = credits.to_i + predicted_major_credits_earned
-  				end
+				end
+  				predicted_major_hpts_earned = credits.to_i * gradingSchema[predictedGrade.to_s] + predicted_major_hpts_earned
+  				predicted_major_credits_earned = credits.to_i + predicted_major_credits_earned
+  			
   			end
 		end
 
@@ -94,7 +93,6 @@ module ProjectionsHelper
 
 		predicted_major_gpa =  4.0 * (cumulative_major_hpts / all_possible_major_hpts)
 
-		logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$Hpts are  #{predicted_major_hpts_earned}"
 		logger.debug "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$predictedGpa is #{predicted_major_gpa}"
 		return predicted_major_gpa
 	
