@@ -10,12 +10,12 @@ module ProjectionsHelper
 	end
 	#merge those two methods later
 
-	def calculateGpaNeededForTargetCumulativeGpa(credits_earned, cumulative_gpa, targetGpa, creditsTakenThisSemester) 
+	def calculateGpaNeededForTargetCumulativeGpa(credits_earned, cumulative_gpa, target_gpa, creditsTakenThisSemester) 
 
 		all_possible_hpts = (credits_earned + creditsTakenThisSemester) * 4.0
 		htps_earned = credits_earned * cumulative_gpa
 
-		gpaNeededForTargetCumulativeGpa = (targetGpa * all_possible_hpts)/(4*creditsTakenThisSemester) - (htps_earned/creditsTakenThisSemester)
+		gpaNeededForTargetCumulativeGpa = (target_gpa * all_possible_hpts)/(4*creditsTakenThisSemester) - (htps_earned/creditsTakenThisSemester)
 			
 		return gpaNeededForTargetCumulativeGpa;
 
@@ -23,12 +23,12 @@ module ProjectionsHelper
 		
 
 
-	def calculateGpaNeededForTargetMajorGpa(major_credits_earned, major_gpa, targetGpa, majorCreditsTakenThisSemester) 
+	def calculateGpaNeededForTargetMajorGpa(major_credits_earned, major_gpa, target_major_gpa, major_credits_taken_this_semester) 
 
-		all_possible_major_hpts = (major_credits_earned + majorCreditsTakenThisSemester) * 4.0
-		htps_earned = major_credits_earned * major_gpa
+		all_possible_major_hpts = (major_credits_earned + major_credits_taken_this_semester) * 4.0
+		major_htps_earned = major_credits_earned * major_gpa
 
-		majorGpaNeededForTargetCumulativeGpa = (targetGpa * all_possible_major_hpts)/(4*majorCreditsTakenThisSemester) - (major_htps_earned/majorCreditsTakenThisSemester)
+		majorGpaNeededForTargetCumulativeGpa = (target_major_gpa * all_possible_major_hpts)/(4*major_credits_taken_this_semester) - (major_hpts_earned/major_credits_taken_this_semester)
 			
 		return majorGpaNeededForTargetCumulativeGpa;
 

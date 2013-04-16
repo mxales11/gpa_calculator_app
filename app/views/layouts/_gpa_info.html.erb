@@ -1,3 +1,4 @@
+<% if signed_in? %>
 <br>
 	 <div id="student-info">
 		<br>Email: <%= @student.email %> </br>
@@ -6,3 +7,4 @@
 		<br>Major gpa: <%= @student.major_gpa %> </br>
 	</div>
 </br>
+<% end %>

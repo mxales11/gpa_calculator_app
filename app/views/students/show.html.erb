@@ -41,10 +41,11 @@
                <br>
                     <%= render 'display_courses' %> 
                 </br>
-                <p>Enter you gpa to make projections:</p>
                 <br>
-                    <%= link_to 'Add completed courses', new_student_taken_course_path(@student, @taken_course) %>
-                </br>
+                    <h5>
+                        <%= link_to 'Add completed course', new_student_taken_course_path(@student, @taken_course) %>
+                    <h5>
+               </br>
         </div>
     </div>
 </div>
