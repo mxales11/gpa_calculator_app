@@ -1,0 +1,28 @@
+<h3>Listing courses taken</h3>
+
+
+<table>
+  <tr>
+    <th>Course_Name</th>
+    <th>Student_Id</th>
+    <th>Grade</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+<% @taken_courses.each do |taken_course| %>
+  <tr>
+    <td><%= Course.find(taken_course.course_id).name %></td>
+    <td><%= taken_course.student_id %></td>
+    <td><%= taken_course.grade %></td>
+    <td><%= link_to 'Show', taken_course %></td>
+    <td><%= link_to 'Edit', edit_taken_course_path(taken_course) %></td>
+    <td><%= link_to 'Destroy', taken_course, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= link_to 'New Taken Course',  new_student_taken_course_path(@student, @taken_course) %>

@@ -14,6 +14,7 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
     @student = Student.find(params[:id])
+    @taken_courses =  @student.taken_courses
     logger.debug "Student  #{@student.attributes.inspect}"
     Rails.logger.info("PARAMS: #{params.inspect}")
 

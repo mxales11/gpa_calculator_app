@@ -1,43 +1,54 @@
-<h1><title>Email: <%= @student.email %> </title></h1>
+<div class="container-fluid">
+    <div class="row-fluid">
+       
+        <div class="span8">
+            <!--Body content-->
+             <div class="row-fluid">
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab1"><abbr title="Ballet">Target cumulative GPA</abbr></a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab2"><abbr title="Modern Dance">Target major GPA</abbr></a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab3"><abbr title="Zumba Dance">Predicted GPA</abbr></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane" id="tab1">
+                            <p><%="FORM FOR TARGET CUMULATIVE GPA" %></p>
+                              <%= link_to 'Make projections', new_student_projection_path(@student, @projection) %>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <p><%="FORM FOR TARGET MAJOR GPA" %></p>
+                              <%= link_to 'Make projections', new_student_projection_path(@student, @projection) %>
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                            <p><%="FORM FOR PREDICTED GPA" %></p>
+                              <%= link_to 'Make projections', new_student_projection_path(@student, @projection) %>    
+                        </div>
+                    </div>
+                </div>
+                    <div>
+                        <%= link_to 'Edit', edit_student_path(@student) %> |
+                        <%= link_to 'Back', students_path %>
+                    </div>
+        </div>
 
-<p>
-  <b>Number of credits earned:</b>
-  <%= @student.credits_earned %>
-</p>
+         <div class="span4" id = "sidebar">
+            <!--Sidebar content-->
+               <br>
+                    <%= render 'display_courses' %> 
+                </br>
+                <p>Enter you gpa to make projections:</p>
+                <br>
+                    <%= link_to 'Add completed courses', new_student_taken_course_path(@student, @taken_course) %>
+                </br>
+        </div>
+    </div>
+</div>
 
 
-<p>
-  <b>Number of major credits earned:</b>
-  <%= @student.major_credits_earned %>
-</p>
 
 
-<p>
-  <b>Cumulative gpa:</b>
-  <%= @student.cumulative_gpa %>
-</p>
-
-<p>
-  <b>Major gpa:</b>
-  <%= @student.major_gpa %>
-</p>
-
-<p>
-<b>Make projections:</b>
-  <%= link_to 'Make projections', new_student_projection_path(@student, @projection) %>
-</p>
-
-<p>
-<b>Enter taken courses to have your cumulative gpa, major gpa, and credits earned calculated and to be able to make projections</b>
-
-<%= link_to 'Add completed courses', new_student_taken_course_path(@student, @taken_course) %>
-</p>
-
-<p>
-<b>See taken courses:</b>
-  <%= link_to 'See taken courses', student_taken_courses_path(@student) %>
-</p>
-
-
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>

@@ -23,14 +23,14 @@ module ProjectionsHelper
 		
 
 
-	def calculateGpaNeededForTargetMajorGpa(credits_earned, major_gpa, targetGpa, majorCreditsTakenThisSemester) 
+	def calculateGpaNeededForTargetMajorGpa(major_credits_earned, major_gpa, targetGpa, majorCreditsTakenThisSemester) 
 
-		#CHANGE CREDITS EARNED TO MAJOR CREDITS EARNED WHEN YOU ADD THIS ATTRIBUTE IN Student table IN SCHEMA
+		all_possible_major_hpts = (major_credits_earned + majorCreditsTakenThisSemester) * 4.0
+		htps_earned = major_credits_earned * major_gpa
 
-		#credits_earned and cumulative_gpa come from student attibutes
-		#rest arguments come from form
-		gpaNeededForTargetMajorGpa = (targetGpa - credits_earned * major_gpa) / majorCreditsTakenThisSemester
-		return gpaNeededForTargetMajorGpa;
+		majorGpaNeededForTargetCumulativeGpa = (targetGpa * all_possible_major_hpts)/(4*majorCreditsTakenThisSemester) - (major_htps_earned/majorCreditsTakenThisSemester)
+			
+		return majorGpaNeededForTargetCumulativeGpa;
 
 	end
 
