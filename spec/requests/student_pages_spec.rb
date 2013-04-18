@@ -19,11 +19,9 @@ describe "Student pages" do
 		let(:student) { FactoryGirl.create(:student) }
 		let(:submit) { "Calculate your predicted GPAs" }
 
-		let(:projection) { Projection.new }
 		
-
 		describe "accessing parameters" do
-			before {  new_student_projection_path(student, projection) }
+			before { visit calculateGpaNeededForTargetCumulativeGpa_student_path }
 			before { click_button submit }
 		
 			
@@ -36,7 +34,7 @@ describe "Student pages" do
 
 		describe "calculation predicted gpa" do
 
-			before {  new_student_projection_path(student, projection) }
+			before { visit calculateGpaNeededForTargetCumulativeGpa_student_path }
 			before { click_button submit }
 
 			it { should have_selector('h4', text: "Your predicted cumulative GPA is") }
@@ -84,7 +82,7 @@ describe "Student pages" do
 			end
 		end
 	end
-
+end
 
 
 	
@@ -148,4 +146,3 @@ describe "Student pages" do
 		end
 =end
 
-end

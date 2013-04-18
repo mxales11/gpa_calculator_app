@@ -99,9 +99,9 @@ class StudentsController < ApplicationController
      @gpa_for_target_cumulative_gpa = 2.2
 
     
-     respond_to do |format| 
-        format.js { render js: @gpa_for_target_cumulative_gpa }
-      end  
+     respond_to do |format|
+      format.js { render :handlers => [:erb] }
+     end
   end
     
 
