@@ -21,12 +21,17 @@ GpaCalculatorApp::Application.routes.draw do
     resources :taken_courses
   end
 
-
   resources :students do
     resources :projections, only: [:new, :create, :destroy, :show]
   end
 
   resources :students
+
+  resources :students do
+    member do
+      post 'calculateGpaNeededForTargetCumulativeGpa'
+    end
+  end
 
  
   

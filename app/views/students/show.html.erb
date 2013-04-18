@@ -6,27 +6,29 @@
              <div class="row-fluid">
                     <ul class="nav nav-tabs">
                         <li>
-                            <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab1"><abbr title="Ballet">Target cumulative GPA</abbr></a>
+                            <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab1"><abbr title="Target cumulative gpa">Target cumulative GPA</abbr></a>
                         </li>
                         <li>
-                            <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab2"><abbr title="Modern Dance">Target major GPA</abbr></a>
+                            <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab2"><abbr title="Target major GPA">Target major GPA</abbr></a>
                         </li>
                         <li>
-                            <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab3"><abbr title="Zumba Dance">Predicted GPA</abbr></a>
+                            <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab3"><abbr title="Predicted GPA">Predicted GPA</abbr></a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane" id="tab1">
                             <p><%="FORM FOR TARGET CUMULATIVE GPA" %></p>
-                              <%= link_to 'Make projections', new_student_projection_path(@student, @projection) %>
+                               <%= render 'form_for_target_cumulative_gpa' %>
                         </div>
                         <div class="tab-pane" id="tab2">
                             <p><%="FORM FOR TARGET MAJOR GPA" %></p>
                               <%= link_to 'Make projections', new_student_projection_path(@student, @projection) %>
+                              <!--render form here-->
                         </div>
                         <div class="tab-pane" id="tab3">
                             <p><%="FORM FOR PREDICTED GPA" %></p>
-                              <%= link_to 'Make projections', new_student_projection_path(@student, @projection) %>    
+                              <%= link_to 'Make projections', new_student_projection_path(@student, @projection) %>   
+                              <!--render form here--> 
                         </div>
                     </div>
                 </div>

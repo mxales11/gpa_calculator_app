@@ -1,6 +1,9 @@
 class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
+
+  respond_to :html, :js
+
   def index
     @students = Student.all
 
@@ -12,11 +15,11 @@ class StudentsController < ApplicationController
 
   # GET /students/1
   # GET /students/1.json
-  def show
-    @student = Student.find(params[:id])
-    @taken_courses =  @student.taken_courses
-    logger.debug "Student  #{@student.attributes.inspect}"
-    Rails.logger.info("PARAMS: #{params.inspect}")
+    def show
+      @student = Student.find(params[:id])
+      @taken_courses =  @student.taken_courses
+      logger.debug "Student  #{@student.attributes.inspect}"
+      Rails.logger.info("PARAMS: #{params.inspect}")
 
     #@student.update_attributes(params[:student])
     
@@ -86,6 +89,49 @@ class StudentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
+  def calculateGpaNeededForTargetCumulativeGpa
+
+
+     @student = current_student
+     @gpa_for_target_cumulative_gpa = 2.2
+
+    
+     respond_to do |format| 
+        format.js { render js: @gpa_for_target_cumulative_gpa }
+      end  
+  end
+    
+
+  def calculateGpaNeededForTargetMajorGpa(student, target_major_gpa, major_credits_taken_this_semester) 
+
+
+    @student = current_student
+     @gpa_for_target_major_gpa = Projector.calculateGpaNeededForTargetMajorGpa(student, target_major_gpa, major_credits_taken_this_semester) 
+  
+  end
+
+
+
+
+  def calculatePredictedCumulativeGpa(student, creditsArray, predictedGradeArray, isRepeatedCourseArray)
+
+    @student = current_student
+    @predicted_cumulative_gpa = Projector.calculatePredictedCumulativeGpa(student, creditsArray, predictedGradeArray, isRepeatedCourseArray)
+
+  end
+  
+
+  def calculatePredictedMajorGpa(student, credits_array, predicted_grade_array, is_major_course_array, is_repeated_course_array)
+
+     @student = current_student
+     @predicted_major_gpa  = Projector.calculatePredictedMajorGpa(credits_array, predicted_grade_array,is_major_course_array, is_repeated_course_array)
+
+  end
+
+
 
   private
 
