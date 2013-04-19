@@ -94,41 +94,54 @@ class StudentsController < ApplicationController
 
   def calculateGpaNeededForTargetCumulativeGpa
 
-
      @student = current_student
-     @gpa_for_target_cumulative_gpa = 2.2
-
-    
+     @gpa_for_target_cumulative_gpa = Projector.calculateGpaNeededForTargetCumulativeGpa(@student, params[:desired_cumulative_gpa], params[:credits_taken_this_semester])
+  
      respond_to do |format|
       format.js { render :handlers => [:erb] }
      end
   end
     
 
-  def calculateGpaNeededForTargetMajorGpa(student, target_major_gpa, major_credits_taken_this_semester) 
-
+  def calculateGpaNeededForTargetMajorGpa
 
     @student = current_student
-     @gpa_for_target_major_gpa = Projector.calculateGpaNeededForTargetMajorGpa(student, target_major_gpa, major_credits_taken_this_semester) 
+    @gpa_for_target_major_gpa = Projector.calculateGpaNeededForTargetMajorGpa(@student, params[:desired_major_gpa], params[:major_credits_taken_this_semester])
+
+     respond_to do |format|
+      format.js { render :handlers => [:erb] }
+     end
+  
+  end
+
+
+   def calculatePredictedGpas
+
+      #use the 2 below methods
   
   end
 
 
 
-
-  def calculatePredictedCumulativeGpa(student, creditsArray, predictedGradeArray, isRepeatedCourseArray)
+  def calculatePredictedCumulativeGpa
 
     @student = current_student
-    @predicted_cumulative_gpa = Projector.calculatePredictedCumulativeGpa(student, creditsArray, predictedGradeArray, isRepeatedCourseArray)
+    @predicted_cumulative_gpa = 4.4
 
+     respond_to do |format|
+      format.js { render :handlers => [:erb] }
+     end
   end
   
 
-  def calculatePredictedMajorGpa(student, credits_array, predicted_grade_array, is_major_course_array, is_repeated_course_array)
+  def calculatePredictedMajorGpa
 
      @student = current_student
-     @predicted_major_gpa  = Projector.calculatePredictedMajorGpa(credits_array, predicted_grade_array,is_major_course_array, is_repeated_course_array)
-
+     @predicted_major_gpa  = 5.5
+     
+     respond_to do |format|
+      format.js { render :handlers => [:erb] }
+     end
   end
 
 

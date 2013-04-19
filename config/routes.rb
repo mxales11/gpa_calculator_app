@@ -33,6 +33,18 @@ GpaCalculatorApp::Application.routes.draw do
     end
   end
 
+   resources :students do
+    member do
+      post 'calculateGpaNeededForTargetMajorGpa'
+    end
+  end
+
+   resources :students do
+    member do
+      post 'calculatePredictedGpas'
+    end
+  end
+
  
   
   # The priority is based upon order of creation:

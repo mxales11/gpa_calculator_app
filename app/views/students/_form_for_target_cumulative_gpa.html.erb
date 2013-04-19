@@ -1,6 +1,4 @@
-<div id= "gpa_for_target_cumulative_gpa">
 <%= form_tag(calculateGpaNeededForTargetCumulativeGpa_student_path, :remote => true) do %>
-
 
 	<%= label_tag :desired_cumulative_gpa %>
 	<%= text_field_tag :desired_cumulative_gpa %>
@@ -8,13 +6,12 @@
 	<%= label_tag :credits_taken_this_semester %>
 	<%= text_field_tag :credits_taken_this_semester %>
 
+	<div id= "gpa_for_target_cumulative_gpa"></div>
 	<br>
-	<%= submit_tag "Calculate your predicted GPAs", class: "btn btn-large btn-primary"%>
+	<%= submit_tag "Calculate your predicted cumulative GPA", class: "btn btn-large btn-primary"%>
 	<br>
 
 <% end %>
-
-</div>
 
 
 
