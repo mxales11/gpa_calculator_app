@@ -17,8 +17,8 @@ class StudentsController < ApplicationController
   # GET /students/1.json
     def show
       @student = Student.find(params[:id])
-      @taken_courses =  @student.taken_courses
-      logger.debug "Student  #{@student.attributes.inspect}"
+      @taken_courses = @student.taken_courses
+      logger.debug "Student #{@student.attributes.inspect}"
       Rails.logger.info("PARAMS: #{params.inspect}")
 
     #@student.update_attributes(params[:student])
@@ -117,33 +117,46 @@ class StudentsController < ApplicationController
 
    def calculatePredictedGpas
 
-      #use the 2 below methods
-  
-  end
-
-
-
-  def calculatePredictedCumulativeGpa
-
-    @student = current_student
-    @predicted_cumulative_gpa = 4.4
-
-     respond_to do |format|
-      format.js { render :handlers => [:erb] }
-     end
-  end
-  
-
-  def calculatePredictedMajorGpa
-
      @student = current_student
-     @predicted_major_gpa  = 5.5
-     
+
+     #get rid of that and just use an array in a form
+     @credits_array = getArrayOfParams("credits", 7)
+     @predicted_grade_array = getArrayOfParams("predicted_grade", 7)
+     @is_repeated_course_array = getArrayOfParams("is_repeated_course", 7);
+     @is_major_course_array =  getArrayOfParams("is_major_course", 7);
+
+     Rails.logger.info("Credits array: #{@credits_array}")
+     Rails.logger.info("Predicted grade array: #{@predicted_grade_array}")
+     Rails.logger.info("is Repeated course array: #{@is_repeated_course_array}")
+     Rails.logger.info("is major course array: #{@is_major_course_array}")
+
+
+
+     @predicted_cumulative_gpa = Projector.calculatePredictedCumulativeGpa(@student, @credits_array, @predicted_grade_array, @is_repeated_course_array)
+     @predicted_major_gpa = Projector.calculatePredictedMajorGpa(@student, @credits_array, @predicted_grade_array, @is_major_course_array, @is_repeated_course_array)
+
+       #change it so it returns both not one
+      @predicted_gpas = Array.new
+      @predicted_gpas.push(@predicted_cumulative_gpa)
+      @predicted_gpas.push(@predicted_major_gpa)
+
      respond_to do |format|
       format.js { render :handlers => [:erb] }
      end
+    
   end
 
+  def getArrayOfParams(parameter, arrayLength)
+
+    arrayOfParams = Array.new
+    length = arrayLength.to_i
+    
+    length.to_i.times do |i|
+        arrayOfParams.push(params[:"#{parameter}#{i.to_s}"])
+      end
+
+    return arrayOfParams
+  end
 
 
   private

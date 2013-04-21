@@ -7,7 +7,7 @@
                    <ul class="nav nav-tabs">
                                        <li>
                           <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab1"><abbr title="
-                            Target Cumulative GPA">Target cumulative GPA</abbr></a>
+Target Cumulative GPA">Target cumulative GPA</abbr></a>
                        </li>
                        <li>
                             <a data-toggle="tab" class="btn btn-large btn-primary" href="#tab2"><abbr title="Target Major GPA">Target major GPA</abbr></a>
@@ -21,14 +21,12 @@
                             <%=render 'form_for_target_cumulative_gpa' %>
                         </div>
                         <div class="tab-pane" id="tab2">
-                              <%=render 'form_for_target_major_gpa' %>
+                            <%=render 'form_for_target_major_gpa' %>
                         </div>
                          <div class="tab-pane" id="tab3">
-                          <p><%="FORM FOR PREDICTED GPA" %></p>
-                              <%= link_to 'Make projections', new_student_projection_path(@student, @projection) %>   
-                              <!--render form here-->   
-                        </div>  
-                      </div>   
+                            <%=render 'form_for_predicted_gpas' %>
+                        </div>
+                      </div>
                 </div>
                   
         </div>
@@ -36,7 +34,7 @@
          <div class="span4" id = "sidebar">
             <!--Sidebar content-->
                <br>
-                    <%= render 'display_courses' %> 
+                    <%= render 'display_courses' %>
                 </br>
                 <p>Enter you gpa to make projections:</p>
                 <br>

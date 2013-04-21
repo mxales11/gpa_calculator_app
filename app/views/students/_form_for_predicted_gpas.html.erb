@@ -1,41 +1,46 @@
 <%= form_tag(calculatePredictedGpas_student_path, :remote => true) do %>
 
-	
-<table>
-	<tr>
-		<td>Course</td>
-		<td>Credits</td>
-		<td>Predicted Grade</td>
-		<td>Is Major Course</td>
-		<td>Is Repeated Course</td>
-	</tr>
+	<table>
+		<tr>
+			<td>Course</td>
+			<td>Credits</td>
+			<td>Predicted Grade</td>
+			<td>Is Major Course</td>
+			<td>Is Repeated Course</td>
+		</tr>
 
-	<tr>
-		<% 7.times do |course_number| %>
+		<tr>
+			<% 7.times do |course_number| %>
 
-			<td><%= course_number + 1%> </td>
-			<td>
-			<%= select_tag :"credits#{course_number}", options_for_select([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) %>
-			</td>
-			<td>
-			<%= select_tag :"predicted_grade#{course_number}", options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
-			</td>
-			<td>	
-			<%= check_box_tag :"is_major_course#{course_number}" , {checked: true } %>
-			</td>
-			<td>
-			<%= check_box_tag :"is_repeated_course#{course_number}" , {checked: false } %>
-			</td>
-	</tr>
+				<td><%= course_number + 1%> </td>
+				<td>
+				<%= select_tag :"credits#{course_number}", options_for_select([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) %>
+				</td>
+				<td>
+				<%= select_tag :"predicted_grade#{course_number}", options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
+				</td>
+				<td>	
+				<%= check_box_tag :"is_major_course#{course_number}" %>
+				</td>
+				<td>
+				<%= check_box_tag :"is_repeated_course#{course_number}" %>
+				</td>
+		</tr>
 		<% end %>
-<table>
+	</table>
 
 	<div id="predicted_gpas"></div>
 	<br>
-	<%= submit_tag "Calculate your predicted GPA", class: "btn btn-large btn-primary"%>
-	<br>
+		<%= submit_tag "Calculate your predicted GPA", class: "btn btn-large btn-primary"%>
+	</br>
 
 <% end %>
+
+
+
+
+
+
 
 
 

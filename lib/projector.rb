@@ -35,40 +35,62 @@ class Projector
 	end
 
 
+	def self.calculatePredictedCumulativeGpa(student, credits_array, predicted_grade_array, is_repeated_course_array)
+
+		gradingSchema = { "A" => 4.0, "AB" => 3.5, "B" => 3.0, "BC" => 2.5, "C" =>2.0, "CD" =>1.5, "D"=> 1.0, "F" => 0.0 }
+		predicted_cumulative_hpts_earned = 0
+		predicted_cumulative_credits_earned = 0
 
 
+		[credits_array, predicted_grade_array, is_repeated_course_array].transpose.each do |credits, predicted_grade, is_repeated_course|
+  		 
+  		 		if (is_repeated_course)
 
+  		 		end
+  					predicted_cumulative_hpts_earned = credits.to_i * gradingSchema[predicted_grade.to_s] + predicted_cumulative_hpts_earned
+  					predicted_cumulative_credits_earned = credits.to_i + predicted_cumulative_credits_earned
+  				
+  		end
+	
 
-	def self.getArrayOfParams(parameter, arrayLength)
+		cumulative_hpts = predicted_cumulative_hpts_earned + student.credits_earned * student.cumulative_gpa
+		all_possible_hpts = (student.credits_earned + predicted_cumulative_credits_earned) * 4.0
 
-		logger.debug("HELPER INVOKED")
-		arrayOfParams = Array.new
-		length = arrayLength.to_i
-		logger.debug(length)
+		predicted_cumulative_gpa =  4.0 * (cumulative_hpts / all_possible_hpts)
 
-
-		length.to_i.times do |i|
-
-	   		logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2"
-			logger.debug "LOOP"
-		
-			logger.debug "EXPECTED PARAMS"
-			logger.debug("#{parameter}#{i.to_s}")
-			logger.debug(params[:projection][:"#{parameter}#{i.to_s}"])
-   			arrayOfParams.push(params[:projection][:"#{parameter}#{i.to_s}"])
-
-	   		logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2"
-			logger.debug "WAS PUSHED"
-
-   		end
-
-	   		logger.debug "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2"
-			logger.debug "ARRAY OF PARAMS is  #{arrayOfParams}"
-
-		return arrayOfParams
+		return predicted_cumulative_gpa
 
 	end
 
+
+	def self.calculatePredictedMajorGpa(student, credits_array, predicted_grade_array, is_major_course_array, is_repeated_course_array)
+
+
+		gradingSchema = { "A" => 4.0, "AB" => 3.5, "B" => 3.0, "BC" => 2.5, "C" =>2.0, "CD" =>1.5, "D"=> 1.0, "F" => 0.0 }
+		predicted_major_hpts_earned = 0
+		predicted_major_credits_earned = 0
+
+		[credits_array, predicted_grade_array, is_major_course_array, is_repeated_course_array].transpose.each do |credits, predicted_grade, is_major_course, is_repeated_course|
+  		
+			if (is_major_course.to_i == 1) 
+
+				if(is_repeated_course)
+
+				end
+  				predicted_major_hpts_earned = credits.to_i * gradingSchema[predicted_grade.to_s] + predicted_major_hpts_earned
+  				predicted_major_credits_earned = credits.to_i + predicted_major_credits_earned
+  			
+  			end
+		end
+
+		cumulative_major_hpts = predicted_major_hpts_earned + student.major_credits_earned * student.major_gpa
+		all_possible_major_hpts = (student.major_credits_earned + predicted_major_credits_earned) * 4.0
+
+		predicted_major_gpa =  4.0 * (cumulative_major_hpts / all_possible_major_hpts)
+
+		return predicted_major_gpa
+	
+	end
 
 
 end
