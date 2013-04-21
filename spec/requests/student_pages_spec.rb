@@ -17,31 +17,22 @@ describe "Student pages" do
 	describe "projection pages" do
 
 		let(:student) { FactoryGirl.create(:student) }
-		let(:submit) { "Calculate your predicted GPAs" }
 
 		
-		describe "accessing parameters" do
-			before { visit calculateGpaNeededForTargetCumulativeGpa_student_path }
-			before { click_button submit }
-		
-			
-			subject { projection }
-			it { should respond_to(:predicted_grade0) }
-			it { should respond_to(:is_major_course0) }
-			it { should respond_to(:is_repeated_course0) }
+		describe "calculating predicted cumulative GPA" do
+			let(:submit) {"Calculate GPA needed this semester to have target Cumulative GPA" }
+			let(:toogle) {"Target Cumulative GPA" }
 
-		end
+			before do
+				click_button toogle
+				fill_in "Desired cumulative GPA", with: 4.0
+				fill_in "Credits taken this semester", with: 18
+				click_button submit
+			end
 
-		describe "calculation predicted gpa" do
-
-			before { visit calculateGpaNeededForTargetCumulativeGpa_student_path }
-			before { click_button submit }
-
-			it { should have_selector('h4', text: "Your predicted cumulative GPA is") }
-			it { should have_selector('h4', text: "Your predicted (cumulative) major GPA is ") }
-			
-			it { should have_selector('h4', text: "4.0") }
-			it { should have_selector('h4', text: "4.0") }
+				it { should have_selector('h5', text: "Cumulative GPA you need this semester for target cumulative GPA:" )}
+				it { should have_text("4.0") }
+				it { should have_text("4.0") }
 		
 		end
 	

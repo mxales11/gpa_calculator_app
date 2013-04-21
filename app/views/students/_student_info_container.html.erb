@@ -1,15 +1,17 @@
-<% if signed_in? %>
-	 <div id="student-info">
-		<h5>Email:</h5>
-		<%= @student.email %>
-		<br></br>
-		<h5>Credits earned:</h5>
-		<%= @student.credits_earned %>
-		<br></br>
-		<h5>Cumulative Gpa:</h5>
-		<%= @student.cumulative_gpa %>
-		<br></br>
-		<h5>Major Gpa:</h5>
-		<%= @student.major_gpa %>
-	</div>
-<% end %>
+<div id="student-info">
+	<% if signed_in? %>
+		 	<h4>Gpa info: <h4>
+		 	<br></br>
+			<h5>Email:</h5>
+			<%= @student.email %>
+			<br></br>
+			<h5>Credits earned:</h5>
+			<%= @student.credits_earned %>
+			<br></br>
+			<h5>Cumulative Gpa:</h5>
+			<%= @student.cumulative_gpa %>
+			<br></br>
+			<h5>Major Gpa:</h5>
+			<%= @student.major_gpa %>>
+	<% end %>
+</div>

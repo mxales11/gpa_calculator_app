@@ -1,6 +1,7 @@
 <%# Change it to render index page instead of that %>
-  <h3>Your taken courses</h3>
-
+<div id="display-courses">
+  <h4>Your completed courses</h4>
+  <br></br>
   <table>
     <tr>
       <th>Course_Name</th>
@@ -9,7 +10,6 @@
       <th></th>
       <th></th>
     </tr>
-
 
   <% @taken_courses.each do |taken_course| %>
     <tr>
@@ -21,4 +21,5 @@
     </tr>
   <% end %>
   </table>
+  </div>
  

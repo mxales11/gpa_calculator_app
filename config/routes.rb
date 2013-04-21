@@ -6,8 +6,6 @@ GpaCalculatorApp::Application.routes.draw do
   match '/about', to: 'static_pages#about'
 
  
- 
- 
   resources :courses
  
   resources :taken_courses
@@ -21,32 +19,17 @@ GpaCalculatorApp::Application.routes.draw do
     resources :taken_courses
   end
 
-  resources :students do
-    resources :projections, only: [:new, :create, :destroy, :show]
-  end
-
   resources :students
 
   resources :students do
     member do
       post 'calculateGpaNeededForTargetCumulativeGpa'
-    end
-  end
-
-   resources :students do
-    member do
       post 'calculateGpaNeededForTargetMajorGpa'
-    end
-  end
-
-   resources :students do
-    member do
       post 'calculatePredictedGpas'
     end
   end
 
  
-  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

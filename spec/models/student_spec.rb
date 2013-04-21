@@ -41,9 +41,6 @@ describe Student do
 			@student.taken_courses(:force_reload=>:true).size.should == 2
     end
     
-
-	#email tests
-
 	describe "when email is not present" do
 		before { @student.email = " " }
 		it { should_not be_valid }

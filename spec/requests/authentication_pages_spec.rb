@@ -10,8 +10,7 @@ describe "Authentication" do
 	describe "signin page" do
 		before { visit signin_path }
 
-		it { should have_selector('h1', text: 'Sign in') }
-		it { should have_selector('title', text: 'Sign in') }
+		it { should have_selector('h3', text: 'Sign in') }
 	end
 
 	describe "signin" do
@@ -21,8 +20,8 @@ describe "Authentication" do
 		describe "with invalid information" do
 			before { click_button "Sign in" }
 
-			it { should have_selector('title', text: 'Sign in') }
-			it { should have_selector('div.alert.alert-error', text: 'Invalid') }
+			it { should have_selector('h3', text: 'Sign in') }
+			it { should have_text('Invalid') }
 		
 
 			describe "after visiting another page" do
@@ -37,13 +36,12 @@ describe "Authentication" do
 			before { sign_in student }
 			
 
-			it { should have_selector('title', text: student.email) }
+			it { should have_selector('h5', text: 'Email') }
 			it { should have_link('Profile', href: student_path(student)) }
-			it { should have_link('Make Projections', href: new_student_projection_path(student, @projection)) }
 			it { should have_link('Add completed courses', href: new_student_taken_course_path(student, @taken_course)) }
 
 			it { should have_link('Profile', href: student_path(student)) }
-			it { should have_link( 'Settings', href: edit_student_path(student)) }
+			it { should have_link( 'Settings', href: '#' )}
 			it { should have_link('Sign out', href: signout_path) }
 			it { should_not have_link('Sign in', href: signin_path) }
 

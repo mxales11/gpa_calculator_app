@@ -1,9 +1,9 @@
 <div class="container-portal">
 <% if signed_in? %>
 <br>
-	<h3>Your gpa info<h3>
 	 <div id="student-info">
-		<br>Email: <%= @student.email %> </br>
+	 	<h3>Your gpa info: <h3>
+		<br><p>Email: <%= @student.email %> </p></br>
 		<br>Credits earned: <%= @student.credits_earned %> </br>
 		<br>Cumulative gpa: <%= @student.cumulative_gpa %> </br>
 		<br>Major gpa: <%= @student.major_gpa %> </br>
