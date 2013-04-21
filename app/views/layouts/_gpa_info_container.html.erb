@@ -1,0 +1,10 @@
+<% if signed_in? %>
+<br>
+	 <div id="student-info">
+		<br>Email: <%= @student.email %> </br>
+		<br>Credits earned: <%= @student.credits_earned %> </br>
+		<br>Cumulative gpa: <%= @student.cumulative_gpa %> </br>
+		<br>Major gpa: <%= @student.major_gpa %> </br>
+	</div>
+</br>
+<% end %>

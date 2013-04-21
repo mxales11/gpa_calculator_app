@@ -8,11 +8,15 @@
   <%= render 'layouts/shim' %>
 </head>
 <body>
-	<%= render 'layouts/header' %>
-	<%= render 'layouts/gpa_info' %>
-
-	<%= yield %>
-	 <%= render 'layouts/footer' %>
+	<div class="MainContainer">
+		<%= render 'layouts/logo_container' %>
+		<%= render 'layouts/app_name_container' %>
+		<div class="PageContent">
+			<%= render 'layouts/nav_tab' %>
+			<%= yield %>
+		 	<%= render 'layouts/footer' %>
+		</div>
+	</div>
 </body>
 </hmtl>
 

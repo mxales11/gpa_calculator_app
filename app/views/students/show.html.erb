@@ -1,7 +1,9 @@
 <div class="container-fluid">
   <div class="row-fluid">
-      
-       <div class="span8">
+    <div class="span2">
+      <%= render 'student_info_container' %>
+    </div>
+    <div class="span7">
            <!--Body content-->
              <div class="row-fluid">
                    <ul class="nav nav-tabs">
@@ -31,7 +33,7 @@ Target Cumulative GPA">Target cumulative GPA</abbr></a>
                   
         </div>
 
-         <div class="span4" id = "sidebar">
+         <div class="span3" id = "sidebar">
             <!--Sidebar content-->
                <br>
                     <%= render 'display_courses' %>
