@@ -1,23 +1,24 @@
 <%# Change it to render index page instead of that %>
-<h3>Your courses</h3>
+  <h3>Your taken courses</h3>
 
-<table>
-  <tr>
-    <th>Course_Name</th>
-    <th>Grade</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <table>
+    <tr>
+      <th>Course_Name</th>
+      <th>Grade</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
 
 
-<% @taken_courses.each do |taken_course| %>
-  <tr>
-    <td><%= Course.find(taken_course.course_id).name %></td>
-    <td><%= taken_course.grade %></td>
-    <td><%= link_to 'Show', taken_course %></td>
-    <td><%= link_to 'Edit', edit_taken_course_path(taken_course) %></td>
-    <td><%= link_to 'Destroy', taken_course, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+  <% @taken_courses.each do |taken_course| %>
+    <tr>
+      <td><%= Course.find(taken_course.course_id).name %></td>
+      <td><%= taken_course.grade %></td>
+      <td><%= link_to 'Show', taken_course %></td>
+      <td><%= link_to 'Edit', edit_taken_course_path(taken_course) %></td>
+      <td><%= link_to 'Destroy', taken_course, confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+ 

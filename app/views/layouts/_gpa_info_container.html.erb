@@ -1,5 +1,7 @@
+<div class="container-portal">
 <% if signed_in? %>
 <br>
+	<h3>Your gpa info<h3>
 	 <div id="student-info">
 		<br>Email: <%= @student.email %> </br>
 		<br>Credits earned: <%= @student.credits_earned %> </br>
@@ -8,3 +10,4 @@
 	</div>
 </br>
 <% end %>
+</div>
