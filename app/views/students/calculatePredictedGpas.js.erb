@@ -1,4 +1,4 @@
-$("#predicted_gpas").html("<h5>Your predicted cumulative GPA is: " + "<%=  @predicted_gpas[0] %>" + "<br>Your predicted major GPA is: " + "<%=  @predicted_gpas[1] %></br></h5>")
+$("#predicted_gpas").html("<h5>Your predicted cumulative GPA is: " + "<%= '%.2f' % @predicted_gpas[0] %>" + "</br></h5>")
 
 
 
