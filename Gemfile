@@ -13,6 +13,8 @@ gem 'faker', '1.0.1'
 
 group :development do
 	gem 'sqlite3', '1.3.5'
+	gem 'rails3-jquery-autocomplete', '0.6.0'
+	gem 'nifty-generators'
 	gem 'rspec-rails', '2.9.0'
 	gem 'annotate', '~> 2.4.1.beta'
 end

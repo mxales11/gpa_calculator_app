@@ -29,6 +29,10 @@ GpaCalculatorApp::Application.routes.draw do
     end
   end
 
+  resources :taken_courses do
+    get :autocomplete_course_name, :on => :collection
+  end
+
  
   # The priority is based upon order of creation:
   # first created -> highest priority.

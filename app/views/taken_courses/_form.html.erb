@@ -21,9 +21,15 @@
     </tr>
 
     <tr>
-        <td><%= f.collection_select :course_id , Course.all, :id, :name %> </td>
-        <td>
-         <%= f.select :grade, options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
+         <td><%= f.collection_select :course_id , Course.all, :id, :name %> </td>
+
+          <%# <%= f.autocomplete_field :course_name, autocomplete_course_name_taken_courses_path, :id_element => '#course_id' %>
+ 
+          <%# <%= f.autocomplete_field :course_name, autocomplete_course_name_taken_courses_path, :id_element => '#course_id' %> 
+         
+          <%#https://github.com/crowdint/rails3-jquery-autocomplete %>
+
+         <td><%= f.select :grade, options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
         </td>
         <td>  
         <%= f.check_box :is_major %>

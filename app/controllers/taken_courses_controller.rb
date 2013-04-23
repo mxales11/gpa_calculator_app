@@ -1,5 +1,7 @@
  class TakenCoursesController < ApplicationController
 
+  autocomplete :course, :name
+
    def index
     #if  params[:student_id].nil?
       #@taken_courses = TakenCourse.all
