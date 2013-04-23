@@ -1,42 +1,38 @@
+<div class= "textarea">
+  <%= form_for([@student, @taken_course]) do |f| %>
 
-  <div class= "textarea">
-<%= form_for([@student, @taken_course]) do |f| %>
+    <% if @taken_course.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@taken_course.errors.count, "error") %> prohibited this course taken from being saved:</h2>
 
-  <% if @taken_course.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@taken_course.errors.count, "error") %> prohibited this course taken from being saved:</h2>
-
-      <ul>
-      <% @taken_course.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
-
+        <ul>
+        <% @taken_course.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
   <div>
-    <%= f.label :course_id %><br />
-    <%= f.collection_select :course_id , Course.all, :id, :name %>
-  </div>
-  <div class="field">
-    <%= f.label :grade %><br />
-    <%= f.text_field :grade %>
-  </div>
-    <div class="field">
-    <%= f.label :is_major? %><br />
-    <%= f.text_field :is_major %>
-  </div>
+  <table>
+    <tr>
+      <td>Course</td>
+      <td>Grade</td>
+      <td>Is Major Course</td>
+    </tr>
 
- 
+    <tr>
+        <td><%= f.collection_select :course_id , Course.all, :id, :name %> </td>
+        <td>
+         <%= f.select :grade, options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
+        </td>
+        <td>  
+        <%= f.check_box :is_major %>
+        </td>
+    </tr>
+</table>
+      <%= f.submit "Add taken course", class: "btn btn-primary" %>
+  
+  <% end %>
 
 
-
-
-  <div class="actions">
-    <%= f.submit "Add taken course", class: "btn btn-large btn-primary" %>
-  </div>
-<% end %>
-
-</div>
 

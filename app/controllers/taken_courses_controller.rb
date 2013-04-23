@@ -58,13 +58,13 @@
 
     @student = Student.find(params[:student_id])
     @taken_course = @student.taken_courses.build(params[:taken_course])
-    
+   
 
     logger.debug "********************************************************************************************************************************************************"
     logger.debug "Student  #{@student.attributes.inspect}"
 
-    updateCredits(@taken_course, @student)
-    calculateGPA(@taken_course, @student)
+    updateCredits(@taken_course)
+    calculateGPA(@taken_course)
 
     logger.debug "********************************************************************************************************************************************************"
     logger.debug "Student  #{@student.attributes.inspect}"
@@ -76,7 +76,7 @@
         redirect_to @student
     else 
           logger.debug "********************************************************************************************************************************************************"
-          logger.debug "Student was not created. Student: #{@student.attributes.inspect}"
+          logger.debug "Taken course was not created. Student: #{@taken_course.attributes.inspect}"
           render 'new'
     end
 end
@@ -113,13 +113,14 @@ end
 
 private 
 
-def updateCredits(taken_course, student)
+def updateCredits(taken_course)
 
+  @student = current_student
   @course = Course.find(taken_course.course_id)
 
-  if(taken_course.is_major?)
+  if(taken_course.is_major.to_s == "true")
 
-    student.update_attribute(:major_credits_earned, student.major_credits_earned + @course.credits)
+    @student.update_attribute(:major_credits_earned, @student.major_credits_earned + @course.credits)
 
     logger.debug "Course is: "
     logger.debug "#{@course.name}"
@@ -127,69 +128,55 @@ def updateCredits(taken_course, student)
   
   end
 
-   student.update_attribute(:credits_earned, student.credits_earned + @course.credits)
+   @student.update_attribute(:credits_earned, @student.credits_earned + @course.credits)
     
 end
 
 
 
-def calculateGPA(taken_course, student)
+def calculateGPA(taken_course)
 
-  logger.debug "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-  logger.debug "Calculate GPA was invoked"
-
+  @student = current_student
   @course = Course.find(taken_course.course_id)
-  @course_credits = @course.credits
+  gradingSchema = { "A" => 4.0, "AB" => 3.5, "B" => 3.0, "BC" => 2.5, "C" =>2.0, "CD" =>1.5, "D"=> 1.0, "F" => 0.0 }
 
-  if(taken_course.is_major?)
-     @major_course_credits = @course_credits
+   logger.debug "calculateGPA was invoked: "
+   logger.debug "#{@student.email}"
+   logger.debug "Course is: "
+   logger.debug "#{@course.name}"
+   logger.debug "#{@taken_course.is_major.to_s}"
+   logger.debug "#{taken_course.is_major.to_s == "true"}"
+
+
+  if(taken_course.is_major.to_s == "true")
+    logger.debug "We are here"
+     @major_course_credits = @course.credits
   else
      @major_course_credits = 0
   end
 
 
-
   #for cumulative
-  @htps_before = student.cumulative_gpa * (student.credits_earned -  @course_credits)
-  @htps_after = @course_credits * matchGradeToNumbers(taken_course)
-  @all_possible_htps = student.credits_earned * 4
+  @htps_before = @student.cumulative_gpa * (@student.credits_earned -  @course.credits)
+  @htps_after = @course.credits  * gradingSchema[taken_course.grade.to_s]
+  @all_possible_htps = @student.credits_earned * 4
 
   #for major
-  @major_htps_before = student.major_gpa * (student.major_credits_earned -  @major_course_credits)
-  @major_htps_after = @major_course_credits *  matchGradeToNumbers(taken_course)
-  @major_all_possible_htps = student.major_credits_earned * 4
+  @major_htps_before = @student.major_gpa * (@student.major_credits_earned -  @major_course_credits)
+  @major_htps_after = @major_course_credits *  gradingSchema[taken_course.grade.to_s]
+  @major_all_possible_htps = @student.major_credits_earned * 4
 
-  #for major
 
-  student.update_attribute(:cumulative_gpa, ((@htps_before + @htps_after)/ @all_possible_htps) * 4)
+  @student.update_attribute(:cumulative_gpa, ((@htps_before + @htps_after)/ @all_possible_htps) * 4)
+  
 
-  if (taken_course.is_major?)
-    student.update_attribute(:major_gpa, ((@major_htps_before + @major_htps_after)/ @major_all_possible_htps) * 4)
+  if (taken_course.is_major.to_s == "true" )
+      logger.debug "We are here"
+      @student.update_attribute(:major_gpa, ((@major_htps_before + @major_htps_after)/ @major_all_possible_htps) * 4)
   end
   
 end
 
-
-def matchGradeToNumbers(taken_course)
-
-  if(taken_course.grade =="A")
-    return 4
-  elsif (taken_course.grade =="AB")
-    return 3.5
-  elsif (taken_course.grade =="B")
-    return 3
-  elsif (taken_course.grade =="BC")
-    return 2.5
-  elsif (taken_course.grade=="C")
-    return 2
-  elsif (taken_course.grade =="CD")
-    return 1.5
-  elsif (taken_course.grade =="D")
-    return 1
-  elsif (taken_course.grade =="F")
-    return 0
-  end
-end
 
 end
 
