@@ -103,7 +103,7 @@ class StudentsController < ApplicationController
      @student = current_user
      @gpa_for_target_cumulative_gpa = Projector.calculateGpaNeededForTargetCumulativeGpa(@student, params[:desired_cumulative_gpa], params[:credits_taken_this_semester])
   
-     authorize! :read, @student
+     
      respond_to do |format|
       format.js { render :handlers => [:erb] }
      end
@@ -115,7 +115,7 @@ class StudentsController < ApplicationController
     @student = current_user
     @gpa_for_target_major_gpa = Projector.calculateGpaNeededForTargetMajorGpa(@student, params[:desired_major_gpa], params[:major_credits_taken_this_semester])
 
-    authorize! :read, @student
+   
 
      respond_to do |format|
       format.js { render :handlers => [:erb] }
@@ -128,7 +128,7 @@ class StudentsController < ApplicationController
 
      @student = current_user
 
-    authorize! :read, @student
+
      #get rid of that and just use an array in a form
      @credits_array = getArrayOfParams("credits", 7)
      @predicted_grade_array = getArrayOfParams("predicted_grade", 7)
