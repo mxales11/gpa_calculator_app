@@ -1,5 +1,6 @@
 <% provide(:title, "") %>
 	<div class="center hero-unit"> 
+		<%= flash[:notice] %>
 		<h2>
 			<%= link_to "Sign up now!", new_student_path, class: "btn btn-large btn-primary" %>
 		</h2>

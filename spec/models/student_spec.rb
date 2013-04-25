@@ -17,11 +17,19 @@ describe Student do
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:authenticate) }
 	it { should respond_to(:taken_courses) }
-
 	it { should respond_to(:remember_token) }
+
+
+	it { should respond_to(:admin) }
+	it { should_not be_admin }
 	
 	it{ should be_valid }
 	
+
+	describe "with admin attribute set to 'true'" do
+		before { @student.toggle!(:admin) }
+		it {should be_admin }
+	end
 	
 	describe "remember_token" do
 		before { @student.save }

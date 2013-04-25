@@ -21,7 +21,7 @@ describe "Authentication" do
 			before { click_button "Sign in" }
 
 			it { should have_selector('h3', text: 'Sign in') }
-			it { should have_text('Invalid') }
+			it { should have_content('Invalid') }
 		
 
 			describe "after visiting another page" do

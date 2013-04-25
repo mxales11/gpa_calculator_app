@@ -4,6 +4,8 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all
 
+    authorize! :read, @courses
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @courses }
@@ -14,6 +16,7 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @course = Course.find(params[:id])
+    authorize! :read, @course
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +29,7 @@ class CoursesController < ApplicationController
   def new
     @course = Course.new
 
+    authorize! :create, @course
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @course }
@@ -35,12 +39,14 @@ class CoursesController < ApplicationController
   # GET /courses/1/edit
   def edit
     @course = Course.find(params[:id])
+    authorize! :read, @course
   end
 
   # POST /courses
   # POST /courses.json
   def create
     @course = Course.new(params[:course])
+    authorize! :create, @course
 
     respond_to do |format|
       if @course.save
@@ -58,6 +64,9 @@ class CoursesController < ApplicationController
   def update
     @course = Course.find(params[:id])
 
+
+    authorize! :update, @course
+
     respond_to do |format|
       if @course.update_attributes(params[:course])
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }
@@ -74,6 +83,8 @@ class CoursesController < ApplicationController
   def destroy
     @course = Course.find(params[:id])
     @course.destroy
+
+    authorize! :destroy, @course
 
     respond_to do |format|
       format.html { redirect_to courses_url }

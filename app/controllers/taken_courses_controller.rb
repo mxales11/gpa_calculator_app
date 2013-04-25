@@ -1,13 +1,14 @@
  class TakenCoursesController < ApplicationController
 
-  autocomplete :course, :name
+  #autocomplete :course, :name
 
    def index
-    #if  params[:student_id].nil?
-      #@taken_courses = TakenCourse.all
+
     @student = Student.find(params[:student_id])
     @taken_courses = @student.taken_courses
-   
+
+    authorize! :read, @taken_courses
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @taken_courses }
@@ -21,7 +22,9 @@
     @taken_course = TakenCourse.find(params[:id])
     @course = Course.find(@taken_course.course_id)
 
-    respond_to do |format|
+    authorize! :read, @taken_course
+
+      respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @taken_courses }
     end
@@ -36,10 +39,12 @@
       flash[:success] = "Student id is #{:student_id}"
       @student = Student.find(params[:student_id])
       @taken_course = @student.taken_courses.build
-  
+
+      authorize! :create, @taken_course
+
   else
-    #change it so that it's not a success
-    flash[:success] = "Student id doesn't exist"
+
+    flash[:error] = "Student id doesn't exist"
    
   end
 
@@ -52,6 +57,7 @@
   # GET /students/1/edit
   def edit
     @taken_course = TakenCourse.find(params[:id])
+    authorize! :read, @taken_course
   end
 
   # POST /students
@@ -88,6 +94,8 @@ end
   def update
     @taken_course = TakenCourse.find(params[:id])
 
+    authorize! :read, @taken_courses
+
     respond_to do |format|
       if @taken_course.update_attributes(params[:taken_course])
         format.html { redirect_to @student, notice: 'Taken course was successfully updated.' }
@@ -102,8 +110,11 @@ end
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
+    @student = current_user
     @taken_course = TakenCourse.find(params[:id])
     @taken_course.destroy
+
+    authorize! :destroy, @taken_courses
 
     respond_to do |format|
       format.html { redirect_to taken_courses_url }
@@ -117,12 +128,14 @@ private
 
 def updateCredits(taken_course)
 
-  @student = current_student
+  @student = current_user
   @course = Course.find(taken_course.course_id)
+
+  authorize! :read, @taken_course
 
   if(taken_course.is_major.to_s == "true")
 
-    @student.update_attribute(:major_credits_earned, @student.major_credits_earned + @course.credits)
+    @student.update_attribute(:major_credits_earned, @student.major_credits_earned.to_i + @course.credits)
 
     logger.debug "Course is: "
     logger.debug "#{@course.name}"
@@ -130,7 +143,7 @@ def updateCredits(taken_course)
   
   end
 
-   @student.update_attribute(:credits_earned, @student.credits_earned + @course.credits)
+   @student.update_attribute(:credits_earned, @student.credits_earned.to_i + @course.credits)
     
 end
 
@@ -138,20 +151,21 @@ end
 
 def calculateGPA(taken_course)
 
-  @student = current_student
+  @student = current_user
   @course = Course.find(taken_course.course_id)
   gradingSchema = { "A" => 4.0, "AB" => 3.5, "B" => 3.0, "BC" => 2.5, "C" =>2.0, "CD" =>1.5, "D"=> 1.0, "F" => 0.0 }
 
-   logger.debug "calculateGPA was invoked: "
-   logger.debug "#{@student.email}"
-   logger.debug "Course is: "
-   logger.debug "#{@course.name}"
-   logger.debug "#{@taken_course.is_major.to_s}"
-   logger.debug "#{taken_course.is_major.to_s == "true"}"
+  authorize! :read, @taken_course
+
+  logger.debug "calculateGPA was invoked: "
+  logger.debug "#{@student.email}"
+  logger.debug "Course is: "
+  logger.debug "#{@course.name}"
+  logger.debug "#{@taken_course.is_major.to_s}"
+  logger.debug "#{taken_course.is_major.to_s == "true"}"
 
 
   if(taken_course.is_major.to_s == "true")
-    logger.debug "We are here"
      @major_course_credits = @course.credits
   else
      @major_course_credits = 0
@@ -159,12 +173,12 @@ def calculateGPA(taken_course)
 
 
   #for cumulative
-  @htps_before = @student.cumulative_gpa * (@student.credits_earned -  @course.credits)
+  @htps_before = @student.cumulative_gpa.to_f * (@student.credits_earned.to_f -  @course.credits.to_f)
   @htps_after = @course.credits  * gradingSchema[taken_course.grade.to_s]
   @all_possible_htps = @student.credits_earned * 4
 
   #for major
-  @major_htps_before = @student.major_gpa * (@student.major_credits_earned -  @major_course_credits)
+  @major_htps_before = @student.major_gpa.to_f * (@student.major_credits_earned.to_f -  @major_course_credits.to_f)
   @major_htps_after = @major_course_credits *  gradingSchema[taken_course.grade.to_s]
   @major_all_possible_htps = @student.major_credits_earned * 4
 
@@ -173,7 +187,6 @@ def calculateGPA(taken_course)
   
 
   if (taken_course.is_major.to_s == "true" )
-      logger.debug "We are here"
       @student.update_attribute(:major_gpa, ((@major_htps_before + @major_htps_after)/ @major_all_possible_htps) * 4)
   end
   

@@ -23,9 +23,9 @@
     <tr>
          <td><%= f.collection_select :course_id , Course.all, :id, :name %> </td>
 
-          <%# <%= f.autocomplete_field :course_name, autocomplete_course_name_taken_courses_path, :id_element => '#course_id' %>
- 
-          <%# <%= f.autocomplete_field :course_name, autocomplete_course_name_taken_courses_path, :id_element => '#course_id' %> 
+          <%#
+          <%= f.autocomplete_field :course_name, autocomplete_course_name_taken_courses_path, :id_element => '#course_id' %> 
+          <%#<%= f.input :course_name, :as => :autocomplete, :url => autocomplete_course_name_taken_courses_path %>
          
           <%#https://github.com/crowdint/rails3-jquery-autocomplete %>
 

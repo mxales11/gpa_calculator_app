@@ -5,16 +5,20 @@
 			<h5>Email:</h5>
 			<%= @student.email %>
 			<br></br>
-			<h5>Cumulative Gpa:</h5>
-			<%= '%.2f' % @student.cumulative_gpa %>
-			<br></br>
-			<h5>Major Gpa:</h5>
-			<%= '%.2f' % @student.major_gpa %>
-			<br></br>
-			<h5>Credits earned:</h5>
-			<%= @student.credits_earned %>
-			<br></br>
-			<h5>Major credits earned:</h5>
-			<%= @student.major_credits_earned %>	
+			<% if !@student.cumulative_gpa.nil? %>
+				<h5>Cumulative Gpa:</h5>
+				<%= '%.2f' % @student.cumulative_gpa %>
+				<br></br>
+			<% end %>
+			<% if !@student.major_gpa.nil? %>
+				<h5>Major Gpa:</h5>
+				<%= '%.2f' % @student.major_gpa %>
+				<br></br>
+			<% end %>
+				<h5>Credits earned:</h5>
+				<%= @student.credits_earned %>
+				<br></br>
+				<h5>Major credits earned:</h5>
+				<%= @student.major_credits_earned %>	
 	<% end %>
 </div>

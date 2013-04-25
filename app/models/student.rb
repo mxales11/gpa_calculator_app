@@ -20,7 +20,6 @@ class Student < ActiveRecord::Base
   has_many :taken_courses 
 
 
-
   private
 
   def create_remember_token

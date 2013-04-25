@@ -7,19 +7,12 @@ GpaCalculatorApp::Application.routes.draw do
 
  
   resources :courses
- 
-  resources :taken_courses
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signup', to: 'students#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
-  resources :students do
-    resources :taken_courses
-  end
-
-  resources :students
 
   resources :students do
     member do
@@ -27,11 +20,12 @@ GpaCalculatorApp::Application.routes.draw do
       post 'calculateGpaNeededForTargetMajorGpa'
       post 'calculatePredictedGpas'
     end
+      resources :taken_courses
   end
 
-  resources :taken_courses do
-    get :autocomplete_course_name, :on => :collection
-  end
+  #resources :taken_courses do
+  #  get :autocomplete_course_name, :on => :collection
+  #end
 
  
   # The priority is based upon order of creation:

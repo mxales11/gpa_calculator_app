@@ -6,6 +6,7 @@ class StudentsController < ApplicationController
 
   def index
     @students = Student.all
+    authorize! :read, @students
 
     respond_to do |format|
       format.html # index.html.erb
@@ -21,13 +22,13 @@ class StudentsController < ApplicationController
       logger.debug "Student #{@student.attributes.inspect}"
       Rails.logger.info("PARAMS: #{params.inspect}")
 
-    #@student.update_attributes(params[:student])
-    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @student }
+      authorize! :read, @student
+
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @student }
+      end
     end
-  end
 
   # GET /students/new
   # GET /students/new.json
@@ -43,6 +44,7 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
     @student = Student.find(params[:id])
+    authorize! :update, @student
   end
 
   # POST /students
@@ -65,8 +67,9 @@ class StudentsController < ApplicationController
   # PUT /students/1.json
   def update
     @student = Student.find(params[:id])
-    
 
+    authorize! :update, @student
+    
     respond_to do |format|
       if @student.update_attributes(params[:student])
         format.html { redirect_to @student, notice: 'Student was successfully updated.' }
@@ -84,6 +87,8 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     @student.destroy
 
+    authorize! :destroy, @student
+
     respond_to do |format|
       format.html { redirect_to students_url }
       format.json { head :no_content }
@@ -94,9 +99,10 @@ class StudentsController < ApplicationController
 
   def calculateGpaNeededForTargetCumulativeGpa
 
-     @student = current_student
+     @student = current_user
      @gpa_for_target_cumulative_gpa = Projector.calculateGpaNeededForTargetCumulativeGpa(@student, params[:desired_cumulative_gpa], params[:credits_taken_this_semester])
   
+     authorize! :read, @student
      respond_to do |format|
       format.js { render :handlers => [:erb] }
      end
@@ -105,8 +111,10 @@ class StudentsController < ApplicationController
 
   def calculateGpaNeededForTargetMajorGpa
 
-    @student = current_student
+    @student = current_user
     @gpa_for_target_major_gpa = Projector.calculateGpaNeededForTargetMajorGpa(@student, params[:desired_major_gpa], params[:major_credits_taken_this_semester])
+
+    authorize! :read, @student
 
      respond_to do |format|
       format.js { render :handlers => [:erb] }
@@ -117,13 +125,15 @@ class StudentsController < ApplicationController
 
    def calculatePredictedGpas
 
-     @student = current_student
+     @student = current_user
 
+    authorize! :read, @student
      #get rid of that and just use an array in a form
      @credits_array = getArrayOfParams("credits", 7)
      @predicted_grade_array = getArrayOfParams("predicted_grade", 7)
      @is_repeated_course_array = getArrayOfParams("is_repeated_course", 7);
      @is_major_course_array =  getArrayOfParams("is_major_course", 7);
+
 
      Rails.logger.info("Credits array: #{@credits_array}")
      Rails.logger.info("Predicted grade array: #{@predicted_grade_array}")
@@ -167,6 +177,7 @@ class StudentsController < ApplicationController
      student.update_attribute(:cumulative_gpa, 0.0)
      student.update_attribute(:credits_earned, 0)
      student.update_attribute(:major_credits_earned, 0)
+   
   end
 
 end

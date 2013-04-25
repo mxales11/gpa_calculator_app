@@ -21,10 +21,10 @@ describe "Student pages" do
 		
 		describe "calculating predicted cumulative GPA" do
 			let(:submit) {"Calculate GPA needed this semester to have target Cumulative GPA" }
-			let(:toogle) {"Target Cumulative GPA" }
+			let(:toggle) {"Target Cumulative GPA" }
 
 			before do
-				click_button toogle
+				click_button toggle
 				fill_in "Desired cumulative GPA", with: 4.0
 				fill_in "Credits taken this semester", with: 18
 				click_button submit
