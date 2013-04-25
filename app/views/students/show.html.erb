@@ -1,4 +1,10 @@
 <div class="container-fluid">
+
+ <% if can? :delete, Student %>
+    <%= link_to "Edit Students", students_path %>
+  <% end %>
+
+
   <div class="row-fluid">
     <div class="span2">
       <%= render 'student_info_container' %>

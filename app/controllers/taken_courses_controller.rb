@@ -114,10 +114,10 @@ end
     @taken_course = TakenCourse.find(params[:id])
     @taken_course.destroy
 
-    authorize! :destroy, @taken_courses
+    authorize! :destroy, @taken_course
 
     respond_to do |format|
-      format.html { redirect_to taken_courses_url }
+      format.html { redirect_to @student }
       format.json { head :no_content }
     end
   end

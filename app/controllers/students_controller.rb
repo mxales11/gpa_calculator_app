@@ -5,8 +5,9 @@ class StudentsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @students = Student.all
-    authorize! :read, @students
+
+    authorize! :index, Student
+    @students = Student.accessible_by(current_ability)
 
     respond_to do |format|
       format.html # index.html.erb

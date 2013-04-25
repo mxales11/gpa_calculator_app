@@ -6,15 +6,14 @@ class Ability
     if user.nil?
 
     elsif user.admin?
-        Rails.logger.info("Initialize method was invoked");
         can :manage, Student
+        can :index, Student
         can :manage, Course
         can :manage, TakenCourse
     else
-        Rails.logger.info("Initialize method was invoked");
         can :read, Student, :id => user.id
-        can :manage, TakenCourse
-
+        can :manage, TakenCourse, :student_id => user.id
+       
     end
 
 
