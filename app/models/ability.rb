@@ -11,7 +11,7 @@ class Ability
         can :manage, Course
         can :manage, TakenCourse
     else
-        can :read, Student, :id => user.id
+        can :show, Student, :id => user.id
         can :update, Student, :id => user.id
         can :manage, TakenCourse, :student_id => user.id
        

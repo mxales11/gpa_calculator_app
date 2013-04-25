@@ -23,7 +23,7 @@ class StudentsController < ApplicationController
       logger.debug "Student #{@student.attributes.inspect}"
       Rails.logger.info("PARAMS: #{params.inspect}")
 
-      authorize! :read, @student
+      authorize! :show, @student
 
       respond_to do |format|
         format.html # show.html.erb
