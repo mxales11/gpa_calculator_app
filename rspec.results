@@ -1,4 +1,4 @@
-.............................*..F.................FFF..FF.
+................................*....................FFF..FF.
 
 Pending:
   TakenCourse add some examples to (or delete) C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/spec/models/taken_course_spec.rb
@@ -7,50 +7,43 @@ Pending:
 
 Failures:
 
-  1) Authentication signin with invalid information 
-     Failure/Error: it { should have_text('Invalid') }
-     NoMethodError:
-       undefined method `has_text?' for #<Capybara::Session>
-     # ./spec/requests/authentication_pages_spec.rb:24:in `block (4 levels) in <top (required)>'
+  1) Student pages projection pages calculating predicted cumulative GPA 
+     Failure/Error: click_button toggle
+     Capybara::ElementNotFound:
+       no button with value or id or text 'Target Cumulative GPA' found
+     # (eval):2:in `click_button'
+     # ./spec/requests/student_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
 
   2) Student pages projection pages calculating predicted cumulative GPA 
-     Failure/Error: click_button toogle
+     Failure/Error: click_button toggle
      Capybara::ElementNotFound:
        no button with value or id or text 'Target Cumulative GPA' found
      # (eval):2:in `click_button'
      # ./spec/requests/student_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
 
   3) Student pages projection pages calculating predicted cumulative GPA 
-     Failure/Error: click_button toogle
+     Failure/Error: click_button toggle
      Capybara::ElementNotFound:
        no button with value or id or text 'Target Cumulative GPA' found
      # (eval):2:in `click_button'
      # ./spec/requests/student_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
 
-  4) Student pages projection pages calculating predicted cumulative GPA 
-     Failure/Error: click_button toogle
-     Capybara::ElementNotFound:
-       no button with value or id or text 'Target Cumulative GPA' found
-     # (eval):2:in `click_button'
-     # ./spec/requests/student_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
-
-  5) Student pages signup with valid information after saving the student 
+  4) Student pages signup with valid information after saving the student 
      Failure/Error: it { should have_selector('title', text: student.email) }
      NoMethodError:
        undefined method `email' for nil:NilClass
      # ./spec/requests/student_pages_spec.rb:69:in `block (5 levels) in <top (required)>'
 
-  6) Student pages signup with valid information after saving the student 
+  5) Student pages signup with valid information after saving the student 
      Failure/Error: it { should have_selector('div.alert.alert-success', text: 'Welcome') }
        expected css "div.alert.alert-success" with text "Welcome" to return something
      # ./spec/requests/student_pages_spec.rb:70:in `block (5 levels) in <top (required)>'
 
-Finished in 12.67 seconds
-58 examples, 6 failures, 1 pending
+Finished in 7.16 seconds
+61 examples, 5 failures, 1 pending
 
 Failed examples:
 
-rspec ./spec/requests/authentication_pages_spec.rb:24 # Authentication signin with invalid information 
 rspec ./spec/requests/student_pages_spec.rb:33 # Student pages projection pages calculating predicted cumulative GPA 
 rspec ./spec/requests/student_pages_spec.rb:34 # Student pages projection pages calculating predicted cumulative GPA 
 rspec ./spec/requests/student_pages_spec.rb:35 # Student pages projection pages calculating predicted cumulative GPA 
