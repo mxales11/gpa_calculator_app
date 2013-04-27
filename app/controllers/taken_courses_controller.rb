@@ -20,8 +20,7 @@
   def show
 
     @taken_course = TakenCourse.find(params[:id])
-    @course = Course.find(@taken_course.course_id)
-
+   
     authorize! :read, @taken_course
 
       respond_to do |format|
@@ -132,21 +131,22 @@ private
 def updateCredits(taken_course)
 
   @student = current_user
-  @course = Course.find(taken_course.course_id)
+
+  
 
   authorize! :read, @taken_course
 
   if(taken_course.is_major.to_s == "true")
 
-    @student.update_attribute(:major_credits_earned, @student.major_credits_earned.to_i + @course.credits)
+    @student.update_attribute(:major_credits_earned, @student.major_credits_earned.to_i + taken_course.credits)
 
-    logger.debug "Course is: "
-    logger.debug "#{@course.name}"
-    logger.debug "#{@course.credits}"
+    logger.debug "Taken course is: "
+    logger.debug "#{taken_course.name}"
+    logger.debug "#{taken_course.credits}"
   
   end
 
-   @student.update_attribute(:credits_earned, @student.credits_earned.to_i + @course.credits)
+   @student.update_attribute(:credits_earned, @student.credits_earned.to_i + taken_course.credits)
     
 end
 
@@ -155,29 +155,20 @@ end
 def calculateGPA(taken_course)
 
   @student = current_user
-  @course = Course.find(taken_course.course_id)
   gradingSchema = { "A" => 4.0, "AB" => 3.5, "B" => 3.0, "BC" => 2.5, "C" =>2.0, "CD" =>1.5, "D"=> 1.0, "F" => 0.0 }
 
   authorize! :read, @taken_course
 
-  logger.debug "calculateGPA was invoked: "
-  logger.debug "#{@student.email}"
-  logger.debug "Course is: "
-  logger.debug "#{@course.name}"
-  logger.debug "#{@taken_course.is_major.to_s}"
-  logger.debug "#{taken_course.is_major.to_s == "true"}"
-
-
   if(taken_course.is_major.to_s == "true")
-     @major_course_credits = @course.credits
+     @major_course_credits = taken_course.credits
   else
      @major_course_credits = 0
   end
 
 
   #for cumulative
-  @htps_before = @student.cumulative_gpa.to_f * (@student.credits_earned.to_f -  @course.credits.to_f)
-  @htps_after = @course.credits  * gradingSchema[taken_course.grade.to_s]
+  @htps_before = @student.cumulative_gpa.to_f * (@student.credits_earned.to_f -  taken_course.credits.to_f)
+  @htps_after = taken_course.credits  * gradingSchema[taken_course.grade.to_s]
   @all_possible_htps = @student.credits_earned * 4
 
   #for major

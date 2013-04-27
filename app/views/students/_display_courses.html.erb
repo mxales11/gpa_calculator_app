@@ -12,7 +12,7 @@
 
   <% @taken_courses.each do |taken_course| %>
     <tr>
-      <td><%= Course.find(taken_course.course_id).name %></td>
+      <td><%= taken_course.name %></td>
       <td><%= taken_course.grade %></td>
       <td><%= link_to 'Edit', edit_student_taken_course_path(@student, taken_course) %></td>
       <td><%= link_to 'Destroy', student_taken_course_path(@student, taken_course), confirm: 'Are you sure?', method: :delete %></td>

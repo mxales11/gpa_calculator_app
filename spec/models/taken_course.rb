@@ -9,10 +9,10 @@ describe TakenCourse do
 	subject { @student }
 
 	it { should respond_to(:student_id) }
-	it { should respond_to(:course_id) }
-	it { should respond_to(:course) }
 	it { should respond_to(:grade) }
 	it { should respond_to(:student) }
+	it { should respond_to(:name) }
+	it { should respond_to(:credits) }
 	it { should be_valid }
 
 	describe "when student_id is not present" do

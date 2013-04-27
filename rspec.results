@@ -1,4 +1,4 @@
-................................*....................FFF..FF.
+..............F..............*......F............FFFFFFFFF
 
 Pending:
   TakenCourse add some examples to (or delete) C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/spec/models/taken_course_spec.rb
@@ -7,45 +7,134 @@ Pending:
 
 Failures:
 
-  1) Student pages projection pages calculating predicted cumulative GPA 
-     Failure/Error: click_button toggle
-     Capybara::ElementNotFound:
-       no button with value or id or text 'Target Cumulative GPA' found
-     # (eval):2:in `click_button'
-     # ./spec/requests/student_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
+  1) Student should have 2 taken courses
+     Failure/Error: @student.taken_courses.create!(course_id: 1, grade: "AB")
+     ActiveModel::MassAssignmentSecurity::Error:
+       Can't mass-assign protected attributes: course_id
+     # C:in `create!'
+     # ./spec/models/student_spec.rb:47:in `block (2 levels) in <top (required)>'
 
-  2) Student pages projection pages calculating predicted cumulative GPA 
-     Failure/Error: click_button toggle
-     Capybara::ElementNotFound:
-       no button with value or id or text 'Target Cumulative GPA' found
-     # (eval):2:in `click_button'
-     # ./spec/requests/student_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
+  2) Authentication signin with valid information 
+     Failure/Error: it { should have_link('Add completed courses', href: new_student_taken_course_path(student, @taken_course)) }
+       expected link "Add completed courses" to return something
+     # ./spec/requests/authentication_pages_spec.rb:41:in `block (4 levels) in <top (required)>'
 
-  3) Student pages projection pages calculating predicted cumulative GPA 
-     Failure/Error: click_button toggle
-     Capybara::ElementNotFound:
-       no button with value or id or text 'Target Cumulative GPA' found
-     # (eval):2:in `click_button'
-     # ./spec/requests/student_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
-
-  4) Student pages signup with valid information after saving the student 
-     Failure/Error: it { should have_selector('title', text: student.email) }
+  3) Student pages profile page 
+     Failure/Error: before { visit student_path(student) }
      NoMethodError:
-       undefined method `email' for nil:NilClass
-     # ./spec/requests/student_pages_spec.rb:69:in `block (5 levels) in <top (required)>'
+       undefined method `taken_courses' for nil:NilClass
+     # ./app/controllers/students_controller.rb:23:in `show'
+     # ./spec/requests/student_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
 
-  5) Student pages signup with valid information after saving the student 
-     Failure/Error: it { should have_selector('div.alert.alert-success', text: 'Welcome') }
-       expected css "div.alert.alert-success" with text "Welcome" to return something
-     # ./spec/requests/student_pages_spec.rb:70:in `block (5 levels) in <top (required)>'
+  4) Student pages projection pages calculating predicted cumulative GPA 
+     Failure/Error: click_button toggle
+     Capybara::ElementNotFound:
+       no button with value or id or text 'Target Cumulative GPA' found
+     # (eval):2:in `click_button'
+     # ./spec/requests/student_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
 
-Finished in 7.16 seconds
-61 examples, 5 failures, 1 pending
+  5) Student pages projection pages calculating predicted cumulative GPA 
+     Failure/Error: click_button toggle
+     Capybara::ElementNotFound:
+       no button with value or id or text 'Target Cumulative GPA' found
+     # (eval):2:in `click_button'
+     # ./spec/requests/student_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
+
+  6) Student pages projection pages calculating predicted cumulative GPA 
+     Failure/Error: click_button toggle
+     Capybara::ElementNotFound:
+       no button with value or id or text 'Target Cumulative GPA' found
+     # (eval):2:in `click_button'
+     # ./spec/requests/student_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
+
+  7) Student pages signup with invalid information should not create a student
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:26: syntax error, unexpected ')', expecting tASSOC
+       ...Confirmation", "Confirmation" );@output_buffer.safe_concat('
+       ...                               ^
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:29: syntax error, unexpected keyword_end, expecting ')'
+       ');       end 
+                    ^
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:40: syntax error, unexpected keyword_ensure, expecting ')'
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:42: syntax error, unexpected keyword_end, expecting ')'
+     # ./app/views/students/new.html.erb:1:in `_app_views_students_new_html_erb__988025178_47261724'
+     # ./app/controllers/students_controller.rb:41:in `new'
+     # ./spec/requests/student_pages_spec.rb:44:in `block (3 levels) in <top (required)>'
+
+  8) Student pages signup with valid information should create a student
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:26: syntax error, unexpected ')', expecting tASSOC
+       ...Confirmation", "Confirmation" );@output_buffer.safe_concat('
+       ...                               ^
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:29: syntax error, unexpected keyword_end, expecting ')'
+       ');       end 
+                    ^
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:40: syntax error, unexpected keyword_ensure, expecting ')'
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:42: syntax error, unexpected keyword_end, expecting ')'
+     # ./app/views/students/new.html.erb:1:in `_app_views_students_new_html_erb__988025178_47261724'
+     # ./app/controllers/students_controller.rb:41:in `new'
+     # ./spec/requests/student_pages_spec.rb:44:in `block (3 levels) in <top (required)>'
+
+  9) Student pages signup with valid information after saving the student 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:26: syntax error, unexpected ')', expecting tASSOC
+       ...Confirmation", "Confirmation" );@output_buffer.safe_concat('
+       ...                               ^
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:29: syntax error, unexpected keyword_end, expecting ')'
+       ');       end 
+                    ^
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:40: syntax error, unexpected keyword_ensure, expecting ')'
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:42: syntax error, unexpected keyword_end, expecting ')'
+     # ./app/views/students/new.html.erb:1:in `_app_views_students_new_html_erb__988025178_47261724'
+     # ./app/controllers/students_controller.rb:41:in `new'
+     # ./spec/requests/student_pages_spec.rb:44:in `block (3 levels) in <top (required)>'
+
+  10) Student pages signup with valid information after saving the student 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:26: syntax error, unexpected ')', expecting tASSOC
+       ...Confirmation", "Confirmation" );@output_buffer.safe_concat('
+       ...                               ^
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:29: syntax error, unexpected keyword_end, expecting ')'
+       ');       end 
+                    ^
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:40: syntax error, unexpected keyword_ensure, expecting ')'
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:42: syntax error, unexpected keyword_end, expecting ')'
+     # ./app/views/students/new.html.erb:1:in `_app_views_students_new_html_erb__988025178_47261724'
+     # ./app/controllers/students_controller.rb:41:in `new'
+     # ./spec/requests/student_pages_spec.rb:44:in `block (3 levels) in <top (required)>'
+
+  11) Student pages signup with valid information after saving the student 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:26: syntax error, unexpected ')', expecting tASSOC
+       ...Confirmation", "Confirmation" );@output_buffer.safe_concat('
+       ...                               ^
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:29: syntax error, unexpected keyword_end, expecting ')'
+       ');       end 
+                    ^
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:40: syntax error, unexpected keyword_ensure, expecting ')'
+       C:/Users/Marta/SMU/CS/CS380/rails_projects/gpa_calculator_app/app/views/students/_form.html.erb:42: syntax error, unexpected keyword_end, expecting ')'
+     # ./app/views/students/new.html.erb:1:in `_app_views_students_new_html_erb__988025178_47261724'
+     # ./app/controllers/students_controller.rb:41:in `new'
+     # ./spec/requests/student_pages_spec.rb:44:in `block (3 levels) in <top (required)>'
+
+Finished in 6.05 seconds
+58 examples, 11 failures, 1 pending
 
 Failed examples:
 
+rspec ./spec/models/student_spec.rb:44 # Student should have 2 taken courses
+rspec ./spec/requests/authentication_pages_spec.rb:41 # Authentication signin with valid information 
+rspec ./spec/requests/student_pages_spec.rb:13 # Student pages profile page 
 rspec ./spec/requests/student_pages_spec.rb:33 # Student pages projection pages calculating predicted cumulative GPA 
 rspec ./spec/requests/student_pages_spec.rb:34 # Student pages projection pages calculating predicted cumulative GPA 
 rspec ./spec/requests/student_pages_spec.rb:35 # Student pages projection pages calculating predicted cumulative GPA 
+rspec ./spec/requests/student_pages_spec.rb:48 # Student pages signup with invalid information should not create a student
+rspec ./spec/requests/student_pages_spec.rb:60 # Student pages signup with valid information should create a student
 rspec ./spec/requests/student_pages_spec.rb:69 # Student pages signup with valid information after saving the student 
 rspec ./spec/requests/student_pages_spec.rb:70 # Student pages signup with valid information after saving the student 
+rspec ./spec/requests/student_pages_spec.rb:72 # Student pages signup with valid information after saving the student 

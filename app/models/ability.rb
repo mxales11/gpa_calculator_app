@@ -8,7 +8,6 @@ class Ability
     elsif user.admin?
         can :manage, Student
         can :index, Student
-        can :manage, Course
         can :manage, TakenCourse
     else
         can :show, Student, :id => user.id

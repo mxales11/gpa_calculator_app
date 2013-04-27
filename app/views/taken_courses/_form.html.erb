@@ -15,29 +15,17 @@
         </ul>
       </div>
     <% end %>
-
-  <div>
-    <table>
-      <tr>
-        <td>Course</td>
-        <td>Grade</td>
-        <td>Is Major Course</td>
-      </tr>
-
-      <tr>
-        <td><%= f.collection_select :course_id , Course.all, :id, :name %> </td>
-        <td><%= f.select :grade, options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
-        </td>
-        <td>  
+        <br></br>
+        <%= f.label :course_name %>
+        <%= f.text_field :name %>
+        <%= f.label :credits %>
+        <%= f.select :credits, options_for_select(['-','1','2', '3', '4', '5', '6', '7', '8']) %>
+         <%= f.label :grade %>
+        <%= f.select :grade, options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
+         <%= f.label :is_major %>
         <%= f.check_box :is_major %>
-        </td>
-      </tr>
-    </table>
-    <%= f.submit "Add", class: "btn btn-primary" %>
-  </div>
-
-  <% end %>
-
+        <br></br>
+      <%= f.submit "Add", class: "btn btn-primary" %>
+      <% end %>
 </div>
-
 
