@@ -1,6 +1,6 @@
  class TakenCoursesController < ApplicationController
 
-  #autocomplete :course, :name
+   respond_to :html, :js
 
    def index
 
@@ -48,10 +48,11 @@
    
   end
 
-    respond_to do |format|
+   respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @taken_course }
     end
+
   end
 
   # GET /students/1/edit
@@ -87,6 +88,8 @@
           logger.debug "Taken course was not created. Student: #{@taken_course.attributes.inspect}"
           render 'new'
     end
+
+   
 end
 
   # PUT /students/1

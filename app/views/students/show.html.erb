@@ -5,6 +5,7 @@
   <% end %>
 
 
+
   <div class="row-fluid">
     <div class="span2">
       <%= render 'student_info_container' %>
@@ -38,10 +39,12 @@ Target Cumulative GPA">Target cumulative GPA</abbr></a>
         </div>
 
          <div class="span3" id = "sidebar">
-                <%= render 'display_courses' %>
-                <br>
-                    <%= link_to 'Add completed courses', new_student_taken_course_path(@student, @taken_course), class: "btn btn-primary" %>
-               </br>
+    
+            <%= render 'display_courses' %>
+            <%= render 'taken_courses/form' %>
+              <br>
+                <a href = "#" class="btn btn-primary" id="add_taken_course_button">Add course</a>
+              </br>        
         </div>
     </div>
 </div> 

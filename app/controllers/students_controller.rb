@@ -18,7 +18,8 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
     def show
-      @student = Student.find(params[:id])
+      @student = current_user
+      @taken_course = TakenCourse.new
       @taken_courses = @student.taken_courses
       logger.debug "Student #{@student.attributes.inspect}"
       Rails.logger.info("PARAMS: #{params.inspect}")
@@ -35,6 +36,7 @@ class StudentsController < ApplicationController
   # GET /students/new.json
   def new
     @student = Student.new
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -81,6 +83,7 @@ class StudentsController < ApplicationController
       end
     end
   end
+
 
   # DELETE /students/1
   # DELETE /students/1.json

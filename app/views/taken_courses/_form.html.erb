@@ -1,44 +1,43 @@
-<div class= "textarea">
+<div id="add_taken_course_form">
+
   <%= form_for([@student, @taken_course]) do |f| %>
 
     <% if @taken_course.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@taken_course.errors.count, "error") %> prohibited this course taken from being saved:</h2>
+        <h2>
+          <%= pluralize(@taken_course.errors.count, "error") %> prohibited this course taken from being saved:
+        </h2>
 
         <ul>
-        <% @taken_course.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+          <% @taken_course.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
         </ul>
       </div>
     <% end %>
+
   <div>
-  <table>
-    <tr>
-      <td>Course</td>
-      <td>Grade</td>
-      <td>Is Major Course</td>
-    </tr>
+    <table>
+      <tr>
+        <td>Course</td>
+        <td>Grade</td>
+        <td>Is Major Course</td>
+      </tr>
 
-    <tr>
-         <td><%= f.collection_select :course_id , Course.all, :id, :name %> </td>
-
-          <%#
-          <%= f.autocomplete_field :course_name, autocomplete_course_name_taken_courses_path, :id_element => '#course_id' %> 
-          <%#<%= f.input :course_name, :as => :autocomplete, :url => autocomplete_course_name_taken_courses_path %>
-         
-          <%#https://github.com/crowdint/rails3-jquery-autocomplete %>
-
-         <td><%= f.select :grade, options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
+      <tr>
+        <td><%= f.collection_select :course_id , Course.all, :id, :name %> </td>
+        <td><%= f.select :grade, options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
         </td>
         <td>  
         <%= f.check_box :is_major %>
         </td>
-    </tr>
-</table>
-      <%= f.submit "Add taken course", class: "btn btn-primary" %>
-  
+      </tr>
+    </table>
+    <%= f.submit "Add", class: "btn btn-primary" %>
+  </div>
+
   <% end %>
 
+</div>
 
 
