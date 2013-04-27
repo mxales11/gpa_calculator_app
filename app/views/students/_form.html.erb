@@ -15,15 +15,15 @@
         <% end %>
 
         <div class="field">
-          <%= f.text_field :email, :placeholder => "password" %>
+          <%= f.text_field :email, :placeholder => "Email" %>
         </div>
         <br></br>
         <div class="field">
-          <%= f.password_field :password, :placeholder => "password" %>
+          <%= f.password_field :password, :placeholder => "Password" %>
         </div>
         <br></br>
           <div class="field">
-          <%= f.password_field  :password_confirmation, :placeholder => "Password Confirmation", "Confirmation" %>
+          <%= f.password_field  :password_confirmation, :placeholder => "Password Confirmation" %>
         </div>
         <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
       <% end %>
