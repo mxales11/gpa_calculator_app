@@ -10,8 +10,7 @@
     authorize! :read, @taken_courses
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @taken_courses }
+      format.js
     end
   end
 
@@ -48,9 +47,8 @@
   end
 
    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @taken_course }
-    end
+      format.js { render :handlers => [:erb] }
+     end
 
   end
 
@@ -81,14 +79,16 @@
     if @taken_course.save!
         logger.debug "********************************************************************************************************************************************************"
         logger.debug "#{@student.attributes.inspect}"
-        redirect_to @student
     else 
           logger.debug "********************************************************************************************************************************************************"
           logger.debug "Taken course was not created. Student: #{@taken_course.attributes.inspect}"
-          render 'new'
     end
 
+    respond_to do |format|
+      format.js
    
+    end
+     
 end
 
   # PUT /students/1
@@ -146,7 +146,7 @@ def updateCredits(taken_course)
   
   end
 
-   @student.update_attribute(:credits_earned, @student.credits_earned.to_i + taken_course.credits)
+  @student.update_attribute(:credits_earned, @student.credits_earned.to_i + taken_course.credits)
     
 end
 

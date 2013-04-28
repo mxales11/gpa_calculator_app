@@ -1,0 +1,5 @@
+$("#add_taken_course_form").hide()
+$('#add_taken_course_button').show()
+
+$("#new_course").html("<table><tr><td><%= @taken_course.name %></td><td><%= @taken_course.grade %></td></tr></table>")
+
