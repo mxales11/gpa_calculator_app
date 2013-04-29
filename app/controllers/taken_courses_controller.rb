@@ -38,6 +38,7 @@
       @student = Student.find(params[:student_id])
       @taken_course = @student.taken_courses.build
 
+
       authorize! :create, @taken_course
 
   else
@@ -74,6 +75,7 @@
 
     logger.debug "********************************************************************************************************************************************************"
     logger.debug "Student  #{@student.attributes.inspect}"
+    @taken_courses = @student.taken_courses
    
 
     if @taken_course.save!
@@ -86,7 +88,6 @@
 
     respond_to do |format|
       format.js
-   
     end
      
 end
@@ -119,8 +120,7 @@ end
     authorize! :destroy, @taken_course
 
     respond_to do |format|
-      format.html { redirect_to @student }
-      format.json { head :no_content }
+      format.js
     end
   end
 

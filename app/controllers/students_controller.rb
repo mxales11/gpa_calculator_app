@@ -20,10 +20,10 @@ class StudentsController < ApplicationController
     def show
       @student = current_user
       @taken_course = TakenCourse.new
-      @taken_courses = @student.taken_courses
-      logger.debug "Student #{@student.attributes.inspect}"
-      Rails.logger.info("PARAMS: #{params.inspect}")
-
+      if(!@student.nil?)
+        @taken_courses = @student.taken_courses
+      end
+     
       authorize! :show, @student
 
       respond_to do |format|
