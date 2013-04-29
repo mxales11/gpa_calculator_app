@@ -13,6 +13,7 @@ describe Student do
 	it { should respond_to(:cumulative_gpa) }
 	it { should respond_to(:password_digest) }
 	it { should respond_to(:credits_earned) }
+	it { should respond_to(:major_credits_earned) }
 	it { should respond_to(:password) }
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:authenticate) }
@@ -44,8 +45,8 @@ describe Student do
     it "should have 2 taken courses" do
 
     		@student.save
-    		@student.taken_courses.create!(course_id: 1, grade: "AB")
-			@student.taken_courses.create!(course_id: 2, grade: "CD")
+    		@student.taken_courses.create!(name: "Probability", grade: "AB", credits: "3")
+			@student.taken_courses.create!(name: "Modern Dance", grade: "CD", credits: "2")
 			@student.taken_courses(:force_reload=>:true).size.should == 2
     end
     

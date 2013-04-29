@@ -2,9 +2,6 @@ class Student < ActiveRecord::Base
   attr_accessible :major_credits_earned, :name, :cumulative_gpa, :email, :credits_earned, :password, :password_confirmation, :major_gpa
   has_secure_password
   
-
-
-
   before_save { |student| student.email = email.downcase }
   before_save :create_remember_token
 

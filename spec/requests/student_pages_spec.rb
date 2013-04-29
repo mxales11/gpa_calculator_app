@@ -3,11 +3,11 @@ require 'spec_helper'
 describe "Student pages" do 
 
 	subject { page }
+	let(:student) { FactoryGirl.create(:student) }
 
 
 	describe "profile page" do
 
-		let(:student) { FactoryGirl.create(:student) }
 		before { visit student_path(student) }
 
 		it { should have_selector('title', title: student.email) }
@@ -16,9 +16,6 @@ describe "Student pages" do
 
 	describe "projection pages" do
 
-		let(:student) { FactoryGirl.create(:student) }
-
-		
 		describe "calculating predicted cumulative GPA" do
 			let(:submit) {"Calculate GPA needed this semester to have target Cumulative GPA" }
 			let(:toggle) {"Target Cumulative GPA" }
@@ -54,7 +51,7 @@ describe "Student pages" do
 			before do
 				fill_in "Email", with: "john15@yahoo.com"
 				fill_in "Password", with: "foobar"
-				fill_in "Confirmation", with: "foobar"
+				fill_in "Password Confirmation", with: "foobar"
 			end
 
 			it "should create a student" do
