@@ -3,6 +3,7 @@
     <tr>
       <th>Email</th>
       <th>Credits earned</th>
+      <th>Major Credits earned</th>
       <th>Cumulative gpa</th>
       <th>Major gpa</th>
       <th></th>
@@ -11,14 +12,15 @@
     </tr>
 
   <% @students.each do |student| %>
-    <tr>
+    <tr id="<%= index_row_div_id(student) %>">
       <td><%= student.email %></td>
       <td><%= student.credits_earned %></td>
-      <td><%= student.cumulative_gpa %></td>
-      <td><%= student.major_gpa %></td>
+      <td><%= student.major_credits_earned %></td>
+      <td><%= getStudentGpa(student.cumulative_gpa)%></td>
+      <td><%= getStudentGpa(student.major_gpa)%></td>
       <td><%= link_to 'Show', student %></td>
       <td><%= link_to 'Edit', edit_student_path(student) %></td>
-      <td><%= link_to 'Destroy', student, confirm: 'Are you sure?', method: :delete %></td>
+      <td><%= link_to 'Destroy', student, confirm: 'Are you sure?', method: :delete, remote: true%></td>
     </tr>
   <% end %>
 </table>

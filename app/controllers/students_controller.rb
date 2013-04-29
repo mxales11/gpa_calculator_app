@@ -37,7 +37,6 @@ class StudentsController < ApplicationController
   def new
     @student = Student.new
 
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @student }
@@ -54,11 +53,11 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(params[:student])
-    
+    initializeStudentAttibutes(@student)
+   
     if @student.save
       sign_in @student
       flash[:success] = "Welcome to Make Projections App!"
-      initializeStudentAttibutes(@student)
       redirect_to @student
 
     else
@@ -94,8 +93,7 @@ class StudentsController < ApplicationController
     authorize! :destroy, @student
 
     respond_to do |format|
-      format.html { redirect_to students_url }
-      format.json { head :no_content }
+      format.js
     end
   end
 
@@ -103,13 +101,12 @@ class StudentsController < ApplicationController
 
   def calculateGpaNeededForTargetCumulativeGpa
 
-     @student = current_user
-     @gpa_for_target_cumulative_gpa = Projector.calculateGpaNeededForTargetCumulativeGpa(@student, params[:desired_cumulative_gpa], params[:credits_taken_this_semester])
-  
-     
-     respond_to do |format|
+    @student = current_user
+    @gpa_for_target_cumulative_gpa = Projector.calculateGpaNeededForTargetCumulativeGpa(@student, params[:desired_cumulative_gpa], params[:credits_taken_this_semester])
+   
+    respond_to do |format|
       format.js { render :handlers => [:erb] }
-     end
+    end
   end
     
 
@@ -118,12 +115,9 @@ class StudentsController < ApplicationController
     @student = current_user
     @gpa_for_target_major_gpa = Projector.calculateGpaNeededForTargetMajorGpa(@student, params[:desired_major_gpa], params[:major_credits_taken_this_semester])
 
-   
-
-     respond_to do |format|
+    respond_to do |format|
       format.js { render :handlers => [:erb] }
-     end
-  
+    end
   end
 
 
