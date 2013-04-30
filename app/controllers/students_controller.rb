@@ -53,9 +53,9 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(params[:student])
-    initializeStudentAttibutes(@student)
    
     if @student.save
+      initializeStudentAttibutes(@student)
       sign_in @student
       flash[:success] = "Welcome to Make Projections App!"
       redirect_to @student

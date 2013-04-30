@@ -1,29 +1,32 @@
 <% provide(:title, "Sign up") %>
 <div class="row">
   <div class="span6 offset3">
-    <h3>Sign up</h3>
+
        <%= form_for(@student) do |f| %>
+
+        <h3><%= displayHeader() %></h3>
+
         <% if @student.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
             <ul>
-            <% @student.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
+              <% @student.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
             </ul>
           </div>
         <% end %>
-
+        
         <div class="field">
-          <%= f.text_field :email, :placeholder => "Email", :name => 'Email' %>
+          <%= f.text_field :email, :placeholder => "Email" %>
         </div>
         <div class="field">
-          <%= f.password_field :password, :placeholder => "Password", :name => 'Password' %>
+          <%= f.password_field :password, :placeholder => "Password" %>
         </div>
           <div class="field">
-          <%= f.password_field  :password_confirmation, :placeholder => "Password Confirmation", :name => 'Password Confirmation' %>
+          <%= f.password_field  :password_confirmation, :placeholder => "Password Confirmation" %>
         </div>
-        <%= f.submit "Create my account", class: "btn btn-large btn-primary", :name => 'Confirmation' %>
+        <%= f.submit getButtonDisplay(), class: "btn btn-large btn-primary" %>
       <% end %>
   </div>
 </div>

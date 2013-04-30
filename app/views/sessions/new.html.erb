@@ -5,11 +5,11 @@
 
 		<%= form_for(:session, url: sessions_path) do |f| %>
 			<br>
-			<%= f.text_field :email, :placeholder => "Email", :name => 'Email' %>
+			<%= f.text_field :email, :placeholder => "Email" %>
 			</br>
-			<%= f.password_field :password, :placeholder => "Password", :name => 'Password' %>
+			<%= f.password_field :password, :placeholder => "Password" %>
 			<br>
-			<%= f.submit "Sign in", class: "btn btn-large btn-primary", :name => 'Confirmation' %>
+			<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
 			</br>
 		<% end %>
 
