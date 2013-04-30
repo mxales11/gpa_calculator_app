@@ -1,6 +1,6 @@
 $('#add_taken_course_form').hide()
 $('#add_taken_course_button').show()
-$('#taken_courses_list').append('<%= taken_courses_list_item(@taken_course) %>')
+$('#taken_courses_list').append('<%= escape_javascript(taken_courses_list_item(@taken_course)) %>')
 
 $('#cumulative_gpa').html('<%= "%.2f" % @student.cumulative_gpa %>')
 $('#major_gpa').html('<%= "%.2f" % @student.major_gpa %>')

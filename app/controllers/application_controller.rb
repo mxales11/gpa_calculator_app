@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
   	if signed_in?
       @student = current_user
-      flash[:error] = "You are not authorized to use this functionality"
-  		redirect_to @student 
+      #flash[:error] = "You are not authorized to use this functionality"
+  		redirect_to @student, :error => "You are not authorized to use this functionality"
   	
   	else
       flash[:error] = "Please sign in to use this application"

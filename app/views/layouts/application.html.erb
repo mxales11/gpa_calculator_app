@@ -17,14 +17,14 @@
 		<div class="PageContent">
 			
 			<%= render 'layouts/nav_tab' %>
-			<% if flash[:error] -%>
+			<% if flash[:error] %>
 				<div id="error_explanation">
 					  <p class='error'><%=h flash[:error] %></p>
 				</div>
 			<% end %>
-			<% if flash[:alert] -%>
+			<% if flash[:alert] %>
 				<div id="error_explanation">
-					  <p class='error'><%=h flash[:error] %></p>
+					  <p class='error'><%=h flash[:alert] %></p>
 				</div>
 			<% end %>
 
