@@ -2,18 +2,6 @@
 
    respond_to :html, :js
 
-   def index
-
-    @student = Student.find(params[:student_id])
-    @taken_courses = @student.taken_courses
-
-    authorize! :read, @taken_courses
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
   # GET /students/1
   # GET /students/1.json
   def show
@@ -53,12 +41,7 @@
 
   end
 
-  # GET /students/1/edit
-  def edit
-    @taken_course = TakenCourse.find(params[:id])
-    authorize! :read, @taken_course
-  end
-
+  
   # POST /students
   # POST /students.json
   def create
@@ -115,6 +98,7 @@ end
   def destroy
     @student = current_user
     @taken_course = TakenCourse.find(params[:id])
+
     @taken_course.destroy
 
     authorize! :destroy, @taken_course
@@ -131,8 +115,6 @@ private
 def updateCredits(taken_course)
 
   @student = current_user
-
-  
 
   authorize! :read, @taken_course
 

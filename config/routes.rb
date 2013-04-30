@@ -18,13 +18,10 @@ GpaCalculatorApp::Application.routes.draw do
       post 'calculateGpaNeededForTargetMajorGpa'
       post 'calculatePredictedGpas'
     end
-      resources :taken_courses
+      resources :taken_courses, :only => [:show, :create, :new, :destroy, :update]
   end
 
-  #resources :taken_courses do
-  #  get :autocomplete_course_name, :on => :collection
-  #end
-
+ 
  
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -21,22 +21,6 @@ module StudentsHelper
     end
 
 
-    def displayErrors(student)
-
-    	if @student.errors.any?
-            out= "<div id='error_explanation'>
-                <h2><%= pluralize(student.errors.count, 'error') %> prohibited this student from being saved:</h2>
-                <ul>
-                <% student.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                <% end %>
-                </ul>
-              </div>
-            <% end %>"
-        end
-
-    end
-
 
     def getButtonDisplay()
 
