@@ -6,7 +6,6 @@ module TakenCoursesHelper
 		out+="<li><b>" + taken_course.name + getProperIndentation(taken_course.name, 15) + "</b>"
 		out+=taken_course.grade.to_s + getProperIndentation(taken_course.grade.to_s, 7)
 		out+=taken_course.credits.to_s + getProperIndentation(taken_course.credits.to_s, 4)
-		out+="  "
 		out+=link_to('Delete', student_taken_course_path(@student, taken_course), :class => "small-link", confirm: 'Are you sure?', method: :delete, :remote => true)
 		out+="</li></div>"
 		out.html_safe

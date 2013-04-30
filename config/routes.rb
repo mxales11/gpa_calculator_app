@@ -18,7 +18,8 @@ GpaCalculatorApp::Application.routes.draw do
       post 'calculateGpaNeededForTargetMajorGpa'
       post 'calculatePredictedGpas'
     end
-      resources :taken_courses, :only => [:show, :create, :new, :destroy, :update]
+      resources :taken_courses
+     
   end
 
  

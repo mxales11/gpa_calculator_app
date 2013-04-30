@@ -1,1 +1,6 @@
 $("#<%= index_row_div_id(@taken_course) %>").remove()
+
+$('#cumulative_gpa').html('<%= "%.2f" % @student.cumulative_gpa %>')
+$('#major_gpa').html('<%= "%.2f" % @student.major_gpa %>')
+$('#credits_earned').html('<%= @student.credits_earned %>')
+$('#major_credits_earned').html('<%= @student.major_credits_earned %>')
