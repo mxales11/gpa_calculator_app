@@ -1,14 +1,6 @@
 class Projector
 
 
-	def self.changeGradingSchema(gradingSchema)
-
-		#change global Grading schema to this global schema
-		#how am I gonna change the above grading schema?
-
-	end
-	#merge those two methods later
-
 	def self.calculateGpaNeededForTargetCumulativeGpa(student, target_gpa, credits_taken_this_semester) 
 
 		all_possible_hpts = (student.credits_earned + credits_taken_this_semester.to_f) * 4.0
@@ -42,14 +34,13 @@ class Projector
 		predicted_cumulative_credits_earned = 0
 
 
-		[credits_array, predicted_grade_array, is_repeated_course_array].transpose.each do |credits, predicted_grade, is_repeated_course|
+		[predicted_grade_array, credits_array, is_repeated_course_array].transpose.each do |predicted_grade, credits, is_repeated_course|
   		 
-  		 		if (is_repeated_course)
-
-  		 		end
-  					predicted_cumulative_hpts_earned = credits.to_i * gradingSchema[predicted_grade.to_s] + predicted_cumulative_hpts_earned
-  					predicted_cumulative_credits_earned = credits.to_i + predicted_cumulative_credits_earned
-  				
+	  		if (predicted_grade.to_s != "-")
+	  					predicted_cumulative_hpts_earned = credits.to_i * gradingSchema[predicted_grade.to_s] + predicted_cumulative_hpts_earned
+	  					predicted_cumulative_credits_earned = credits.to_i + predicted_cumulative_credits_earned
+	  			
+	  		end	
   		end
 	
 
@@ -70,18 +61,16 @@ class Projector
 		predicted_major_hpts_earned = 0
 		predicted_major_credits_earned = 0
 
+
 		[credits_array, predicted_grade_array, is_major_course_array, is_repeated_course_array].transpose.each do |credits, predicted_grade, is_major_course, is_repeated_course|
-  		
-			if (is_major_course.to_i == 1) 
-
-				if(is_repeated_course)
-
-				end
-  				predicted_major_hpts_earned = credits.to_i * gradingSchema[predicted_grade.to_s] + predicted_major_hpts_earned
-  				predicted_major_credits_earned = credits.to_i + predicted_major_credits_earned
-  			
-  			end
-		end
+	  	
+			if (predicted_grade.to_s != "-")
+				if (is_major_course.to_i == 1) 
+	  				predicted_major_hpts_earned = credits.to_i * gradingSchema[predicted_grade.to_s] + predicted_major_hpts_earned
+	  				predicted_major_credits_earned = credits.to_i + predicted_major_credits_earned
+	  			end
+	  		end
+	  	end
 
 		cumulative_major_hpts = predicted_major_hpts_earned + student.major_credits_earned * student.major_gpa
 		all_possible_major_hpts = (student.major_credits_earned + predicted_major_credits_earned) * 4.0

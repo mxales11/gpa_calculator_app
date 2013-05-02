@@ -123,35 +123,49 @@ class StudentsController < ApplicationController
 
    def calculatePredictedGpas
 
-     @student = current_user
+   
+    @student = current_user
+    @credits_array = params[:credits]
+    @predicted_grade_array = params[:predicted_grade]
+    @is_repeated_course_array = getArrayOfParams("is_repeated_course", @predicted_grade_array.length);
+    @is_major_course_array =  getArrayOfParams("is_major_course",  @predicted_grade_array.length);
 
 
-     #get rid of that and just use an array in a form
-     @credits_array = getArrayOfParams("credits", 7)
-     @predicted_grade_array = getArrayOfParams("predicted_grade", 7)
-     @is_repeated_course_array = getArrayOfParams("is_repeated_course", 7);
-     @is_major_course_array =  getArrayOfParams("is_major_course", 7);
+    Rails.logger.info("Credits array: #{@credits_array}")
+    Rails.logger.info("Predicted grade array: #{@predicted_grade_array}")
+    Rails.logger.info("is Repeated course array: #{@is_repeated_course_array}")
+    Rails.logger.info("is major course array: #{@is_major_course_array}")
 
 
-     Rails.logger.info("Credits array: #{@credits_array}")
-     Rails.logger.info("Predicted grade array: #{@predicted_grade_array}")
-     Rails.logger.info("is Repeated course array: #{@is_repeated_course_array}")
-     Rails.logger.info("is major course array: #{@is_major_course_array}")
+    @predicted_cumulative_gpa = Projector.calculatePredictedCumulativeGpa(@student, @credits_array, @predicted_grade_array, @is_repeated_course_array)
+    @predicted_major_gpa = Projector.calculatePredictedMajorGpa(@student, @credits_array, @predicted_grade_array, @is_major_course_array, @is_repeated_course_array)
 
+    @predicted_gpas = Array.new
+    @predicted_gpas.push(@predicted_cumulative_gpa)
+    @predicted_gpas.push(@predicted_major_gpa)
 
-
-     @predicted_cumulative_gpa = Projector.calculatePredictedCumulativeGpa(@student, @credits_array, @predicted_grade_array, @is_repeated_course_array)
-     @predicted_major_gpa = Projector.calculatePredictedMajorGpa(@student, @credits_array, @predicted_grade_array, @is_major_course_array, @is_repeated_course_array)
-
-       #change it so it returns both not one
-      @predicted_gpas = Array.new
-      @predicted_gpas.push(@predicted_cumulative_gpa)
-      @predicted_gpas.push(@predicted_major_gpa)
-
-     respond_to do |format|
-      format.js { render :handlers => [:erb] }
-     end
+    respond_to do |format|
+     format.js { render :handlers => [:erb] }
+    end
     
+  end
+
+ 
+  private
+
+  def initializeStudentAttibutes(student)
+
+     student.update_attribute(:major_gpa, 0.0)
+     student.update_attribute(:cumulative_gpa, 0.0)
+     student.update_attribute(:credits_earned, 0)
+     student.update_attribute(:major_credits_earned, 0)
+   
+  end
+
+  def adjustArrays(predicted_grade_array, is_major_array) 
+
+    
+
   end
 
   def getArrayOfParams(parameter, arrayLength)
@@ -164,18 +178,6 @@ class StudentsController < ApplicationController
       end
 
     return arrayOfParams
-  end
-
-
-  private
-
-  def initializeStudentAttibutes(student)
-
-     student.update_attribute(:major_gpa, 0.0)
-     student.update_attribute(:cumulative_gpa, 0.0)
-     student.update_attribute(:credits_earned, 0)
-     student.update_attribute(:major_credits_earned, 0)
-   
   end
 
 end
