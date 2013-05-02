@@ -1,17 +1,12 @@
 <%= form_tag(calculateGpaNeededForTargetMajorGpa_student_path, :remote => true) do %>
 
-	<%= label_tag :target_major_gpa %>
-	<%= text_field_tag :desired_major_gpa %>
-
-	<%= label_tag :major_credits_taken_this_semester %>
-	<%= text_field_tag :major_credits_taken_this_semester %>
-
+	<%= text_field_tag :desired_major_gpa, nil, :placeholder => "Target Major GPA" %>
+	<br></br>
+	<%= text_field_tag :major_credits_taken_this_semester, nil, :placeholder => "Major credits earned this term" %>
 	<div id="gpa_for_target_major_gpa"></div>
 	<br>
-		<%= submit_tag "Calculate major GPA needed this semester for target major (overall) GPA", class: "btn btn-primary " %>
+		<%= submit_tag "Calculate major GPA you need this semester", class: "btn btn-primary " %>
 	</br>
-	
-	
 
 <% end %>
 

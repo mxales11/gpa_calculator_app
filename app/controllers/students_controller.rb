@@ -162,12 +162,6 @@ class StudentsController < ApplicationController
    
   end
 
-  def adjustArrays(predicted_grade_array, is_major_array) 
-
-    
-
-  end
-
   def getArrayOfParams(parameter, arrayLength)
 
     arrayOfParams = Array.new

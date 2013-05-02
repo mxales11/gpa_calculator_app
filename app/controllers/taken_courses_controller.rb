@@ -70,14 +70,8 @@
     calculateGPA(@taken_course, false)
     @taken_courses = @student.taken_courses
    
-    if @taken_course.save!
-        logger.debug "********************************************************************************************************************************************************"
-        logger.debug "#{@student.attributes.inspect}"
-    else 
-          logger.debug "********************************************************************************************************************************************************"
-          logger.debug "Taken course was not created. Student: #{@taken_course.attributes.inspect}"
-    end
-
+    @taken_course.save
+       
     respond_to do |format|
       format.js
     end
@@ -126,7 +120,6 @@ private
 def updateCredits(taken_course, isDestroyed)
 
   @student = current_user
-
   authorize! :read, @taken_course
 
   if(taken_course.is_major.to_s == "true")

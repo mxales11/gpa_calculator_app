@@ -1,14 +1,12 @@
 <%= form_tag(calculateGpaNeededForTargetCumulativeGpa_student_path, :remote => true) do %>
 
-	<%= label_tag :target_cumulative_gpa, "Desired cumulative GPA" %>
-	<%= text_field_tag :desired_cumulative_gpa %>
-
-	<%= label_tag :credits_taken_this_semester, "Credits taken this semester" %>
-	<%= text_field_tag :credits_taken_this_semester %>
+	<%= text_field_tag :desired_cumulative_gpa, nil, :placeholder => "Target Cumulative GPA" %>
+	<br></br>
+	<%= text_field_tag :credits_taken_this_semester, nil, :placeholder => "Credits earned this term" %>
 
 	<div id= "gpa_for_target_cumulative_gpa"></div>
 	<br>
-	<%= submit_tag "Calculate GPA needed this semester to have target Cumulative GPA", class: "btn btn-primary"%>
+		<%= submit_tag "Calculate GPA you need this semester", class: "btn btn-primary"%>
 	<br>
 
 <% end %>
