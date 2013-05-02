@@ -2,11 +2,12 @@
 
 	<table>
 		<tr>
-			<td>Course</td>
-			<td>Credits</td>
-			<td>Predicted Grade</td>
-			<td>Is Major Course</td>
-			<td>Is Repeated Course</td>
+			<th id="blue"></th>
+			<th id="black">credits</th>
+			<th id="blue">predicted grade</th>
+			<th id="black">major?</th>
+			<th id="blue">repeated?</th>
+			<th id="black">previous grade (if repeated)</th>
 		</tr>
 
 		<tr>
@@ -14,16 +15,19 @@
 
 				<td><%= course_number + 1%> </td>
 				<td>
-				<%= select_tag :"credits[]", options_for_select(['-', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) %>
+				<%= select_tag :"credits[]", options_for_select(['-', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), :style => "width:60px" %>
 				</td>
 				<td>
-				<%= select_tag :"predicted_grade[]", options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']) %>
+				<%= select_tag :"predicted_grade[]", options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']), :style => "width:60px" %>
 				</td>
 				<td>	
 				<%= check_box_tag :"is_major_course#{course_number}" %>
 				</td>
 				<td>
 				<%= check_box_tag :"is_repeated_course#{course_number}" %>
+				</td>
+				<td>
+				<%= select_tag :"grade_from_repeated_course[]", options_for_select(['-','A','AB', 'B', 'BC', 'C', 'CD', 'D', 'F']), :style => "width:60px" %>
 				</td>
 		</tr>
 		<% end %>

@@ -127,18 +127,21 @@ class StudentsController < ApplicationController
     @student = current_user
     @credits_array = params[:credits]
     @predicted_grade_array = params[:predicted_grade]
+    @repeated_grade_array= params[:grade_from_repeated_course]
     @is_repeated_course_array = getArrayOfParams("is_repeated_course", @predicted_grade_array.length);
     @is_major_course_array =  getArrayOfParams("is_major_course",  @predicted_grade_array.length);
+
 
 
     Rails.logger.info("Credits array: #{@credits_array}")
     Rails.logger.info("Predicted grade array: #{@predicted_grade_array}")
     Rails.logger.info("is Repeated course array: #{@is_repeated_course_array}")
     Rails.logger.info("is major course array: #{@is_major_course_array}")
+    Rails.logger.info("Grade from repeated course is: #{@repeated_grade_array}")
 
 
-    @predicted_cumulative_gpa = Projector.calculatePredictedCumulativeGpa(@student, @credits_array, @predicted_grade_array, @is_repeated_course_array)
-    @predicted_major_gpa = Projector.calculatePredictedMajorGpa(@student, @credits_array, @predicted_grade_array, @is_major_course_array, @is_repeated_course_array)
+    @predicted_cumulative_gpa = Projector.calculatePredictedCumulativeGpa(@student, @credits_array, @predicted_grade_array, @is_repeated_course_array, @repeated_grade_array)
+    @predicted_major_gpa = Projector.calculatePredictedMajorGpa(@student, @credits_array, @predicted_grade_array, @is_major_course_array, @is_repeated_course_array,  @repeated_grade_array)
 
     @predicted_gpas = Array.new
     @predicted_gpas.push(@predicted_cumulative_gpa)
