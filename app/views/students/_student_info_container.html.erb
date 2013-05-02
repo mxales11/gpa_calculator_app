@@ -1,23 +1,18 @@
 <div id="student-info">
 	<% if signed_in? %>
 		 	<h4>Gpa info: <h4>
-		 	<br></br>
-			<h5>Email:</h5>
+			</br><h5>Email:</h5>
 			<%= @student.email %>
-			<br></br>
 			<% if !@student.cumulative_gpa.nil? %>
 				<h5>Cumulative Gpa:</h5>
 				<div id="cumulative_gpa"><%= '%.2f' % @student.cumulative_gpa %></div>
-				<br></br>
 			<% end %>
 			<% if !@student.major_gpa.nil? %>
 				<h5>Major Gpa:</h5>
 				<div id="major_gpa"><%= '%.2f' % @student.major_gpa %></div>
-				<br></br>
 			<% end %>
 				<h5>Credits earned:</h5>
 				<div id="credits_earned"><%= @student.credits_earned %></div>
-				<br></br>
 				<h5>Major credits earned:</h5>
 				<div id="major_credits_earned"><%= @student.major_credits_earned %>	</div>
 	<% end %>

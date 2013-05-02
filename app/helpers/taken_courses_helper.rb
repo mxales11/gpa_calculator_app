@@ -12,13 +12,12 @@ module TakenCoursesHelper
 
 
 	def taken_courses_list(taken_courses)
-		out = "<h4>Your completed courses</h4><table class='unstyled' 
-			style='font-size:8pt;padding:10px'><tbody id='taken_courses_list'><tr><th>Name</th><th>Grade</th><th>Credits</th><th></th></tr>"
+		out = "<div id='display-courses'><h4>Your completed courses</h4><br></br><table><tbody id='taken_courses_list'><tr><th>Name</th><th>Grade</th><th>Credits</th><th></th></tr>"
 	   	
 	   	taken_courses.each { |c|
 	   		out += taken_courses_list_item(c)
 	   	 }
-	   	 out += "</tbody></table>"
+	   	 out += "</tbody></table></div>"
 	   	 out.html_safe
 
 	   end
