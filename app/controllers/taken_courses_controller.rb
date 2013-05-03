@@ -170,14 +170,22 @@ def calculateGPA(taken_course, isDestroyed)
     @htps_gained = taken_course.credits  * gradingSchema[taken_course.grade.to_s]
 
     if(isDestroyed.to_s == "true")
-      @student.update_attribute(:cumulative_gpa, ((@all_htps_before - @htps_gained)/ @all_possible_htps) * 4)
+      if(@all_possible_htps!=0)
+        @student.update_attribute(:cumulative_gpa, ((@all_htps_before - @htps_gained)/ @all_possible_htps) * 4)
+      else
+        @student.update_attribute(:cumulative_gpa, 0)
+      end
     else
        @student.update_attribute(:cumulative_gpa, ((@all_htps_before + @htps_gained)/ @all_possible_htps) * 4)
     end
 
     if (taken_course.is_major.to_s == "true" )
       if(isDestroyed.to_s == "true")
-        @student.update_attribute(:major_gpa, ((@all_major_htps_before - @major_htps_gained)/ @major_all_possible_htps) * 4)
+        if(@major_all_possible_htps!=0)
+          @student.update_attribute(:major_gpa, ((@all_major_htps_before - @major_htps_gained)/ @major_all_possible_htps) * 4)
+        else
+          @student.update_attribute(:major_gpa, 0);
+        end
       else
          @student.update_attribute(:major_gpa, ((@all_major_htps_before + @major_htps_gained)/ @major_all_possible_htps) * 4)
       end

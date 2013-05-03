@@ -16,7 +16,6 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		Rails.logger.info("DESTROY WAS INVOKED")
 		sign_out
 		redirect_to root_path
 	end

@@ -17,8 +17,8 @@
       <td><%= student.major_credits_earned %></td>
       <td><%= getStudentGpa(student.cumulative_gpa)%></td>
       <td><%= getStudentGpa(student.major_gpa)%></td>
-      <td><%= link_to 'Edit', edit_student_path(student) %></td>
-      <td><%= link_to 'Destroy', student, confirm: 'Are you sure?', method: :delete, remote: true%></td>
+      <td><%= link_to 'Edit', edit_student_path(student), :class=> "small-link"%></td>
+      <td><%= link_to 'Destroy', student, confirm: 'Are you sure?', :class=> "small-link", method: :delete, remote: true %></td>
     </tr>
   <% end %>
 </table>

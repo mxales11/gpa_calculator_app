@@ -74,7 +74,11 @@ class StudentsController < ApplicationController
     
     respond_to do |format|
       if @student.update_attributes(params[:student])
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+        if (@current_user.admin?)
+          format.html { redirect_to students_path, notice: 'Student was successfully updated.' }
+        else
+          format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+        end
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -123,22 +127,12 @@ class StudentsController < ApplicationController
 
    def calculatePredictedGpas
 
-   
     @student = current_user
     @credits_array = params[:credits]
     @predicted_grade_array = params[:predicted_grade]
     @repeated_grade_array= params[:grade_from_repeated_course]
     @is_repeated_course_array = getArrayOfParams("is_repeated_course", @predicted_grade_array.length);
     @is_major_course_array =  getArrayOfParams("is_major_course",  @predicted_grade_array.length);
-
-
-
-    Rails.logger.info("Credits array: #{@credits_array}")
-    Rails.logger.info("Predicted grade array: #{@predicted_grade_array}")
-    Rails.logger.info("is Repeated course array: #{@is_repeated_course_array}")
-    Rails.logger.info("is major course array: #{@is_major_course_array}")
-    Rails.logger.info("Grade from repeated course is: #{@repeated_grade_array}")
-
 
     @predicted_cumulative_gpa = Projector.calculatePredictedCumulativeGpa(@student, @credits_array, @predicted_grade_array, @is_repeated_course_array, @repeated_grade_array)
     @predicted_major_gpa = Projector.calculatePredictedMajorGpa(@student, @credits_array, @predicted_grade_array, @is_major_course_array, @is_repeated_course_array,  @repeated_grade_array)
