@@ -18,13 +18,13 @@
         <% end %>
         
         <div class="field">
-          <%= f.text_field :email, :placeholder => "Email" %>
+          <%= f.text_field :email, :name => "Email", :placeholder => "Email" %>
         </div>
         <div class="field">
-          <%= f.password_field :password, :placeholder => "Password" %>
+          <%= f.password_field :password, :name => "Password", :placeholder => "Password" %>
         </div>
           <div class="field">
-          <%= f.password_field  :password_confirmation, :placeholder => "Password Confirmation" %>
+          <%= f.password_field  :password_confirmation, :name => "Password Confirmation", :placeholder => "Password Confirmation" %>
         </div>
         <%= f.submit getButtonDisplay(), class: "btn btn-large btn-primary" %>
       <% end %>

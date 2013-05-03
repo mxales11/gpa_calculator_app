@@ -1,0 +1,171 @@
+...................................F...FFFFFFFFFFF.....F..FFF.FFF
+
+Failures:
+
+  1) TakenCourse 
+     Failure/Error: it { should be_valid }
+       expected valid? to return true, got false
+     # ./spec/models/taken_course_spec.rb:17:in `block (2 levels) in <top (required)>'
+
+  2) Authentication signin with invalid information 
+     Failure/Error: before { click_button "Sign in" }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/requests/authentication_pages_spec.rb:21:in `block (4 levels) in <top (required)>'
+
+  3) Authentication signin with invalid information 
+     Failure/Error: before { click_button "Sign in" }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/requests/authentication_pages_spec.rb:21:in `block (4 levels) in <top (required)>'
+
+  4) Authentication signin with invalid information after visiting another page 
+     Failure/Error: before { click_button "Sign in" }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/requests/authentication_pages_spec.rb:21:in `block (4 levels) in <top (required)>'
+
+  5) Authentication signin with valid information 
+     Failure/Error: before { sign_in student }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/support/utilities.rb:8:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:36:in `block (4 levels) in <top (required)>'
+
+  6) Authentication signin with valid information 
+     Failure/Error: before { sign_in student }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/support/utilities.rb:8:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:36:in `block (4 levels) in <top (required)>'
+
+  7) Authentication signin with valid information 
+     Failure/Error: before { sign_in student }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/support/utilities.rb:8:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:36:in `block (4 levels) in <top (required)>'
+
+  8) Authentication signin with valid information 
+     Failure/Error: before { sign_in student }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/support/utilities.rb:8:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:36:in `block (4 levels) in <top (required)>'
+
+  9) Authentication signin with valid information 
+     Failure/Error: before { sign_in student }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/support/utilities.rb:8:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:36:in `block (4 levels) in <top (required)>'
+
+  10) Authentication signin with valid information 
+     Failure/Error: before { sign_in student }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/support/utilities.rb:8:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:36:in `block (4 levels) in <top (required)>'
+
+  11) Authentication signin with valid information 
+     Failure/Error: before { sign_in student }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/support/utilities.rb:8:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:36:in `block (4 levels) in <top (required)>'
+
+  12) Authentication signin with valid information followed by signout 
+     Failure/Error: before { sign_in student }
+     NoMethodError:
+       undefined method `[]' for nil:NilClass
+     # ./app/controllers/sessions_controller.rb:8:in `create'
+     # (eval):2:in `click_button'
+     # ./spec/support/utilities.rb:8:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:36:in `block (4 levels) in <top (required)>'
+
+  13) Static pages About page should have the h1 'About Application'
+     Failure/Error: page.should have_selector('h1', text: 'About Us')
+       expected css "h1" with text "About Us" to return something
+     # ./spec/requests/static_pages_spec.rb:40:in `block (3 levels) in <top (required)>'
+
+  14) Student pages projection pages calculating predicted cumulative GPA 
+     Failure/Error: click_button toggle
+     Capybara::ElementNotFound:
+       no button with value or id or text 'Target Cumulative GPA' found
+     # (eval):2:in `click_button'
+     # ./spec/requests/student_pages_spec.rb:24:in `block (4 levels) in <top (required)>'
+
+  15) Student pages projection pages calculating predicted cumulative GPA 
+     Failure/Error: click_button toggle
+     Capybara::ElementNotFound:
+       no button with value or id or text 'Target Cumulative GPA' found
+     # (eval):2:in `click_button'
+     # ./spec/requests/student_pages_spec.rb:24:in `block (4 levels) in <top (required)>'
+
+  16) Student pages projection pages calculating predicted cumulative GPA 
+     Failure/Error: click_button toggle
+     Capybara::ElementNotFound:
+       no button with value or id or text 'Target Cumulative GPA' found
+     # (eval):2:in `click_button'
+     # ./spec/requests/student_pages_spec.rb:24:in `block (4 levels) in <top (required)>'
+
+  17) Student pages signup with valid information should create a student
+     Failure/Error: expect { click_button submit}. to change(Student, :count).by(1)
+       count should have been changed by 1, but was changed by 0
+     # ./spec/requests/student_pages_spec.rb:58:in `block (4 levels) in <top (required)>'
+
+  18) Student pages signup with valid information after saving the student 
+     Failure/Error: it { should have_selector('title', text: student.email) }
+     NoMethodError:
+       undefined method `email' for nil:NilClass
+     # ./spec/requests/student_pages_spec.rb:66:in `block (5 levels) in <top (required)>'
+
+  19) Student pages signup with valid information after saving the student 
+     Failure/Error: it { should have_link('Sign out') }
+       expected link "Sign out" to return something
+     # ./spec/requests/student_pages_spec.rb:68:in `block (5 levels) in <top (required)>'
+
+Finished in 5.95 seconds
+65 examples, 19 failures
+
+Failed examples:
+
+rspec ./spec/models/taken_course_spec.rb:17 # TakenCourse 
+rspec ./spec/requests/authentication_pages_spec.rb:23 # Authentication signin with invalid information 
+rspec ./spec/requests/authentication_pages_spec.rb:24 # Authentication signin with invalid information 
+rspec ./spec/requests/authentication_pages_spec.rb:29 # Authentication signin with invalid information after visiting another page 
+rspec ./spec/requests/authentication_pages_spec.rb:39 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:40 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:41 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:43 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:44 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:45 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:46 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:51 # Authentication signin with valid information followed by signout 
+rspec ./spec/requests/static_pages_spec.rb:38 # Static pages About page should have the h1 'About Application'
+rspec ./spec/requests/student_pages_spec.rb:30 # Student pages projection pages calculating predicted cumulative GPA 
+rspec ./spec/requests/student_pages_spec.rb:31 # Student pages projection pages calculating predicted cumulative GPA 
+rspec ./spec/requests/student_pages_spec.rb:32 # Student pages projection pages calculating predicted cumulative GPA 
+rspec ./spec/requests/student_pages_spec.rb:57 # Student pages signup with valid information should create a student
+rspec ./spec/requests/student_pages_spec.rb:66 # Student pages signup with valid information after saving the student 
+rspec ./spec/requests/student_pages_spec.rb:68 # Student pages signup with valid information after saving the student 

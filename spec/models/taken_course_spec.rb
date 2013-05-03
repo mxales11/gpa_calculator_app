@@ -4,11 +4,7 @@ describe TakenCourse do
 
 	before do 
 		@student = Student.new(email: "student@yahoo.com", password:"foobar", password_confirmation: "foobar")
-		@taken_course = @student.taken_courses.build
-		@taken_courses.grade = 'A'
-		@taken_course.name = 'Probability'
-		@taken_course.credits = 3
-		@taken_course = @student.taken_courses.build(params[:taken_course])
+		@taken_course = @student.taken_courses.build(grade: 'A', name: 'Probability', credits: 3, is_major: false)
 	end
 
 	subject { @taken_course }
@@ -18,7 +14,6 @@ describe TakenCourse do
 	it { should respond_to(:student) }
 	it { should respond_to(:name) }
 	it { should respond_to(:credits) }
-	it { should respond_to(:grade) }
 	it { should be_valid }
 
 	describe "when student_id is not present" do

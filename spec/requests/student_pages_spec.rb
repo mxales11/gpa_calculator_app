@@ -64,8 +64,7 @@ describe "Student pages" do
 				let(:student) { Student.find_by_email('student@yahoo.com') }
 
 				it { should have_selector('title', text: student.email) }
-				it { should have_selector('div.alert.alert-success', text: 'Welcome') }
-
+				
 				it { should have_link('Sign out') }
 			end
 		end
@@ -74,63 +73,4 @@ end
 
 
 	
-
-
-=begin TESTS FOR ADDING TAKEN COURSES:
-	describe "signup page" do
-
-		it { should have_selector('h1', text: 'Sign up') }
-		it { should have_selector('title', text: 'Sign up') }
-	end
-
-		before { visit signup_path }
-		
-
-	describe "add taken courses page" do
-
-		let(:student) { FactoryGirl.create(:student) }
-		let(:course) { FactoryGirl.create(:course) }
-		let(:submit) { "Add taken course" }
-
-		before do
-			visit new_student_taken_course_path(student, taken_course)
-		end
-
-			describe "with valid information" do
-
-				before do
-					fill_in "course_id", with: 3
-					fill_in "grade", with: "AB"
-				end
-				
-
-				it "should create taken course" do
-						expect { click_button submit }.to change(TakenCourse, :count).by(1)
-				end
-			end
-
-			describe "with missing grade" do 
-
-				before do
-					fill_in "course_id", with: 2
-				end
-
-				it "should not create taken course" do
-						expect { click_button submit }.not_to change(TakenCourse, :count)
-				end
-			end
-
-
-			describe "with missing course_id" do 
-
-				before do
-					fill_in "grade", with: "AB"
-				end
-
-				it "should not create taken course" do
-						expect { click_button submit }.not_to change(TakenCourse, :count)
-				end
-			end
-		end
-=end
 
